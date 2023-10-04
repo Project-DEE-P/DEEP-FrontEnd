@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     body {
@@ -55,3 +56,17 @@ export const GlobalStyle = createGlobalStyle`
         resize: none;
     }
 `
+export const DefaultBox = styled.div`
+	width: 100%;
+	height: 100%;
+	max-width: 1320px;
+	margin: 0 auto;
+
+	@media screen and (max-width: 1320px) {
+		max-width: 1000px;
+	}
+
+	@media screen and (max-width: 700px) {
+		max-width: 660px;
+	}
+`;
