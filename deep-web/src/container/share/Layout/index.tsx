@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 import AppHeader from "../../../components/layout/AppHeader";
+import { useRecoilValue } from "recoil";
+import oAuthInfoAtom from "../../../atoms/loginInfo";
+import { useNavigate } from "react-router-dom";
 
 const PageContainer = styled(DefaultBox)`
   min-height: calc(100vh - 40px);
@@ -76,6 +79,16 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
+  const loginInfo = useRecoilValue(oAuthInfoAtom);
+  const navigate = useNavigate();
+  useLayoutEffect(() => {
+    if (loginInfo == null) {
+      navigate("/oauth");
+    } else {
+      // TODO: 로그인 정보로 데이터 불러와서 리스트 렌더링
+      console.log("리스트 그리기 진행");
+    }
+  }, [loginInfo]);
   return (
     <>
       <AppHeader />
