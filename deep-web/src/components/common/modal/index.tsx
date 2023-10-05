@@ -23,7 +23,12 @@ const Modal: React.FC<Props> = ({ isOpen, onYes, onNo }) => {
       };
 
     const handleYes = () => {
-        handleOpenModal(); 
+    //    if(토큰있다) {
+    //     navigate ("다음페이지 이동")
+    //    }
+    //    else {
+    //     Navigate("/signin")
+    //    }
       };
     
       const handleNo = () => {

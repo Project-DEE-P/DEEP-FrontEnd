@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as s from "./style"
 import AppHeader from "../../../components/layout/AppHeader";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../../components/common/modal";
 
 interface Props {
     children: React.ReactNode;
@@ -13,11 +14,7 @@ const Layout = ({ children }: Props) => {
     const navigation = useNavigate();
 
     const handleRememberClick = () => {
-        if (!hasToken) {
-            setShowModal(false);
-        } else {
-            navigation("/");
-        }
+        setShowModal(true);
     }
 
     const handleModalConfirm = () => {
@@ -43,11 +40,7 @@ const Layout = ({ children }: Props) => {
           <s.RememberButton onClick={handleRememberClick}>기억하기</s.RememberButton>
         </s.ButtonContainer>
         {showModal && (
-          // 모달 컴포넌트를 여기에 추가
-          <div className="modal">
-            <p>토큰이 없습니다. 로그인이 필요합니다.</p>
-            <button onClick={handleModalConfirm}>확인</button>
-          </div>
+         <Modal isOpen={showModal} onYes={handleModalConfirm} onNo={handleModalConfirm} />
         )}
       </s.PageContainer>
     </>
