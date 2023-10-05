@@ -1,10 +1,11 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 import AppHeader from "../../../components/layout/AppHeader";
 import { useRecoilValue } from "recoil";
 import oAuthInfoAtom from "../../../atoms/loginInfo";
 import { useNavigate } from "react-router-dom";
+import Modal from "../../../components/common/Modal";
 
 const PageContainer = styled(DefaultBox)`
   min-height: calc(100vh - 40px);
@@ -80,16 +81,26 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   const loginInfo = useRecoilValue(oAuthInfoAtom);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (loginInfo == null) {
-      navigate("/oauth");
-    } else {
-      console.log(loginInfo.access_token);
-      // TODO: 로그인 정보로 데이터 불러와서 리스트 렌더링
-      console.log("리스트 그리기 진행");
+  const [showModal, setShowModal] = useState<any>(false); 
+    const navigation = useNavigate();
+
+    const handleRememberClick = () => {
+        setShowModal(true);
     }
-  }, [loginInfo]);
+
+    const handleModalConfirm = () => {
+        setShowModal(false);
+    }
+    
+    useEffect(() => {
+        if (loginInfo == null) {
+        navigation("/oauth");
+        } else {
+        console.log(loginInfo.access_token);
+        // TODO: 로그인 정보로 데이터 불러와서 리스트 렌더링
+        console.log("리스트 그리기 진행");
+        }
+    }, [loginInfo]);
   return (
     <>
       <AppHeader />
@@ -106,8 +117,11 @@ const Layout = ({ children }: Props) => {
         </CardContainer>
         <MemoContainer>최희건님에 대한 메모를 남겨주세요.</MemoContainer>
         <ButtonContainer>
-          <RememberButton>기억하기</RememberButton>
+          <RememberButton onClick={handleRememberClick}>기억하기</RememberButton>
         </ButtonContainer>
+        {showModal && (
+            <Modal isOpen={showModal} onYes={handleModalConfirm} onNo={handleModalConfirm} />
+        )}
       </PageContainer>
     </>
   );
