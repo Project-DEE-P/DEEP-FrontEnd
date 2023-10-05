@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
     body {
         line-height: 1;
         font-family: Pretendard;
@@ -55,18 +56,18 @@ export const GlobalStyle = createGlobalStyle`
         font-family: inherit;
         resize: none;
     }
-`
+`;
 export const DefaultBox = styled.div`
-	width: 100%;
-	height: 100%;
-	max-width: 1320px;
-	margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
 
-	@media screen and (max-width: 1320px) {
-		max-width: 1000px;
-	}
+  @media screen and (max-width: 1320px) {
+    max-width: 1000px;
+  }
 
-	@media screen and (max-width: 700px) {
-		max-width: 660px;
-	}
+  @media screen and (max-width: 700px) {
+    max-width: 660px;
+  }
 `;
