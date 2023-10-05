@@ -85,6 +85,7 @@ const Layout = ({ children }: Props) => {
     if (loginInfo == null) {
       navigate("/oauth");
     } else {
+      console.log(loginInfo.access_token);
       // TODO: 로그인 정보로 데이터 불러와서 리스트 렌더링
       console.log("리스트 그리기 진행");
     }
