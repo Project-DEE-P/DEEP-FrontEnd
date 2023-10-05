@@ -2,7 +2,9 @@ import { atom } from "recoil";
 
 const oAuthInfo = atom<LoginInfo | null>({
   key: "oAuthInfo",
-  default: null,
+  default: {
+    oAuthId: "adas",
+  },
 });
 
 export type LoginInfo = {

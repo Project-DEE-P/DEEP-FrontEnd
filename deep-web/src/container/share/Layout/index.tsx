@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 import AppHeader from "../../../components/layout/AppHeader";
@@ -81,7 +81,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const loginInfo = useRecoilValue(oAuthInfoAtom);
   const navigate = useNavigate();
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (loginInfo == null) {
       navigate("/oauth");
     } else {
