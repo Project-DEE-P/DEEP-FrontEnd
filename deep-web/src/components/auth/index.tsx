@@ -1,12 +1,11 @@
 import React from "react";
 
-const OAuth = () => {
-    return (
-        <>
-        
-        </>
-    )
+function Oauth() {
+  return (
+    <>
+      <div>page</div>
+    </>
+  );
 }
 
-
-export default OAuth;
+export default Oauth;
