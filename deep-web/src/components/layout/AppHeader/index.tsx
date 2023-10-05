@@ -1,16 +1,20 @@
 import React from "react";
 import * as a from "./style";
 import { Link } from "react-router-dom";
-import DeepLogoImg from "../../../assets/img/DeepLogo.svg";
+import Logo from "../../../assets/logo.svg"
 
 const AppHeader = () => {
-  return (
-    <a.HeaderContainer>
-      <a.AppHeaderBox>
-        <a.LogoImg src={DeepLogoImg} />
-      </a.AppHeaderBox>
-    </a.HeaderContainer>
-  );
-};
+    return (
+        <a.HeaderContainer>
+            <a.AppHeaderBox>
+                <div>
+                    <a>
+                        <img src="/logo.svg" alt="deep_logo" />
+                    </a>
+                </div>
+            </a.AppHeaderBox>
+        </a.HeaderContainer>
+    )
+}
 
 export default AppHeader;
