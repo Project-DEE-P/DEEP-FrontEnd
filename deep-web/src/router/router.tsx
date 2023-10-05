@@ -10,6 +10,7 @@ const Router = () => {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<ShowCard />} />
           <Route path="/showCard" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="*" element={<NoMatchPage />} />
