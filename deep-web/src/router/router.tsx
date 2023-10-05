@@ -1,13 +1,19 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import OAuthPage from "../pages/OAuth";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ShowCard from "../pages/ShowCard/index";
+import OAuthPage from "../pages/OAuth/OAuth";
+import NoMatchPage from "../pages/NoMatch";
 
-export default function Router() {
+const Router = () => {
   return (
-    <>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<OAuthPage />} />
+        <Route path="/showCard" element={<ShowCard />} />
+        <Route path="/oauth" element={<OAuthPage />} />
+        <Route path="*" element={<NoMatchPage />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
-}
+};
+
+export default Router;
