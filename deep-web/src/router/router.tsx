@@ -8,7 +8,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="showCard" element={<ShowCard />} />
+        <Route path="/showCard" element={<ShowCard />} />
         <Route path="/oauth" element={<OAuthPage />} />
         <Route path="*" element={<NoMatchPage />} />
       </Routes>
