@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as S from "./style";
 import AppHeader from "../layout/AppHeader";
+import axios from "axios";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
 import { useRecoilState, useRecoilValue } from "recoil";
