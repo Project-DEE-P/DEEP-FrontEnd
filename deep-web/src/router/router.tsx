@@ -4,16 +4,21 @@ import ShowCard from "../pages/ShowCard/index";
 import OAuthPage from "../pages/OAuth/OAuth";
 import NoMatchPage from "../pages/NoMatch";
 import CardListPage from "../pages/CardList";
+import { RecoilRoot } from "recoil";
+
 const Router = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/showCard" element={<ShowCard />} />
-        <Route path="/oauth" element={<OAuthPage />} />
-        <Route path="/cardlist" element={<CardListPage />} />
-        <Route path="*" element={<NoMatchPage />} />
-      </Routes>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ShowCard />} />
+          <Route path="/showCard" element={<ShowCard />} />
+          <Route path="/oauth" element={<OAuthPage />} />
+          <Route path="/cardlist" element={<CardListPage />} />
+          <Route path="*" element={<NoMatchPage />} />
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 };
 
