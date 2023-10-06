@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as S from "./style";
 import AppHeader from "../layout/AppHeader";
+import axios from "axios"
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
 import { useRecoilState } from "recoil";
@@ -24,10 +25,26 @@ const OAuth: React.FC = () => {
     const accessToken = url.hash.substring(1).split("&")[0].split("=")[1];
     if (accessToken) {
       try {
-        setLoginInfo({
-          access_token: accessToken,
-        });
-        navigation("/showCard");
+        axios
+            .get("http://10.80.162.14:8081/v1/api/auth/google/", {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            })
+            .then((response) => {
+                const userData = response.data;
+                if (userData) {
+                    setLoginInfo({
+                        access_token: accessToken,
+                    });
+                    navigation("/showCard");
+                } else {
+                    console.log("Authentication failed");
+                }
+            })
+            .catch((error) => {
+                console.error("Authentication error", error);
+            });
       } catch (error) {
         console.log("OAuth token expired");
       }
