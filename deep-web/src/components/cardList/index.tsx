@@ -3,6 +3,8 @@ import Layout from "../../container/share/Layout";
 import * as S from "./style";
 import AppHeader from "../layout/AppHeader";
 import Card from "./card";
+import { customAxios } from "../../lib/customAxios";
+import { useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
 const CardList = () => {
@@ -27,14 +29,14 @@ const CardList = () => {
       <AppHeader />
       <S.CardListContainer>
         <S.CardListTitleWrapper>
-          <S.CardListTitleBlack>최희건 님의</S.CardListTitleBlack>
+          <S.CardListTitleBlack>최희건님의</S.CardListTitleBlack>
           <S.CardListTitleBlue>DEE:P</S.CardListTitleBlue>
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>
         </S.CardListTitleWrapper>
         <S.CardWrapper>
           {/* cardData 배열을 기반으로 카드 컴포넌트 렌더링하면 됨 */}
           {cardData.map((card) => (
-            <Card key={card.id}/>
+            <Card key={card.id} />
           ))}
         </S.CardWrapper>
       </S.CardListContainer>

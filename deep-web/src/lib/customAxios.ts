@@ -1,11 +1,10 @@
 import axios, { AxiosInstance } from "axios";
 import cookies from "js-cookie";
-
-const SERVER_ADDRESS = "http://10.80.162.51:8080";
+import config from "../config/config.json";
 
 export const customAxios: AxiosInstance = axios.create({
-  baseURL: `${SERVER_ADDRESS}`,
+  baseURL: config.SERVER_ADDRESS,
   headers: {
-    access_token: cookies.get("access_token"),
+    Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsImlhdCI6MTY5NjUxNjIzNiwiZXhwIjoxNjk3MTIxMDM2LCJpc3MiOiJERUVQIiwic3ViIjoidG9rZW4ifQ.0nbNhZVZcJ4pBSWwCugzpC4oJbz5zSFswD-xaiCO8Ug"}`,
   },
 });
