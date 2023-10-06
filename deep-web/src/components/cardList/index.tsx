@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../container/share/Layout";
 import * as S from "./style";
 import AppHeader from "../layout/AppHeader";
@@ -6,17 +6,21 @@ import Card from "./card";
 import axios, { AxiosResponse } from "axios";
 
 const CardList = () => {
-  const [cardData, setCardData] = useState<AxiosResponse | null | void>();
-  axios
-    .get("https://127.0.0.1:8082/v1/api/card/remember")
-    .then(function (response) {
-      console.log(response);
-      setCardData(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .then(function () {});
+  const [cardData, setCardData] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("https://127.0.0.1:8082/v1/api/card/remember")
+      .then(function (response) {
+        console.log(response);
+        if (response.data && response.data.data) {
+          setCardData(response.data.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -28,8 +32,9 @@ const CardList = () => {
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>
         </S.CardListTitleWrapper>
         <S.CardWrapper>
-          {[...Array(5)].map((idx) => (
-            <Card></Card>
+          {/* cardData 배열을 기반으로 카드 컴포넌트 렌더링하면 됨 */}
+          {cardData.map((card) => (
+            <Card key={card.id}/>
           ))}
         </S.CardWrapper>
       </S.CardListContainer>
