@@ -5,7 +5,7 @@ import AppHeader from "../../../components/layout/AppHeader";
 import { useRecoilValue } from "recoil";
 import oAuthInfoAtom from "../../../atoms/loginInfo";
 import { useNavigate } from "react-router-dom";
-import Modal from "../../../components/common/Modal";
+import Modal from "../../../components/common/modal";
 
 const PageContainer = styled(DefaultBox)`
   min-height: calc(100vh - 40px);
