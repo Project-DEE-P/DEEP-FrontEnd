@@ -10,7 +10,7 @@ interface Props {
 
 const Modal: React.FC<Props> = ({ isOpen, onYes, onNo }) => {
     const navigation = useNavigate();   
-    const [isModalOpen, setIsModalOpen] = useState<any>(isOpen);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (!isOpen) return null;
 
@@ -37,7 +37,7 @@ const Modal: React.FC<Props> = ({ isOpen, onYes, onNo }) => {
     
 
     return (
-        <m.ModalOverlay style={{ display: isModalOpen ? "flex" : "none" }}>
+        <m.ModalOverlay>
             <m.ModalContent>
                 <p>기억하시겠습니까?</p>
                 <m.ButtonContainer>
