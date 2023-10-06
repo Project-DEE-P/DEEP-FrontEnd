@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as m from "./style";
 import { useNavigate } from "react-router-dom";
+import cookies from 'js-cookie';
 import { modalState, useModalstate } from "../../../atoms/modalState";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 const Modal: React.FC<Props> = ({ isOpen, onYes, onNo }) => {
   const navigation = useNavigate();
   const [modalStack, setModalStack] = useModalstate();
+  const accessToken = cookies.get('access_token')
 
   // 모달 닫기 함수
   const closeModal = () => {
@@ -19,11 +21,9 @@ const Modal: React.FC<Props> = ({ isOpen, onYes, onNo }) => {
   };
 
   const handleYes = () => {
-    // if (토큰있다) {
-    //   navigation('/다음페이지'); // 다음 페이지로 이동
-    // } else {
-    //   navigation('/signin'); // 로그인 페이지로 이동
-    // }
+    if (accessToken) {
+        navigation("/cardList");
+    }
     closeModal(); // 모달 닫기
   };
 
