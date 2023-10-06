@@ -26,7 +26,7 @@ const OAuth: React.FC = () => {
     if (accessToken) {
       try {
         axios
-            .get("http://10.80.162.14:8081/v1/api/auth/google/", {
+            .get("http://10.80.162.14:8081/v1/api/auth/google", {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -34,10 +34,21 @@ const OAuth: React.FC = () => {
             .then((response) => {
                 const userData = response.data;
                 if (userData) {
-                    setLoginInfo({
-                        access_token: accessToken,
-                    });
-                    navigation("/showCard");
+                   axios.post("http://10.80.162.14:8081/v1/api/auth/google", {
+                    name: userData.name,
+                    email: userData.email,
+                   })
+                   .then((postResponse) => {
+                    console.log("User data sent to server:", postResponse.data);
+                   })
+                   .catch((postError) => {
+                    console.error("Error sending user data to server:", postError)
+                   })
+
+                   setLoginInfo({
+                    access_token: accessToken,
+                  });
+                  navigation("/showCard");
                 } else {
                     console.log("Authentication failed");
                 }

@@ -1,3 +1,5 @@
 {
-    "oauth_client_id": "25037882319-1gl4gqc6c2s4k24p04h2m1q8kopj43gm.apps.googleusercontent.com"
+    "oauth_client_id": "25037882319-1gl4gqc6c2s4k24p04h2m1q8kopj43gm.apps.googleusercontent.com",
+    "oauth_client_seceret": "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",
+    "oauth_callback_url" : "http://localhost:8081/v1/api/auth/google/callback"
 }
