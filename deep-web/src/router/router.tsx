@@ -12,7 +12,7 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ShowCard />} />
-          <Route path="/showCard/:id" element={<ShowCard />} />
+          <Route path="/showCard" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />
           <Route path="*" element={<NoMatchPage />} />

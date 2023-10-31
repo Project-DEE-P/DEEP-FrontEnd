@@ -32,6 +32,7 @@ const Layout = ({ children }: Props) => {
       console.log(loginInfo.access_token);
       // TODO: 로그인 정보로 데이터 불러와서 리스트 렌더링
       console.log("리스트 그리기 진행");
+      
     }
   };
 
@@ -40,20 +41,18 @@ const Layout = ({ children }: Props) => {
   };
 
   useEffect(() => {
+    console.log(`현재 파라미터 값 : ${param}`)
     navigation(`/showcard/${param}`);
     showCardInfo();
   }, [param]);
 
-  const showCardInfo = () => {
-    axios
-      .get(`http://10.80.162.51:8080/v1/api/card/${param}`)
-      .then(function (response: any) {
+  const showCardInfo = async () => {
+    try {
+        const response = await axios.get(`http://172.16.1.21:8080/v1/api/card/${param}`);
         console.log(response);
-      })
-      .catch(function (error: any) {
-        console.log(error);
-      })
-      .then(function () {});
+    } catch(err) {
+        console.log(err);
+    }
   };
 
   return (
