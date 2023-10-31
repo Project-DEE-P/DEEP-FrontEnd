@@ -9,11 +9,6 @@ interface UserData {
   email: string | null;
 }
 
-interface UserData {
-  name: string | null;
-  email: string | null;
-}
-
 function Google() {
   const [data, setData] = useState<UserData>({ name: null, email: null });
   const GOOGLE_CLIENT_ID =
