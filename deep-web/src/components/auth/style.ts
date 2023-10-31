@@ -3,7 +3,6 @@ import { DefaultBox } from "../../styles/default";
 
 export const OAuthContainer = styled(DefaultBox)`
   min-height: calc(100vh - 40px);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,8 +10,10 @@ export const OAuthContainer = styled(DefaultBox)`
 `;
 
 export const DeepLogoImg = styled.img<{ src: string }>`
-  margin-bottom: 40vh;
-  margin-top: 40vh;
+  margin-top: 20px; 
+  margin-bottom: 20px;
 `;
 
-export const OAuthButton = styled.img``;
+export const OAuthButton = styled.img`
+  cursor: pointer;
+`;

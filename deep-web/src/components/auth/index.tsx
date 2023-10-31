@@ -43,8 +43,8 @@ const OAuth: React.FC = () => {
   return (
     <>
       <S.OAuthContainer>
-        <S.DeepLogoImg src={DeepLogo}></S.DeepLogoImg>
-        <S.OAuthButton src={OAuthBtn} onClick={oAuthHandler}></S.OAuthButton>
+        <S.DeepLogoImg src={DeepLogo} />
+        <S.OAuthButton src={OAuthBtn} onClick={oAuthHandler} />
         {/* <GoogleLogin
           onSuccess={(credentialResponse) => {
             console.log(credentialResponse);
