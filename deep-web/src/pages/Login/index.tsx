@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import * as l from "./style";
-import axios from "axios";
 
 const Login = () => {
     return (

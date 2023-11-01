@@ -4,7 +4,7 @@ import ShowCard from "../pages/ShowCard/index";
 import OAuthPage from "../pages/OAuth/OAuth";
 import NoMatchPage from "../pages/NoMatch";
 import CardListPage from "../pages/CardList";
-import Login from "../components/Login";
+import Login from "../pages/Login";
 import { RecoilRoot } from "recoil";
 
 const Router = () => {

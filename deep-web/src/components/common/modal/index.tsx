@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as m from "./style";
 import { useNavigate } from "react-router-dom";
 import cookies from 'js-cookie';
