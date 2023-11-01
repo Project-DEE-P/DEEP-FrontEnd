@@ -34,10 +34,10 @@ const CardList = () => {
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>
         </S.CardListTitleWrapper>
         <S.CardWrapper>
-          {/* cardData 배열을 기반으로 카드 컴포넌트 렌더링하면 됨 */}
-          {cardData.map((card) => (
+          {/* {cardData.map((card) => (
             <Card key={card.id} />
-          ))}
+          ))} */}
+          <Card />
         </S.CardWrapper>
       </S.CardListContainer>
     </>
