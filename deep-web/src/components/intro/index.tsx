@@ -8,3 +8,5 @@ const Intro = () => {
     </S.IntroContainer>
   );
 };
+
+export default Intro
