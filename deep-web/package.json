@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/js-cookie": "^3.0.4",
     "@types/jsonwebtoken": "^9.0.3",
     "@types/react-redux": "^7.1.28",

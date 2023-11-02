@@ -52,7 +52,7 @@
         navigation(`/showcard/${param}`);
       } catch(err) {
         console.log(err);
-        navigation(`showCard/${param}`); // 호출 실패 해도 navigation 호출
+        // navigation(`showCard/${param}`); // 호출 실패 해도 navigation 호출
       }
     };
 
