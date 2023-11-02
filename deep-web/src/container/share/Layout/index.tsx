@@ -47,7 +47,7 @@
 
     const showCardInfo = async () => {
       try {
-        const response = await axios.get(`http://172.16.1.21:8080/v1/api/card/${param}`);
+        const response = await customAxios.get(`http://172.16.1.21:8080/v1/api/card/${param}`);
         console.log(response);
         navigation(`/showcard/${param}`);
       } catch(err) {
