@@ -2,13 +2,13 @@
   import * as s from "./style";
   import { DefaultBox } from "../../../styles/default";
   import AppHeader from "../../../components/layout/AppHeader";
+  import Header from "../../../components/layout/Header";
   import { useRecoilState, useRecoilValue } from "recoil";
   import oAuthInfoAtom from "../../../atoms/loginInfo";
   import cardIdAtom from "../../../atoms/cardid";
   import { useNavigate, useParams } from "react-router-dom";
   import Modal from "../../../components/common/modal";
   import { customAxios } from "../../../lib/customAxios";
-  import axios from "axios";
   import SampleCard from "../../../assets/img/SampleCard.svg";
 
   interface Props {
@@ -66,7 +66,7 @@
 
     return (
       <>
-        <AppHeader />
+        <Header />
         <s.PageContainer>
           <s.NFCContainer>
             <s.NFCTitle>
