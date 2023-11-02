@@ -27,7 +27,7 @@ const Header = () => {
             <_.HeaderButton>
                 <div>로그인</div>
             </_.HeaderButton>
-        </a>    
+            </a>    
         </_.HeaderButtonBox>
       </_.AppHeaderBox>
     </_.HeaderContainer>
