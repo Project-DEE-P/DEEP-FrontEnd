@@ -4,13 +4,13 @@ import axios from "axios";
 import styled from "styled-components";
 // import { CustomBtn } from "../common/Button/Btn";
 
-interface UserData {
-  name: string | null;
-  email: string | null;
-}
+// interface UserData {
+//   name: string | null;
+//   email: string | null;
+// }
 
 function Google() {
-  const [data, setData] = useState<UserData>({ name: null, email: null });
+  // const [data, setData] = useState<UserData>({ name: null, email: null });
   const GOOGLE_CLIENT_ID =
     "777095937699-c7l8td7s6rtm8qpi3ejcf49tg4krcp6c.apps.googleusercontent.com";
   const REDIRECT_URI = "http://localhost:3000/oauth";
