@@ -79,6 +79,7 @@ export const FindUser = styled.p`
   background-color: transparent;
   text-decoration: none;
   color: black;
+  margin-top: -0.5%;
 `;
 
 export const Bar = styled.span`
@@ -100,7 +101,7 @@ export const LoginBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 340px;
+  width: 380px;
 `;
 
 export const SignBtn = styled.button`
@@ -114,6 +115,6 @@ export const SignBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 340px;
+  width: 380px;
   margin-top: 10px;
 `;
