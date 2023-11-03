@@ -3,12 +3,13 @@ import { DefaultBox } from "../../../styles/default";
 
 export const PageContainer = styled(DefaultBox)`
     min-height: calc(100vh - 40px);
-`
+    overflow: hidden;
+`;
 export const NFCContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-left: 40px;
-    margin-top: 18%;
+    margin-top: 15%;
 `
 
 export const NFCTitle = styled.p`
@@ -18,6 +19,7 @@ export const NFCTitle = styled.p`
     font-size: 23px;
     font-style: normal;
     font-weight: 700;
+    
 `
 export const CardContainer = styled.div`
     display: flex;

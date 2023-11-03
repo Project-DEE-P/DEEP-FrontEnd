@@ -66,7 +66,7 @@
 
     return (
       <>
-        <Header />
+        <AppHeader />
         <s.PageContainer>
           <s.NFCContainer>
             <s.NFCTitle>
