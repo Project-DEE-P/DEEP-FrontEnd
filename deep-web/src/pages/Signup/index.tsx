@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as s from "./style";
+import axios from "axios";
 
 const SignUp = () => {
   const [formRegister, setFormRegister] = useState({
@@ -26,7 +27,7 @@ const SignUp = () => {
     // 중복 확인 로직을
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!username || !name || !password || !pwCheck || !email) {
@@ -47,7 +48,24 @@ const SignUp = () => {
       return;
     }
 
-    // 회원가입 로직
+    try {
+        const userData = {
+            userId: username,
+            password: password,
+            name: name,
+            email: email,
+          };
+
+          const response = await axios.post("http://10.80.163.222:8081/v1/api/auth/signup", userData);
+
+          if (response.status === 201) {
+            alert("회원가입 성공");
+          } else {
+            alert("회원가입 실패");
+          }
+    } catch (error) {
+        console.error(error)
+    }
   };
 
   function isId(username: string) {
