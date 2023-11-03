@@ -5,6 +5,7 @@ import OAuthPage from "../pages/OAuth/OAuth";
 import NoMatchPage from "../pages/NoMatch";
 import CardListPage from "../pages/CardList";
 import Production from "../pages/Production";
+import SignUp from "../pages/Signup";
 import Login from "../pages/Login";
 import { RecoilRoot } from "recoil";
 
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
           <Route path="*" element={<NoMatchPage />} />
         </Routes>
       </BrowserRouter>

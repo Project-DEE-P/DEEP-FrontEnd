@@ -22,22 +22,36 @@ const OAuth: React.FC = () => {
 
   useEffect(() => {
     // TODO: URL 파싱 리팩토링 진행
-    console.log(`파라미터값 : ${param}`);
-    console.log(`/showCard/${param}`);
-    const url = new URL(window.location.href);
-    const accessToken = url.hash.substring(1).split("&")[0].split("=")[1];
-    if (accessToken) {
-      try {
-        setLoginInfo({
-          access_token: accessToken,
-        });
-        console.log(`/showCard/5`);
-        console.log(param);
-        navigation(`/showCard/5`);
-      } catch (error) {
-        console.log("OAuth token expired");
+    const handleOAuthResponse = async () => {
+      const url = new URL(window.location.href);
+      const accessToken = url.hash.substring(1).split("&")[0].split("=")[1];
+
+      if (accessToken) {
+        try {
+          const response = await axios.post("http://10.80.163.222/v1/api/auth/google", {
+            access_token: accessToken,
+          });
+
+          if (response.status === 200) {
+            const data = response.data;
+
+            if (data.token) {
+              setLoginInfo({
+                access_token: data.token,
+              });
+
+              navigation("/showCard");
+            }
+          } else if (response.status === 500) {
+            console.log("INTERNAL SERVER ERROR");
+          }
+        } catch (error) {
+          console.log("OAuth token expired or failed");
+        }
       }
-    }
+    };
+    
+    handleOAuthResponse();
   }, [param]);
 
   return (
@@ -45,15 +59,6 @@ const OAuth: React.FC = () => {
       <S.OAuthContainer>
         <S.DeepLogoImg src={DeepLogo} />
         <S.OAuthButton src={OAuthBtn} onClick={oAuthHandler} />
-        {/* <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-          useOneTap
-        /> */}
       </S.OAuthContainer>
     </>
   );

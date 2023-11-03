@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as l from "./style";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const navagation = useNavigate();
@@ -19,19 +20,31 @@ const Login = () => {
     });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login();
 
-    console.log("로그인할래!");
-  };
+    try {
+      const response = await axios.post("http://127.0.0.1:8081/v1/api/auth/login", {
+        username: formValue.username,
+        password: formValue.password,
+      });
 
-  const login = () => {
-    if (formValue.username === "" || formValue.password === "") {
-      window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
-      return;
+      if (response.status === 200) {
+        console.log("로그인 성공!");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log("로그인 실패", error);
+      window.alert("로그인 실패: 아이디 혹은 비밀번호가 올바르지 않습니다.");
     }
   };
+
+  // const login = () => {
+  //   if (formValue.username === "" || formValue.password === "") {
+  //     window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
+  //     return;
+  //   }
+  // };
 
   return (
     <>
