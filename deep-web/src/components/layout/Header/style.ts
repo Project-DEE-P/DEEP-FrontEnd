@@ -28,6 +28,12 @@ export const HeaderButtonBox = styled.div`
   right: 20px;
   display: flex;
   align-items: center;
+
+  button {
+    background:  #fff;
+    border: none;
+    cursor: pointer;
+  }
 `;
 
 export const HeaderButton = styled.a`
@@ -42,7 +48,5 @@ export const HeaderButton = styled.a`
     font-size: 20px;
     font-weight: 500;
     margin-left: 50px;
-    text-decoration: none !important;
   }
-  
 `;

@@ -1,10 +1,16 @@
 import React from 'react';
 import * as _ from "./style"
 import Deep from "../../../assets/img/DeepLogo.svg"
+import { useNavigate } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
-const Header = () => {
+const Header: React.FC = () => {
 //   const user = useSelector((state: any) => state.user);
+    const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+  };
 
   return (
     <_.HeaderContainer>
@@ -13,21 +19,21 @@ const Header = () => {
             <img src={Deep} alt="error" />
         </a>
         <_.HeaderButtonBox>
-            <a href="/business-card">
+            <button onClick={() => handleNavigate('/business-card')}>
               <_.HeaderButton>
                 <div>명함 제작</div>
               </_.HeaderButton>
-            </a>
-          <a href="/card-management">
+            </button>
+          <button onClick={() => handleNavigate('/business-card')}>
             <_.HeaderButton>
               <div>명함 관리</div>
             </_.HeaderButton>
-          </a>  
-          <a href='/login'>
+          </button>  
+          <button onClick={() => handleNavigate('/business-card')}>
             <_.HeaderButton>
                 <div>로그인</div>
             </_.HeaderButton>
-            </a>    
+            </button>    
         </_.HeaderButtonBox>
       </_.AppHeaderBox>
     </_.HeaderContainer>
