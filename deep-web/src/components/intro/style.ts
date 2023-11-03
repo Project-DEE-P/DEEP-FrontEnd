@@ -59,11 +59,11 @@ export const SecondContainer = styled.div`
 
 export const ThirdContainer = styled.div`
   width: 100vw;
-  height: 180vh;
+  height: 185vh;
   background-color: #ffffff;
   padding-left: 15vw;
   padding-right: 15vw;
-  padding-top: 5vh;
+  padding-top: 15vh;
   padding-bottom: 5vh;
   box-sizing: border-box;
 
