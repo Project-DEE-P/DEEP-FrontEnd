@@ -26,7 +26,7 @@ export const FirstText = styled.p`
   color: #000;
 
   font-family: Pretendard;
-  font-size: 1.5rem;
+  font-size: 3vh;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
@@ -91,7 +91,7 @@ export const ThirdTitle = styled.h4`
   color: #1775f9;
 
   font-family: Pretendard;
-  font-size: 2rem;
+  font-size: 3vh;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -100,7 +100,7 @@ export const ThirdTitle = styled.h4`
 export const ThirdText = styled.p`
   color: #000;
   font-family: Pretendard;
-  font-size: 3rem;
+  font-size: 5vh;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -109,7 +109,7 @@ export const ThirdText = styled.p`
 export const ThirdRightText = styled.p`
   color: #000;
   font-family: Pretendard;
-  font-size: 3rem;
+  font-size: 5vh;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -122,9 +122,11 @@ export const ThirdTextRightWraper = styled.div`
   flex-direction: column;
 `;
 export const NFCImg = styled.img`
+  height: 35vh;
   position: absolute;
 `;
 export const CardMockupImg = styled.img`
+  height: 75vh;
   position: relative;
   top: 50px;
   &:hover {
