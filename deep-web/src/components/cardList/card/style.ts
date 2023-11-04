@@ -30,5 +30,7 @@ export const CardDateText = styled.p`
 `;
 
 export const SampleCardImg = styled.img<{ src: string }>`
-  width: 100%;
+  width: calc(100vw - 30px);
+  height: 200px;
+  min-height: 200px;
 `;
