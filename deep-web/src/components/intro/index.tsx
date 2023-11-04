@@ -28,7 +28,11 @@ const Intro = () => {
           </S.FirstText>
           <S.GooglePlay src={Playstore} data-aos="fade-up"></S.GooglePlay>
         </S.FirstTextWraper>
-        <S.MockupImg src={IntroMockup} data-aos="fade-up"></S.MockupImg>
+        <S.MockupImg
+          src={IntroMockup}
+          data-aos="fade-up"
+          data-aos-delay="100"
+        ></S.MockupImg>
       </S.FirstContainer>
       <S.SecondContainer>
         <S.IntroTextImg src={SecondText} data-aos="fade-up"></S.IntroTextImg>

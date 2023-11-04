@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 
+
+
 export const HeaderContainer = styled.div`
   width: 100%;
   height: 40px;
