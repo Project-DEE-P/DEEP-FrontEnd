@@ -1,6 +1,7 @@
+import { DefaultBox } from "src/styles/default";
 import styled from "styled-components";
 
-export const LoginSection = styled.div`
+export const LoginSection = styled(DefaultBox)`
   width: 100%;
   max-width: 340px;
   margin: 0 auto;
@@ -108,7 +109,7 @@ export const LoginBtn = styled.button`
 
 export const SignBtn = styled.button`
   color: #1775F9;
-  border-style: none;
+  border-style: none;   
   background-color: white;
   font-weight: 500;
   font-size: 16px;

@@ -1,3 +1,4 @@
+import { DefaultBox } from "src/styles/default";
 import styled from "styled-components";
 
 export const RegisterSection = styled.div`
@@ -55,7 +56,7 @@ export const Title = styled.h2`
   letter-spacing: -1px;
 `;
 
-export const Wrap = styled.div`
+export const Wrap = styled(DefaultBox)`
   width: 1050px;
   margin: 0 auto;
   padding: 50px 0 51px;
