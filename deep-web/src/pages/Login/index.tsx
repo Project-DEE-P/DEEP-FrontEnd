@@ -39,13 +39,6 @@ const Login = () => {
     }
   };
 
-  // const login = () => {
-  //   if (formValue.username === "" || formValue.password === "") {
-  //     window.alert("아이디 혹은 비밀번호가 공란입니다! 입력해주세요!");
-  //     return;
-  //   }
-  // };
-
   return (
     <>
       <l.LoginSection>
@@ -72,11 +65,11 @@ const Login = () => {
               <l.InputCheck type="checkbox" />
               <l.Text>보안접속</l.Text>
             </l.Wrap>
-            <l.Search>
+            {/* <l.Search>
               <l.FindUser>아이디찾기</l.FindUser>
               <l.Bar />
               <l.FindUser>비밀번호 찾기</l.FindUser>
-            </l.Search>
+            </l.Search> */}
           </l.CheckContainer>
 
           <l.LoginBtn type="submit">로그인</l.LoginBtn>
