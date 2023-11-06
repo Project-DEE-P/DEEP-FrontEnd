@@ -15,7 +15,7 @@ root.render(
     onScriptLoadError={() => console.log("실패")}
     onScriptLoadSuccess={() => console.log("성공")}
   >
-      <App />
+    <App />
   </GoogleOAuthProvider>
 );
 
