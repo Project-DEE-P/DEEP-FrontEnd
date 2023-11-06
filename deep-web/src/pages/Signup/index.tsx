@@ -31,7 +31,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://10.80.163.222:8081/v1/api/auth/id-check",
+        "http://172.20.10.2:8081/v1/api/auth/id-check",
         { id: username }
       );
 
@@ -70,6 +70,11 @@ const SignUp = () => {
       return;
     }
 
+    if (!isEmail(email)) {
+      alert("이메일이 올바르지 않습니다.");
+      return;
+    }
+
     try {
       const userData = {
         userId: username,
@@ -79,7 +84,7 @@ const SignUp = () => {
       };
 
       const response = await axios.post(
-        "http://10.80.163.222:8081/v1/api/auth/signup",
+        "http://172.20.10.2:8081/v1/api/auth/signup",
         userData
       );
 
@@ -98,6 +103,11 @@ const SignUp = () => {
     let regExp =
       /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
     return regExp.test(password);
+  }
+
+  function isEmail(email: string) {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    return emailRegex.test(email);
   }
 
   return (
@@ -182,7 +192,7 @@ const SignUp = () => {
                 </s.Id>
                 <s.Div>
                   <s.Input
-                    type="text"
+                    type="text" 
                     placeholder="이름을 입력해주세요"
                     name="name"
                     onChange={onChangeFormRegister}

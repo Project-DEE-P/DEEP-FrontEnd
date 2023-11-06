@@ -8,23 +8,22 @@ import Production from "../pages/Production";
 import SignUp from "../pages/Signup";
 import Login from "../pages/Login";
 import { RecoilRoot } from "recoil";
-import LandingPage from "../pages/Landing";
-import TemplatePage from "src/pages/Template";
+import CallbackPage from "src/pages/callback";
 
 const Router = () => {
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<ShowCard />} />
+          <Route path="production" element={<Production />} />
           <Route path="/showCard/:cardId" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/landing" element={<LandingPage />} />
-          <Route path="/register" element={<SignUp />} />
-          <Route path="/template" element={<TemplatePage />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NoMatchPage />} />
+          <Route path="/callback" element={<CallbackPage />}/>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
