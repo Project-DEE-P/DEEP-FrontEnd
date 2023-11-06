@@ -1,8 +1,8 @@
 import React from "react";
-import Layoutfrom from "../../container/share/Layout";
+import LayoutForm from "../../container/share/Layout";
 
 const ShowCard = () => {
-    return <Layoutfrom children={undefined}/>;
-}
+  return <LayoutForm children={undefined} />;
+};
 
 export default ShowCard;

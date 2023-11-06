@@ -3,8 +3,12 @@ import { DefaultBox } from "../../../styles/default";
 
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 40px;
+  height: 50px;
   background: #fff;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const AppHeaderBox = styled(DefaultBox)`
@@ -30,21 +34,17 @@ export const HeaderButtonBox = styled.div`
   align-items: center;
 
   button {
-    background:  #fff;
+    background: #fff;
     border: none;
     cursor: pointer;
   }
 `;
 
 export const HeaderButton = styled.a`
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-
   div {
-    color: #0A3570;
+    color: #0a3570;
     text-align: center;
-    font-family: 'Pretendard';
+    font-family: "Pretendard";
     font-size: 20px;
     font-weight: 500;
     margin-left: 50px;
