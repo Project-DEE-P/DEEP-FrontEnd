@@ -184,7 +184,7 @@ const SignUp = () => {
                   <s.Input
                     type="text"
                     placeholder="이름을 입력해주세요"
-                    name="nickname"
+                    name="name"
                     onChange={onChangeFormRegister}
                     value={name}
                   />
@@ -203,7 +203,7 @@ const SignUp = () => {
                   <s.Input
                     type="text"
                     placeholder="이메일을 입력해주세요"
-                    name="address"
+                    name="email"
                     onChange={onChangeFormRegister}
                     value={email}
                   />
