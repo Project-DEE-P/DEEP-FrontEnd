@@ -36,6 +36,14 @@ const SignUp = () => {
       );
 
       setResponse(response.data);
+
+      if (response.status === 200) {
+        alert("사용할 수 있는 아이디 입니다.");
+      } else if (response.status === 400) {
+        alert("중복된 아이디 입니다.");
+      } else if (response.status === 500) {
+        alert("INTERNAL SERVER ERROR");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -176,7 +184,7 @@ const SignUp = () => {
                   <s.Input
                     type="text"
                     placeholder="이름을 입력해주세요"
-                    name="nickname"
+                    name="name"
                     onChange={onChangeFormRegister}
                     value={name}
                   />
@@ -195,7 +203,7 @@ const SignUp = () => {
                   <s.Input
                     type="text"
                     placeholder="이메일을 입력해주세요"
-                    name="address"
+                    name="email"
                     onChange={onChangeFormRegister}
                     value={email}
                   />
