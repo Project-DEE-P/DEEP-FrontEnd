@@ -30,6 +30,8 @@ export const FirstText = styled.p`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+
+  overflow: hidden;
 `;
 export const IntroTextImg = styled.img`
   width: 35vw;
@@ -50,6 +52,8 @@ export const SecondContainer = styled.div`
   padding-left: 15vw;
   padding-right: 15vw;
   box-sizing: border-box;
+
+  overflow: hidden;
 
   display: flex;
   flex-direction: row;
@@ -104,6 +108,7 @@ export const ThirdText = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  overflow: hidden;
 `;
 
 export const ThirdRightText = styled.p`
