@@ -23,7 +23,7 @@ const Header: React.FC = () => {
               <img src={Deep} alt="error" />
             </a>
             <_.HeaderButtonBox>
-              <button onClick={() => handleNavigate("/business-card")}>
+              <button onClick={() => handleNavigate("/template")}>
                 <_.HeaderButton>
                   <div>명함 제작</div>
                 </_.HeaderButton>
