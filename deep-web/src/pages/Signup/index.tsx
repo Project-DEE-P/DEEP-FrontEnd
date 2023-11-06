@@ -10,7 +10,7 @@ const SignUp = () => {
     name: "",
     email: "",
   });
-
+  const [response, setResponse] = useState({ code: 0, message: "" });
   const { username, password, pwCheck, name, email } = formRegister;
 
   const onChangeFormRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,23 @@ const SignUp = () => {
     });
   };
 
-  const onClick = (e: React.MouseEvent) => {
+  const onClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    // 중복 확인 로직을
+    if (!username) {
+      alert("아이디를 입력하세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://10.80.163.222:8081/v1/api/auth/id-check",
+        { id: username }
+      );
+
+      setResponse(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -49,22 +63,21 @@ const SignUp = () => {
     }
 
     try {
-        const userData = {
-            userId: username,
-            password: password,
-            name: name,
-            email: email,
-          };
+      const userData = {
+        userId: username,
+        password: password,
+        name: name,
+        email: email,
+      };
 
-          const response = await axios.post("http://10.80.163.222:8081/v1/api/auth/signup", userData);
+      const response = await axios.post(
+        "http://10.80.163.222:8081/v1/api/auth/signup",
+        userData
+      );
 
-          if (response.status === 201) {
-            alert("회원가입 성공");
-          } else {
-            alert("회원가입 실패");
-          }
+      setResponse(response.data);
     } catch (error) {
-        console.error(error)
+      console.error(error);
     }
   };
 
