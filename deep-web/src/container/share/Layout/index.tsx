@@ -1,36 +1,77 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import * as s from "./style";
+import * as S from "../../../components/template/style";
 import { DefaultBox } from "../../../styles/default";
-import AppHeader from "../../../components/layout/AppHeader";
 import Header from "../../../components/layout/Header";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import oAuthInfoAtom from "../../../atoms/loginInfo";
 import cardIdAtom from "../../../atoms/cardid";
+import CardTypeAtom from "../../../atoms/cardType";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/common/modal";
 import { customAxios } from "../../../lib/customAxios";
 import SampleCard from "../../../assets/img/SampleCard.svg";
-
+import CardTemplate from "src/container/cardTemplate";
+import axios from "axios";
 interface Props {
   children: React.ReactNode;
 }
 
+interface CardProps {
+  id: Number;
+  uid: String;
+  template: String;
+  name: String;
+  position: String;
+  department: String;
+  phone: String;
+  email: String;
+  github: String;
+  createdDateTime: String;
+  modifiedDateTime: String;
+}
+
 const LayoutForm = ({ children }: Props) => {
+  const serverUrl = "https://api.ddeep.store";
   const loginInfo = useRecoilValue(oAuthInfoAtom);
-  const [param, setParam] = useRecoilState(cardIdAtom);
+  const [cardId, setCardId] = useRecoilState(cardIdAtom);
+  const [cardType, setCardType] = useRecoilState(CardTypeAtom);
   const [showModal, setShowModal] = useState<any>(false);
+  const [resTemple, setResTemple] = useState<any>([]);
+  const [resImg, setResImg] = useState([]);
+
   const navigation = useNavigate();
 
-  const params = useParams();
-  const id = Number(params.id);
+  // 1) url로 Param 값을 type, id로 저장
+  const { istemplate, id } = useParams();
+  setCardId(Number(id));
+  setCardType(String(istemplate).toUpperCase());
+  console.log(cardType);
 
+  // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
+    const response = customAxios
+      .post(`${serverUrl}/v2/api/remember`, {
+        cardType: cardType,
+        cardId: cardId,
+      })
+      .then((postResponse) => {
+        console.log("User data sent to server:", postResponse.data);
+      });
+    console.log(response);
+    navigation("/cardlist");
     if (loginInfo == null) {
       navigation("/oauth");
     } else {
-      console.log(loginInfo.access_token);
-      console.log("리스트 그리기 진행");
-
+      const response = customAxios
+        .post(`${serverUrl}/v1/api/remember`, {
+          cardType: cardType,
+          cardId: cardId,
+        })
+        .then((postResponse) => {
+          console.log("User data sent to server:", postResponse.data);
+        });
+      console.log(response);
       navigation("/cardlist");
     }
   };
@@ -39,39 +80,52 @@ const LayoutForm = ({ children }: Props) => {
     setShowModal(false);
   };
 
+  // 2) 카드를 get하기 위해 url에서 param 값을 뽑아(CardType) template형식인지 Image 형식인지 구하고 그거에 맞춰 요청 보냄
   useEffect(() => {
-    console.log(`현재 파라미터 값 : ${param}`);
-    // navigation(`/showcard/${param}`);
-    showCardInfo();
-  }, [param]);
+    console.log();
+    if (cardType === "TEMPLATE") {
+      const resTemple = axios
+        .get(`${serverUrl}/v2/api/card/template/${cardId}`)
+        .then((postResponse) => {
+          setResTemple(postResponse.data);
+          console.log("User data sent to server:", postResponse.data);
+        });
+    } else {
+      const resImg = axios
+        .get(`${serverUrl}/v2/api/card/Image/${cardId}`)
+        .then((postResponse) => {
+          setResImg(postResponse.data);
+          console.log("User data sent to server:", postResponse.data);
+        });
+    }
+  }, []);
 
   const showCardInfo = async () => {
     try {
       const response = await customAxios.get(
-        `http://172.16.1.21:8080/v1/api/card/${param}`
+        `${serverUrl}/v1/api/card/showcard/${cardType}/${cardId}`
       );
       console.log(response);
-      navigation(`/showcard/${param}`);
+      navigation(`/showcard/${cardType}/${cardId}`);
     } catch (err) {
       console.log(err);
       // navigation(`showCard/${param}`); // 호출 실패 해도 navigation 호출
     }
   };
 
-  if (!isNaN(id)) {
-    setParam(id);
+  if (!isNaN(Number(id))) {
+    setCardId(Number(id));
     console.log(`현재 파라미터값 : ${id}`);
-    showCardInfo();
   } else {
     navigation("/showCard");
     interface Props {
       children: React.ReactNode;
     }
   }
-  
+  console.log(resTemple);
   return (
     <>
-      <AppHeader />
+      <Header />
       <s.PageContainer>
         <s.NFCContainer>
           <s.NFCTitle>
@@ -79,7 +133,11 @@ const LayoutForm = ({ children }: Props) => {
           </s.NFCTitle>
         </s.NFCContainer>
         <s.CardContainer>
-          <img src={SampleCard} alt="error" />
+          {cardType === "TEMPLATE" ? (
+            <CardTemplate data={resTemple}></CardTemplate>
+          ) : (
+            <img src={""}></img>
+          )}
         </s.CardContainer>
         <s.ButtonContainer>
           <s.RememberButton onClick={handleRememberClick}>

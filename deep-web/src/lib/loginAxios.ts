@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiServer = '';
+const apiServer = "https://api.ddeep.store";
 
 export const loginAxios = async (userId: string, password: string) => {
   try {

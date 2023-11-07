@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import cookies from 'js-cookie';
 import * as jwt from 'jsonwebtoken';
 
-const SERVER_URL = 'http://10.80.162.51:8080'; 
+const SERVER_URL = 'https://api.ddeep.store'; 
 const getToken = () => cookies.get('access_token');
 
 export const checkToken = async (config: AxiosRequestConfig) => {
