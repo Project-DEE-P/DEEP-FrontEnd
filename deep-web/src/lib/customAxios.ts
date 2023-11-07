@@ -9,14 +9,4 @@ export const customAxios: AxiosInstance = axios.create({
   },
 });
 
-export const templateAxios = axios.create({
-  baseURL: "http://220.122.166.117/v2/api/card/template",
-  timeout: 10000, 
-  headers: {
-    "Content-Type": "application/json",
-  },
-  transformRequest: [(data) => JSON.stringify(data)],
-  transformResponse: [(data) => JSON.parse(data)],
-});
-
 export default customAxios;
