@@ -87,3 +87,20 @@ export const CardWrapper = styled.div`
   column-gap: 20px;
   row-gap: 20px;
 `;
+
+export const Container = styled.div`
+  ${(prop) => prop.theme.responsiveContainer}
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 2rem;
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  margin-top: 2rem;
+`;
+
+export const TabText = styled.div`
+  margin-left: 0.5rem;
+`;
