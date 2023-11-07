@@ -1,13 +1,5 @@
 import { useEffect } from "react";
 import * as S from "./style";
-import axios from "axios";
-import { useRecoilState } from "recoil";
-import loginInfoAtom from "../../atoms/loginInfo";
-import { useNavigate } from "react-router-dom";
-import config from "../../config/config.json";
-import cardIdAtom from "../../atoms/cardid";
-import CardTypeAtom from "../../atoms/cardType";
-import Login from "../../components/common/LoginButton";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
 
@@ -18,11 +10,11 @@ function OAuth() {
 
   return (
     <>
-      <S.OAuthContainer>
-        <S.DeepLogoImg src={DeepLogo}></S.DeepLogoImg>
-        <S.OAuthButton src={OAuthBtn} onClick={handleLoginClick} />
-      </S.OAuthContainer>
-    </>
+    <S.OAuthContainer>
+      <S.DeepLogoImg src={DeepLogo}></S.DeepLogoImg>
+      <S.OAuthButton src={OAuthBtn} onClick={handleLoginClick} />
+    </S.OAuthContainer>
+  </>
   );
 }
 
