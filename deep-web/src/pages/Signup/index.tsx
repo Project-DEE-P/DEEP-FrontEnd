@@ -27,9 +27,9 @@ const SignUp = () => {
       alert("아이디를 입력하세요.");
       return;
     }
-
+  
     const userIdString = String(userId);
-
+  
     try {
       const response = await axios.post(
         `http://10.80.163.49:8081/v1/api/auth/id-check`,
@@ -40,9 +40,9 @@ const SignUp = () => {
           },
         }
       );
-
+  
       console.log(response);
-
+  
       if (response.status === 201) {
         alert("사용할 수 있는 아이디 입니다.");
       } else if (response.status === 400) {
@@ -55,13 +55,14 @@ const SignUp = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
+  };  
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
     if (!userId || !name || !password || !email) {
+
+    if (!userId || !name || !password || !pwCheck || !email) {
       alert("빈칸을 모두 채워주세요.");
       return;
     }
@@ -129,6 +130,7 @@ const SignUp = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     return emailRegex.test(email);
   }
+}
 
   return (
     <>
