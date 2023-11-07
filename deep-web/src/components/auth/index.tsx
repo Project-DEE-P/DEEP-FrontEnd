@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import * as S from "./style";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
+import Header from "../layout/Header";
 
 function OAuth() {
   const handleLoginClick = () => {

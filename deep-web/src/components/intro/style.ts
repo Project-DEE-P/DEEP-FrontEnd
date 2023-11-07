@@ -18,8 +18,8 @@ export const FirstContainer = styled.div`
   flex-direction: row;
 
   @media screen and (max-width: 1024px) {
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 8vw;
+    padding-right: 8vw;
     padding-top: 5vh;
     height: 80vh;
     width: 100%;
@@ -151,7 +151,7 @@ export const ThirdText = styled.p`
   line-height: normal;
   overflow: hidden;
   @media screen and (max-width: 1024px) {
-    font-size: 4vh;
+    font-size: 3.5vh;
   }
 `;
 
@@ -165,7 +165,7 @@ export const ThirdRightText = styled.p`
   text-align: end;
 
   @media screen and (max-width: 1024px) {
-    font-size: 4vh;
+    font-size: 3.5vh;
     width: 80vw;
   }
 `;
