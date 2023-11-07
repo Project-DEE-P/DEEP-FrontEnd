@@ -13,7 +13,9 @@ const AppHeader = () => {
   return (
     <a.HeaderContainer>
       <a.AppHeaderBox>
-        <a.LogoImg src={DeepLogoImg} />
+        <a href="/">
+          <a.LogoImg src={DeepLogoImg} alt="error" />
+        </a>
         <a.HeaderButtonBox>
           <button onClick={() => handleNavigate("/template")}>
             <a.HeaderButton>

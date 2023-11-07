@@ -61,7 +61,7 @@ const Template = () => {
             <S.TemplateTitleBlack>명함 제작하기</S.TemplateTitleBlack>
           </S.TemplateRowContainer>
         </S.TemplateTitleWrapper>
-        <S.TemplateRowContainer>
+        <S.TemplateComponentWraper>
           <S.TemplateListContainer>
             <S.TemplateOptionWraper>
               <S.TemplateOptionTitleWraper>
@@ -150,6 +150,7 @@ const Template = () => {
               <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
+
           <S.TemplatePreviewWraper>
             <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
             <S.TemplatePreviewCard>
@@ -172,7 +173,7 @@ const Template = () => {
               </S.CardInfoWraper>
             </S.TemplatePreviewCard>
           </S.TemplatePreviewWraper>
-        </S.TemplateRowContainer>
+        </S.TemplateComponentWraper>
       </S.TemplateInputWraper>
     </>
   );
