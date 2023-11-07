@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import Header from "../layout/Header";
 import TestCard from "./testCard";
+import customAxios from "src/lib/customAxios";
 import { useLocation } from "react-router-dom";
 import PageTab from "src/modules/PageTab";
 import axios from "axios";
@@ -17,7 +18,7 @@ const CardList = () => {
 
   const fetchTemplateCardData = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/v2/api/card/template`);
+      const response = await customAxios.get(`${serverUrl}/v2/api/card/template`);
       if (response.data && response.data.data) {
         setTemplateCardData(response.data.data);
       }
@@ -28,7 +29,7 @@ const CardList = () => {
 
   const fetchImageCardData = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/v2/api/card/image`);
+      const response = await customAxios.get(`${serverUrl}/v2/api/card/image`);
       if (response.data && response.data.data) {
         setImageCardData(response.data.data);
       }
@@ -80,15 +81,15 @@ const CardList = () => {
         ]}
       />
       <S.CardListContainer>
-        <S.CardWrapper>
-          {tabNum === 0
-            ? templateCardData.map((card) => (
-                <TestCard key={card.id} cardData={card} />
-              ))
-            : imageCardData.map((card) => (
-                <TestCard key={card.id} cardData={card} />
-              ))}
-        </S.CardWrapper>
+      <S.CardWrapper>
+        {tabNum === 0
+          ? templateCardData.map((card) => (
+              <TestCard key={card.id} cardData={card} />
+            ))
+          : imageCardData.map((card) => (
+              <TestCard key={card.id} cardData={card} />
+            ))}
+      </S.CardWrapper>
       </S.CardListContainer>
     </>
   );

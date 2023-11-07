@@ -41,6 +41,7 @@ const Template = () => {
 
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
+        alert("명함이 생성되었습니다.")
       } else {
         console.log("[ERROR] Request failed");
       }
