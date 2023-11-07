@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
-import customAxios, { templateAxios } from "src/lib/customAxios";
+import customAxios from "src/lib/customAxios";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
 
 const Template = () => {
