@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 
-export const LoginButton = styled(DefaultBox)`
+export const LoginButton = styled.div`
   display: flex;
   width: 328px;
   height: 56px;
@@ -9,15 +9,11 @@ export const LoginButton = styled(DefaultBox)`
   justify-content: center;
   border: none;
   border-radius: 16px;
-  background: #1775F9;
+  background: #1775f9;
   cursor: pointer;
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
 
   span {
-    color: #FFF;
+    color: #fff;
     font-family: Pretendard;
     font-size: 19px;
     font-weight: 600;
