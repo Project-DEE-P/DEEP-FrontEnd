@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { DefaultBox } from "../../../styles/default";
 
 export const LoginButton = styled.div`
   display: flex;
