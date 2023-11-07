@@ -10,6 +10,7 @@ import CardTypeAtom from "../../atoms/cardType";
 import Login from "../../components/common/LoginButton";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
+import Header from "../layout/Header";
 
 function OAuth() {
   const handleLoginClick = () => {
@@ -18,6 +19,7 @@ function OAuth() {
 
   return (
     <>
+
       <S.OAuthContainer>
         <S.DeepLogoImg src={DeepLogo}></S.DeepLogoImg>
         <S.OAuthButton src={OAuthBtn} onClick={handleLoginClick} />
