@@ -10,7 +10,7 @@ import config from "../../config/config.json";
 
 // TODO: OAuth 관련 로직 리팩토링
 const OAuth: React.FC = () => {
-  const REDIRECT_URI = "http://localhost:3000/callback";
+  const REDIRECT_URI = "http://localhost:3000/oauth";
   const oAuthURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${config.oauth_client_id}&response_type=token&redirect_uri=${REDIRECT_URI}&scope=https://www.googleapis.com/auth/userinfo.email`;
   const [_, setLoginInfo] = useRecoilState(loginInfoAtom);
   const navigation = useNavigate();

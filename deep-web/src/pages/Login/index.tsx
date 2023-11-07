@@ -48,14 +48,14 @@ const Login = () => {
           <l.UserName
             type="text"
             placeholder="아이디를 입력해주세요"
-            name="username"
+            name="id"
             onChange={onChangeFormValue}
             value={formValue.id}
           />
           <l.PassWord
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            name="password"
+            name="pw"
             onChange={onChangeFormValue}
             value={formValue.pw}
           />

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as s from "./style";
 import axios from "axios";
 
@@ -11,6 +12,7 @@ const SignUp = () => {
     email: "",
   });
   const { userId, password, pwCheck, name, email } = formRegister;
+  const navigation = useNavigate();
 
   const onChangeFormRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,16 +22,16 @@ const SignUp = () => {
       [name]: value,
     });
   };
-  
-  const onClick = async (e: React.MouseEvent) => {
+
+  const onClick = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!userId) {
       alert("아이디를 입력하세요.");
       return;
     }
-  
+
     const userIdString = String(userId);
-  
+
     try {
       const response = await axios.post(
         `http://10.80.163.49:8081/v1/api/auth/id-check`,
@@ -40,28 +42,24 @@ const SignUp = () => {
           },
         }
       );
-  
+
       console.log(response);
-  
+
       if (response.status === 201) {
         alert("사용할 수 있는 아이디 입니다.");
-      } else if (response.status === 400) {
+      } else if (response.status === 400 && response.data.message === "중복된 아이디입니다.") {
         alert("중복된 아이디 입니다.");
       } else if (response.status === 500) {
         alert("INTERNAL SERVER ERROR");
-      } else {
-        alert(`서버에서 오류가 발생했습니다. 상태 코드: ${response.status}`);
       }
     } catch (error) {
       console.error(error);
     }
-  };  
+  }, [userId]);
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
   
-    if (!userId || !name || !password || !email) {
-
     if (!userId || !name || !password || !pwCheck || !email) {
       alert("빈칸을 모두 채워주세요.");
       return;
@@ -105,13 +103,14 @@ const SignUp = () => {
   
       if (response.data.code === 200) {
         alert("회원가입 성공");
+        navigation("/login");
       } else if (response.data.code === 500) {
         alert("INTERNAL SERVER ERROR");
       }
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [userId, name, password, pwCheck, email, navigation]);
 
   function isId(userId: string) {
     // let regExp = /[a-zA-Z0-9]/;
@@ -130,7 +129,6 @@ const SignUp = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     return emailRegex.test(email);
   }
-}
 
   return (
     <>
@@ -169,7 +167,7 @@ const SignUp = () => {
 
             <div>
               <s.Content>
-                <s.Id>  
+                <s.Id>
                   <s.Name>
                     비밀번호<s.Red>*</s.Red>
                   </s.Name>
@@ -214,7 +212,7 @@ const SignUp = () => {
                 </s.Id>
                 <s.Div>
                   <s.Input
-                    type="text" 
+                    type="text"
                     placeholder="이름을 입력해주세요"
                     name="name"
                     onChange={onChangeFormRegister}
