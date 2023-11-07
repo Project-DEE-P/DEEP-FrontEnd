@@ -33,7 +33,7 @@ const Header: React.FC = () => {
                   <div>명함 관리</div>
                 </_.HeaderButton>
               </button>
-              <button onClick={() => handleNavigate("/login")}>
+              <button onClick={() => handleNavigate("/oauth")}>
                 <_.HeaderButton>
                   <div>로그인</div>
                 </_.HeaderButton>

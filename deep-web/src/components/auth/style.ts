@@ -10,10 +10,11 @@ export const OAuthContainer = styled(DefaultBox)`
 `;
 
 export const DeepLogoImg = styled.img<{ src: string }>`
-  margin-top: 20px; 
+  margin-top: 20px;
   margin-bottom: 20px;
 `;
 
 export const OAuthButton = styled.img`
+  margin-top: 10vh;
   cursor: pointer;
 `;
