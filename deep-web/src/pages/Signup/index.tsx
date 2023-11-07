@@ -4,14 +4,13 @@ import axios from "axios";
 
 const SignUp = () => {
   const [formRegister, setFormRegister] = useState({
-    username: "",
+    userId: "",
     password: "",
     pwCheck: "",
     name: "",
     email: "",
   });
-  const [response, setResponse] = useState({ code: 0, message: "" });
-  const { username, password, pwCheck, name, email } = formRegister;
+  const { userId, password, pwCheck, name, email } = formRegister;
 
   const onChangeFormRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,38 +20,48 @@ const SignUp = () => {
       [name]: value,
     });
   };
-
+  
   const onClick = async (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!username) {
+    if (!userId) {
       alert("아이디를 입력하세요.");
       return;
     }
 
+    const userIdString = String(userId);
+
     try {
       const response = await axios.post(
-        "http://172.20.10.2:8081/v1/api/auth/id-check",
-        { id: username }
+        `http://10.80.163.49:8081/v1/api/auth/id-check`,
+        { userId: userIdString },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      setResponse(response.data);
+      console.log(response);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("사용할 수 있는 아이디 입니다.");
       } else if (response.status === 400) {
         alert("중복된 아이디 입니다.");
       } else if (response.status === 500) {
         alert("INTERNAL SERVER ERROR");
+      } else {
+        alert(`서버에서 오류가 발생했습니다. 상태 코드: ${response.status}`);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!username || !name || !password || !pwCheck || !email) {
+  
+    if (!userId || !name || !password || !email) {
       alert("빈칸을 모두 채워주세요.");
       return;
     }
@@ -60,49 +69,60 @@ const SignUp = () => {
       alert("패스워드가 서로 일치하지 않습니다.");
       return;
     }
-    if (!isId(username)) {
-      alert("아이디를 다시 입력해주세요");
+    if (!isId(userId)) {
+      alert("아이디를 다시 입력해주세요.");
       return;
     }
-
+  
     if (!isPassword(password)) {
-      alert("비밀번호를 다시 입력해주세요");
+      alert("비밀번호를 다시 입력해주세요.");
       return;
     }
-
+  
     if (!isEmail(email)) {
       alert("이메일이 올바르지 않습니다.");
       return;
     }
-
+  
     try {
       const userData = {
-        userId: username,
+        userId: userId,
         password: password,
         name: name,
         email: email,
       };
-
+  
       const response = await axios.post(
-        "http://172.20.10.2:8081/v1/api/auth/signup",
-        userData
+        "http://10.80.163.49:8081/v1/api/auth/signup",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
-
-      setResponse(response.data);
+  
+      if (response.data.code === 200) {
+        alert("회원가입 성공");
+      } else if (response.data.code === 500) {
+        alert("INTERNAL SERVER ERROR");
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  function isId(username: string) {
-    let regExp = /[a-zA-Z0-9]/;
-    return regExp.test(username);
+  function isId(userId: string) {
+    // let regExp = /[a-zA-Z0-9]/;
+    // return regExp.test(userId);
+    return true;
   }
 
   function isPassword(password: string) {
-    let regExp =
-      /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-    return regExp.test(password);
+    // let regExp =
+    //   /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
+    // return regExp.test(password);
+    return true;
   }
 
   function isEmail(email: string) {
@@ -133,10 +153,10 @@ const SignUp = () => {
                 <s.Div>
                   <s.Input
                     type="text"
-                    placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
-                    name="username"
+                    placeholder="아이디를 입력해주세요"
+                    name="userId"
                     onChange={onChangeFormRegister}
-                    value={username}
+                    value={userId}
                   />
                 </s.Div>
                 <s.Check>
@@ -147,7 +167,7 @@ const SignUp = () => {
 
             <div>
               <s.Content>
-                <s.Id>
+                <s.Id>  
                   <s.Name>
                     비밀번호<s.Red>*</s.Red>
                   </s.Name>
