@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import * as l from "./style";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { loginAxios } from "../../lib/loginAxios";
 
 const Login = () => {
   const navagation = useNavigate();
@@ -24,22 +24,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://10.80.163.49:8081/v1/api/auth/login", {
-        id: formValue.id,
-        pw: formValue.pw,
-      });
+      const { id, pw } = formValue;
 
-      const responseData = response.data;
+      const { token, refreshToken } = await loginAxios(id, pw);
 
-      if (responseData.code === 200) {
-        console.log("로그인 성공!");
-        console.log(responseData.message);
-        // 여기서 토큰 처리 또는 리다이렉트 등을 수행할 수 있습니다.
-      } else {
-        console.log("로그인 실패");
-        console.log(responseData.message);
-        window.alert("로그인 실패: " + responseData.message);
-      }
+      console.log("로그인 성공!");
+      console.log(`Token: ${token}`);
+      console.log(`Refresh Token: ${refreshToken}`);
+
     } catch (error) {
       console.log("로그인 실패", error);
       window.alert("로그인 실패: 서버와 통신 중 오류가 발생했습니다.");
