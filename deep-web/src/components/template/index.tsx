@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../container/share/Layout";
 import * as S from "./style";
-import AppHeader from "../layout/AppHeader";
-import { customAxios } from "../../lib/customAxios";
-import { useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
+import customAxios, { templateAxios } from "src/lib/customAxios";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
 
 const Template = () => {
@@ -18,20 +15,6 @@ const Template = () => {
     homepage: "",
   });
 
-  useEffect(() => {
-    axios
-      .get("https://127.0.0.1:8082/v1/api/card/remember")
-      .then(function (response) {
-        console.log(response);
-        if (response.data && response.data.data) {
-          setCardData(response.data.data);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
   const onChangeHandler = (e: any) => {
     setCardData((data) => {
       return {
@@ -40,6 +23,30 @@ const Template = () => {
       };
     });
   };
+
+  const handleSubmit = async () => {
+    try {
+      const requestBody = {
+        template: "",
+        name: cardData.name,
+        position: cardData.position,
+        department: cardData.department,
+        phone: cardData.number,
+        email: cardData.email,
+        github: cardData.homepage,
+      };
+
+      const response = await customAxios.post("http://10.80.161.115:8082/v2/api/card/template", requestBody);
+
+      if (response.status === 201) {
+        console.log("[SUCCESS] Created");
+      } else {
+        console.log("[ERROR] Request failed");
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
+  }
 
   return (
     <>
@@ -138,6 +145,7 @@ const Template = () => {
               <S.TemplateOptionHelper>
                 깃허브 또는 홈페이지를 입력해주세요
               </S.TemplateOptionHelper>
+              <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
           <S.TemplatePreviewWraper>
