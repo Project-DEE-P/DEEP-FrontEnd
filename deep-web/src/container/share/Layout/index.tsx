@@ -90,9 +90,10 @@ const LayoutForm = ({ children }: Props) => {
           console.log("User data sent to server:", postResponse.data);
         });
     } else {
-      const resImg = customAxios
+      const resImg = axios
         .get(`http://10.80.161.115:8082/v2/api/card/Image/${cardId}`)
         .then((postResponse) => {
+          setResImg(postResponse.data);
           console.log("User data sent to server:", postResponse.data);
         });
     }
@@ -120,7 +121,7 @@ const LayoutForm = ({ children }: Props) => {
   //     children: React.ReactNode;
   //   }
   // }
-
+  console.log(resTemple);
   return (
     <>
       <Header />
@@ -134,7 +135,7 @@ const LayoutForm = ({ children }: Props) => {
           {cardType === "TEMPLATE" ? (
             <CardTemplate data={resTemple}></CardTemplate>
           ) : (
-            <img src=""></img>
+            <img src={""}></img>
           )}
         </s.CardContainer>
         <s.ButtonContainer>
