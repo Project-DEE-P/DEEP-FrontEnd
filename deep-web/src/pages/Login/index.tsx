@@ -7,8 +7,8 @@ const Login = () => {
   const navagation = useNavigate();
 
   const [formValue, setFormValue] = useState({
-    username: "",
-    password: "",
+    id: "",
+    pw: "",
   });
 
   const onChangeFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +24,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://172.20.10.2:8081/v1/api/auth/login", {
-        username: formValue.username,
-        password: formValue.password,
+      const response = await axios.post("http://10.80.163.49:8081/v1/api/auth/login", {
+        id: formValue.id,
+        pw: formValue.pw,
       });
 
       if (response.status === 200) {
@@ -50,14 +50,14 @@ const Login = () => {
             placeholder="아이디를 입력해주세요"
             name="username"
             onChange={onChangeFormValue}
-            value={formValue.username}
+            value={formValue.id}
           />
           <l.PassWord
             type="password"
             placeholder="비밀번호를 입력해주세요"
             name="password"
             onChange={onChangeFormValue}
-            value={formValue.password}
+            value={formValue.pw}
           />
 
           <l.CheckContainer>
@@ -65,11 +65,6 @@ const Login = () => {
               <l.InputCheck type="checkbox" />
               <l.Text>보안접속</l.Text>
             </l.Wrap>
-            {/* <l.Search>
-              <l.FindUser>아이디찾기</l.FindUser>
-              <l.Bar />
-              <l.FindUser>비밀번호 찾기</l.FindUser>
-            </l.Search> */}
           </l.CheckContainer>
 
           <l.LoginBtn type="submit">로그인</l.LoginBtn>
