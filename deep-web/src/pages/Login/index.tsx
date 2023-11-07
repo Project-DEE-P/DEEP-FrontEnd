@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import * as l from "./style";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -11,16 +11,16 @@ const Login = () => {
     pw: "",
   });
 
-  const onChangeFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeFormValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setFormValue({
       ...formValue,
       [name]: value,
     });
-  };
+  }, [formValue]);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -29,15 +29,22 @@ const Login = () => {
         pw: formValue.pw,
       });
 
-      if (response.status === 200) {
+      const responseData = response.data;
+
+      if (responseData.code === 200) {
         console.log("로그인 성공!");
-        console.log(response.data);
+        console.log(responseData.message);
+        // 여기서 토큰 처리 또는 리다이렉트 등을 수행할 수 있습니다.
+      } else {
+        console.log("로그인 실패");
+        console.log(responseData.message);
+        window.alert("로그인 실패: " + responseData.message);
       }
     } catch (error) {
       console.log("로그인 실패", error);
-      window.alert("로그인 실패: 아이디 혹은 비밀번호가 올바르지 않습니다.");
+      window.alert("로그인 실패: 서버와 통신 중 오류가 발생했습니다.");
     }
-  };
+  }, [formValue]);
 
   return (
     <>

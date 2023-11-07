@@ -46,11 +46,11 @@ const SignUp = () => {
       console.log(response);
 
       if (response.status === 201) {
-        alert("사용할 수 있는 아이디 입니다.");
-      } else if (response.status === 400 && response.data.message === "중복된 아이디입니다.") {
-        alert("중복된 아이디 입니다.");
+        alert(response.data.message);
+      } else if (response.status === 400) {
+        alert(response.data.message);
       } else if (response.status === 500) {
-        alert("INTERNAL SERVER ERROR");
+        alert(response.data.message);
       }
     } catch (error) {
       console.error(error);
