@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { DefaultBox } from "../../../styles/default";
 
 export const LoginButton = styled.div`
   display: flex;
@@ -11,6 +10,7 @@ export const LoginButton = styled.div`
   border-radius: 16px;
   background: #1775f9;
   cursor: pointer;
+  margin-top: -10vh;
 
   span {
     color: #fff;

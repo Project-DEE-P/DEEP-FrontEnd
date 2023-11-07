@@ -32,6 +32,7 @@ interface CardProps {
 }
 
 const LayoutForm = ({ children }: Props) => {
+  const serverUrl = "https://api.ddeep.store";
   const loginInfo = useRecoilValue(oAuthInfoAtom);
   const [cardId, setCardId] = useRecoilState(cardIdAtom);
   const [cardType, setCardType] = useRecoilState(CardTypeAtom);
@@ -49,11 +50,21 @@ const LayoutForm = ({ children }: Props) => {
 
   // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
+    const response = customAxios
+      .post(`${serverUrl}/v2/api/remember`, {
+        cardType: cardType,
+        cardId: cardId,
+      })
+      .then((postResponse) => {
+        console.log("User data sent to server:", postResponse.data);
+      });
+    console.log(response);
+    navigation("/cardlist");
     if (loginInfo == null) {
       navigation("/oauth");
     } else {
       const response = customAxios
-        .post(`https://api.ddeep.store/v1/api/remember`, {
+        .post(`${serverUrl}/v1/api/remember`, {
           cardType: cardType,
           cardId: cardId,
         })
@@ -74,14 +85,14 @@ const LayoutForm = ({ children }: Props) => {
     console.log();
     if (cardType === "TEMPLATE") {
       const resTemple = axios
-        .get(`https://api.ddeep.store/v2/api/card/template/${cardId}`)
+        .get(`${serverUrl}/v2/api/card/template/${cardId}`)
         .then((postResponse) => {
           setResTemple(postResponse.data);
           console.log("User data sent to server:", postResponse.data);
         });
     } else {
       const resImg = axios
-        .get(`https://api.ddeep.store/v2/api/card/Image/${cardId}`)
+        .get(`${serverUrl}/v2/api/card/Image/${cardId}`)
         .then((postResponse) => {
           setResImg(postResponse.data);
           console.log("User data sent to server:", postResponse.data);
@@ -89,28 +100,28 @@ const LayoutForm = ({ children }: Props) => {
     }
   }, []);
 
-  // const showCardInfo = async () => {
-  //   try {
-  //     const response = await customAxios.get(
-  //       `http://172.16.1.21:8080/v1/api/card/showcard/${cardType}/${cardId}`
-  //     );
-  //     console.log(response);
-  //     navigation(`/showcard/${cardType}/${cardId}`);
-  //   } catch (err) {
-  //     console.log(err);
-  //     // navigation(`showCard/${param}`); // 호출 실패 해도 navigation 호출
-  //   }
-  // };
+  const showCardInfo = async () => {
+    try {
+      const response = await customAxios.get(
+        `${serverUrl}/v1/api/card/showcard/${cardType}/${cardId}`
+      );
+      console.log(response);
+      navigation(`/showcard/${cardType}/${cardId}`);
+    } catch (err) {
+      console.log(err);
+      // navigation(`showCard/${param}`); // 호출 실패 해도 navigation 호출
+    }
+  };
 
-  // if (!isNaN(Number(id))) {
-  //   setCardId(Number(id));
-  //   console.log(`현재 파라미터값 : ${id}`);
-  // } else {
-  //   navigation("/showCard");
-  //   interface Props {
-  //     children: React.ReactNode;
-  //   }
-  // }
+  if (!isNaN(Number(id))) {
+    setCardId(Number(id));
+    console.log(`현재 파라미터값 : ${id}`);
+  } else {
+    navigation("/showCard");
+    interface Props {
+      children: React.ReactNode;
+    }
+  }
   console.log(resTemple);
   return (
     <>

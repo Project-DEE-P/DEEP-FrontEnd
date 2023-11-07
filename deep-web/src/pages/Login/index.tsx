@@ -7,8 +7,8 @@ const Login = () => {
   const navagation = useNavigate();
 
   const [formValue, setFormValue] = useState({
-    id: "",
-    pw: "",
+    userId: "",
+    password: "",
   });
 
   const onChangeFormValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +24,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { id, pw } = formValue;
+      const { userId, password } = formValue;
 
-      const { token, refreshToken } = await loginAxios(id, pw);
+      const { token, refreshToken } = await loginAxios(userId, password);
 
       console.log("로그인 성공!");
       console.log(`Token: ${token}`);
@@ -47,16 +47,16 @@ const Login = () => {
           <l.UserName
             type="text"
             placeholder="아이디를 입력해주세요"
-            name="id"
+            name="userId"
             onChange={onChangeFormValue}
-            value={formValue.id}
+            value={formValue.userId}
           />
           <l.PassWord
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            name="pw"
+            name="password"
             onChange={onChangeFormValue}
-            value={formValue.pw}
+            value={formValue.password}
           />
 
           <l.CheckContainer>

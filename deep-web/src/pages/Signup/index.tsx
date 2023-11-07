@@ -11,6 +11,7 @@ const SignUp = () => {
     name: "",
     email: "",
   });
+  const serverUrl = "https://api.ddeep.store";
   const { userId, password, pwCheck, name, email } = formRegister;
   const navigation = useNavigate();
   const [isIdChecked, setIsIdChecked] = useState(false);
@@ -37,7 +38,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `http://10.80.163.49:8081/v1/api/auth/id-check`,
+        `${serverUrl}/v1/api/auth/id-check`,
         { userId: userIdString },
         {
           headers: {
@@ -62,11 +63,6 @@ const SignUp = () => {
 
   const onSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!isIdChecked) {
-      alert("중복체크를 먼저 수행해주세요.");
-      return;
-    }
   
     if (!userId || !name || !password || !pwCheck || !email) {
       alert("빈칸을 모두 채워주세요.");
@@ -100,7 +96,7 @@ const SignUp = () => {
       };
   
       const response = await axios.post(
-        "http://10.80.163.49:8081/v1/api/auth/signup",
+        `${serverUrl}/v1/api/auth/signup`,
         userData,
         {
           headers: {
@@ -109,10 +105,10 @@ const SignUp = () => {
         }
       );
   
-      if (response.data.code === 200) {
+      if (response.status === 201) {
         alert("회원가입 성공");
         navigation("/login");
-      } else if (response.data.code === 500) {
+      } else if (response.status === 500) {
         alert("INTERNAL SERVER ERROR");
       }
     } catch (error) {
