@@ -141,6 +141,7 @@ const Template = () => {
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
           <S.TemplatePreviewWraper>
+            <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
             <S.TemplatePreviewCard>
               <S.CardInfoWraper>
                 <S.CardDepartment>{cardData.department}</S.CardDepartment>
