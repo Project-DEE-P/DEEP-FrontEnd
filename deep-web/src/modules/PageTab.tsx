@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 interface PageTabProps {
   tabItems: { title?: string; url: string; component: React.ReactNode }[];
   tabNum: number;
-  setTabNum: any;
+  setTabNum: React.Dispatch<React.SetStateAction<number>>;
   tabWidth?: number;
 }
 

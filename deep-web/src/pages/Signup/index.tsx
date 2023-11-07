@@ -11,6 +11,7 @@ const SignUp = () => {
     name: "",
     email: "",
   });
+  const serverUrl = "https://api.ddeep.store";
   const { userId, password, pwCheck, name, email } = formRegister;
   const navigation = useNavigate();
   const [isIdChecked, setIsIdChecked] = useState(false);
@@ -37,7 +38,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        `http://10.80.163.49:8081/v1/api/auth/id-check`,
+        `${serverUrl}/v1/api/auth/id-check`,
         { userId: userIdString },
         {
           headers: {
@@ -100,7 +101,7 @@ const SignUp = () => {
       };
   
       const response = await axios.post(
-        "http://10.80.163.49:8081/v1/api/auth/signup",
+        `${serverUrl}/v1/api/auth/signup`,
         userData,
         {
           headers: {

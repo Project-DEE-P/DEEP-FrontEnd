@@ -14,6 +14,7 @@ const Template = () => {
     email: "",
     homepage: "",
   });
+  const serverUrl = "https://api.ddeep.store";
 
   const onChangeHandler = (e: any) => {
     setCardData((data) => {
@@ -36,10 +37,11 @@ const Template = () => {
         github: cardData.homepage,
       };
 
-      const response = await customAxios.post("http://10.80.161.115:8082/v2/api/card/template", requestBody);
+      const response = await customAxios.post(`${serverUrl}/v2/api/card/template`, requestBody);
 
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
+        alert("명함이 생성되었습니다.")
       } else {
         console.log("[ERROR] Request failed");
       }

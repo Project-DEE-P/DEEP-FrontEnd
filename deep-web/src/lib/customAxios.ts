@@ -5,7 +5,7 @@ import config from "../config/config.json";
 export const customAxios: AxiosInstance = axios.create({
   baseURL: config.SERVER_ADDRESS,
   headers: {
-    Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsImlhdCI6MTY5OTM2NTgzOSwiZXhwIjoxNjk5OTcwNjM5LCJpc3MiOiJERUVQIiwic3ViIjoidG9rZW4ifQ.xDQZ543zzejlzgDBtSJtDZqGOYjztKUZv4PW7o2tC48"}`,
+    Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbjEiLCJpYXQiOjE2OTkzODA1MzQsImV4cCI6MTY5OTk4NTMzNCwiaXNzIjoiREVFUCIsInN1YiI6InRva2VuIn0.X77jqKPn4uJhhe7QycEQufL-iLWqqOOkCCqx4yZHrxM"}`,
   },
 });
 
