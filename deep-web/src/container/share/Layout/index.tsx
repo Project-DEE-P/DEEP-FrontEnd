@@ -1,7 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import * as s from "./style";
-import * as S from "../../../components/template/style";
-import { DefaultBox } from "../../../styles/default";
 import Header from "../../../components/layout/Header";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import oAuthInfoAtom from "../../../atoms/loginInfo";
@@ -10,7 +8,6 @@ import CardTypeAtom from "../../../atoms/cardType";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/common/modal";
 import { customAxios } from "../../../lib/customAxios";
-import SampleCard from "../../../assets/img/SampleCard.svg";
 import CardTemplate from "src/container/cardTemplate";
 import axios from "axios";
 interface Props {

@@ -10,6 +10,7 @@ import CardMockup from "../../assets/img/MockUpCard.svg";
 import ForthMockup from "../../assets/img/ForthMo.png";
 import ForthText from "../../assets/img/ForthText.png";
 import AOS from "aos";
+import Header from "../layout/Header";
 
 import { Mobile, Desktop } from "../../hooks/useMediaQuery";
 
