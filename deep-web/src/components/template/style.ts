@@ -310,3 +310,21 @@ export const CardInfoBlack = styled.div`
     height: 1.2rem;
   }
 `;
+
+export const CreateTemplate = styled.button`
+  width: 400px;
+  height: 50px;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 1px;
+  background: #1775F9;
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 20px;
+  margin-top: 5%;
+  &:focus {
+    border-color: #1775f9;
+    border-width: 1px;
+    outline: none;
+}
+`;
