@@ -141,7 +141,8 @@ export const TemplateInputWraper = styled.div``;
 export const TemplatePreviewWraper = styled.div`
   height: 70vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 `;
 
 export const TemplatePreviewCard = styled.div`
