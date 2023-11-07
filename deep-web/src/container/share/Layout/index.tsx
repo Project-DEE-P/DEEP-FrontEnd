@@ -49,30 +49,20 @@ const LayoutForm = ({ children }: Props) => {
 
   // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
-    const response = customAxios
-      .post(`http://10.80.161.115:8082/v2/api/remember`, {
-        cardType: cardType,
-        cardId: cardId,
-      })
-      .then((postResponse) => {
-        console.log("User data sent to server:", postResponse.data);
-      });
-    console.log(response);
-    navigation("/cardlist");
-    // if (loginInfo == null) {
-    //   navigation("/oauth");
-    // } else {
-    //   const response = customAxios
-    //     .post(`http://10.80.161.115:8082/v1/api/remember`, {
-    //       cardType: cardType,
-    //       cardId: cardId,
-    //     })
-    //     .then((postResponse) => {
-    //       console.log("User data sent to server:", postResponse.data);
-    //     });
-    //   console.log(response);
-    //   navigation("/cardlist");
-    // }
+    if (loginInfo == null) {
+      navigation("/oauth");
+    } else {
+      const response = customAxios
+        .post(`https://api.ddeep.store/v1/api/remember`, {
+          cardType: cardType,
+          cardId: cardId,
+        })
+        .then((postResponse) => {
+          console.log("User data sent to server:", postResponse.data);
+        });
+      console.log(response);
+      navigation("/cardlist");
+    }
   };
 
   const handleModalConfirm = () => {
@@ -84,14 +74,14 @@ const LayoutForm = ({ children }: Props) => {
     console.log();
     if (cardType === "TEMPLATE") {
       const resTemple = axios
-        .get(`http://10.80.161.115:8082/v2/api/card/template/${cardId}`)
+        .get(`https://api.ddeep.store/v2/api/card/template/${cardId}`)
         .then((postResponse) => {
           setResTemple(postResponse.data);
           console.log("User data sent to server:", postResponse.data);
         });
     } else {
       const resImg = axios
-        .get(`http://10.80.161.115:8082/v2/api/card/Image/${cardId}`)
+        .get(`https://api.ddeep.store/v2/api/card/Image/${cardId}`)
         .then((postResponse) => {
           setResImg(postResponse.data);
           console.log("User data sent to server:", postResponse.data);
