@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const IntroContainer = styled.div``;
 
 export const FirstContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: linear-gradient(
     180deg,
@@ -16,6 +16,16 @@ export const FirstContainer = styled.div`
 
   display: flex;
   flex-direction: row;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 5vh;
+    height: 80vh;
+    width: 100%;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
 `;
 export const FirstTextWraper = styled.div`
   display: flex;
@@ -32,17 +42,34 @@ export const FirstText = styled.p`
   line-height: normal;
 
   overflow: hidden;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2vh;
+  }
 `;
 export const IntroTextImg = styled.img`
   width: 35vw;
+  @media screen and (max-width: 1024px) {
+    width: 40vh;
+  }
 `;
 export const MockupImg = styled.img`
   width: 40vw;
   margin-top: 10vh;
+
+  @media screen and (max-width: 1024px) {
+    width: 30vh;
+    left: -100px;
+    margin-top: -2vh;
+  }
 `;
 export const GooglePlay = styled.img`
   width: 10vw;
   margin-top: 3vh;
+
+  @media screen and (max-width: 1024px) {
+    width: 10vh;
+  }
 `;
 
 export const SecondContainer = styled.div`
@@ -75,6 +102,11 @@ export const ThirdContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ThirdPartWraper = styled.div`
@@ -82,6 +114,11 @@ export const ThirdPartWraper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const ThirdRightPartWraper = styled.div`
@@ -99,6 +136,10 @@ export const ThirdTitle = styled.h4`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 2vh;
+  }
 `;
 
 export const ThirdText = styled.p`
@@ -109,6 +150,9 @@ export const ThirdText = styled.p`
   font-weight: 600;
   line-height: normal;
   overflow: hidden;
+  @media screen and (max-width: 1024px) {
+    font-size: 4vh;
+  }
 `;
 
 export const ThirdRightText = styled.p`
@@ -119,16 +163,28 @@ export const ThirdRightText = styled.p`
   font-weight: 600;
   line-height: normal;
   text-align: end;
+
+  @media screen and (max-width: 1024px) {
+    font-size: 4vh;
+    width: 80vw;
+  }
 `;
 export const ThirdTextWraper = styled.div``;
 export const ThirdTextRightWraper = styled.div`
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  @media screen and (max-width: 1024px) {
+    width: 50vw;
+  }
 `;
 export const NFCImg = styled.img`
   height: 35vh;
   position: absolute;
+
+  @media screen and (max-width: 1024px) {
+    height: 25vh;
+  }
 `;
 export const CardMockupImg = styled.img`
   height: 75vh;
@@ -139,6 +195,10 @@ export const CardMockupImg = styled.img`
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    height: 55vh;
   }
 
   @keyframes shake {
@@ -181,4 +241,8 @@ export const ForthContainer = styled.div`
 
 export const ForthMockup = styled.img`
   width: 40%;
+
+  @media screen and (max-width: 1024px) {
+    width: 30vh;
+  }
 `;

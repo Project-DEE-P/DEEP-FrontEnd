@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DefaultBox } from "../../../styles/default";
 
 export const HeaderContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 40px;
   background: #fff;
 `;
@@ -12,7 +12,7 @@ export const LogoImg = styled.img<{ src: string }>`
   height: 1.2rem;
 `;
 
-export const AppHeaderBox = styled(DefaultBox)`
+export const AppHeaderBox = styled.div`
   position: relative;
   margin: 30px;
 `;
@@ -24,18 +24,26 @@ export const HeaderButtonBox = styled.div`
   right: 20px;
   display: flex;
   align-items: center;
+
+  button {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+  }
 `;
 export const HeaderButton = styled.a`
-  width: 30px;
   height: 30px;
   border-radius: 15px;
-  background: #ededed;
   margin-left: 10px;
+  font-family: pretendard;
+
+  display: flex;
+  justify-content: center;
 
   & > img {
     width: 14px;
     height: 14px !important;
-    color: #495057;
+    background: #ededed;
     margin: 8px !important;
   }
 `;
