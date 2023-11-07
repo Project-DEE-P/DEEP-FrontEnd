@@ -58,16 +58,12 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const DefaultBox = styled.div`
-	width: 100%;
-	height: 100%;
-	max-width: 1320px;
-	margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
 
-	@media screen and (max-width: 1320px) {
-		max-width: 1000px;
-	}
-
-	@media screen and (max-width: 700px) {
-		max-width: 660px;
-	}
+  @media screen and (max-width: 1024px) {
+    max-width: 1024px;
+  }
 `;

@@ -1,7 +1,9 @@
+import { DefaultBox } from "src/styles/default";
 import styled from "styled-components";
 
-export const LoginSection = styled.div`
-  width: 340px;
+export const LoginSection = styled(DefaultBox)`
+  width: 100%;
+  max-width: 340px;
   margin: 0 auto;
   padding-top: 90px;
   letter-spacing: -0.6px;
@@ -101,12 +103,13 @@ export const LoginBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 380px;
+  width: 150%;
+  max-width: 380px;
 `;
 
 export const SignBtn = styled.button`
   color: #1775F9;
-  border-style: none;
+  border-style: none;   
   background-color: white;
   font-weight: 500;
   font-size: 16px;
@@ -115,6 +118,7 @@ export const SignBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 380px;
+  width: 150%;
+  max-width: 380px;
   margin-top: 10px;
 `;

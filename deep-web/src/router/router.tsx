@@ -17,7 +17,7 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/showCard/:cardId" element={<ShowCard />} />
+          <Route path="/showCard/:istemplate/:id" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />
           <Route path="/login" element={<Login />} />
