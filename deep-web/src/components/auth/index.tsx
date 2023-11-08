@@ -15,9 +15,17 @@ function OAuth() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-
+  
     if (token) {
       localStorage.setItem("token", token);
+      navigation("/");
+    }
+  }, [navigation]);
+  
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("token");
+  
+    if (isLoggedIn) {
       navigation("/");
     }
   }, [navigation]);
