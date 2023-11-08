@@ -3,6 +3,7 @@ import * as S from "./style";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
 import customAxios from "src/lib/customAxios";
+import TestCard from "../cardList/testCard";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
 
 const Template = () => {
@@ -28,7 +29,7 @@ const Template = () => {
   const handleSubmit = async () => {
     try {
       const requestBody = {
-        template: "",
+        template: "", 
         name: cardData.name,
         position: cardData.position,
         department: cardData.department,
@@ -41,14 +42,15 @@ const Template = () => {
 
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
-        alert("명함이 생성되었습니다.")
+        alert("명함이 생성되었습니다.");
       } else {
         console.log("[ERROR] Request failed");
       }
     } catch (error) {
       console.error("error", error);
     }
-  }
+  };
+
 
   return (
     <>

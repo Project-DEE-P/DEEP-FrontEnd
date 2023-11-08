@@ -49,7 +49,7 @@ const CardList = () => {
 
   return (
     <>
-      <Header />
+      <Header />  
       <S.CardListTitleWrapper>
         <S.CardListTitleBlack>조승완님의</S.CardListTitleBlack>
         <S.CardListRowContainer>

@@ -23,7 +23,6 @@ function OAuth() {
   }, [navigation]);
   
   useEffect(() => {
-    console.log(localStorage);
     const isLoggedIn = localStorage.getItem("token");
   
     if (isLoggedIn) {
