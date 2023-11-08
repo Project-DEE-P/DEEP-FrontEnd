@@ -1,4 +1,3 @@
-
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import React, { useEffect, useState } from "react";
 import * as s from "./style";
@@ -40,7 +39,7 @@ const LayoutForm = ({ children }: Props) => {
 
   // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
-    const response = customAxios
+    const response = customAxios;
     // const convertAndSave = async () => {
     //   if (domRef.current) {
     //     const canvas = await html2canvas(domRef.current);
@@ -104,7 +103,7 @@ const LayoutForm = ({ children }: Props) => {
             </s.NFCTitle>
           </s.NFCContainer>
           <s.CardContainer ref={domRef} className="card">
-              {cardData ? (
+            {cardData ? (
               cardType === "TEMPLATE" ? (
                 // <div ref={domRef} className="card">
                 <s.TemplatePreviewWraper>
@@ -127,10 +126,11 @@ const LayoutForm = ({ children }: Props) => {
                       </s.TemplateRowContainer>
                     </s.CardInfoWraper>
                   </s.TemplatePreviewCard>
-                </s.TemplatePreviewWraper>) : (
-                <img src={""}></img>
-              ):))}
-              }
+                </s.TemplatePreviewWraper>
+              ) : (
+                <img src={SampleCard} alt="Sample Image" />
+              )
+            ) : null}
           </s.CardContainer>
           <s.ButtonContainer>
             {cardData && (
@@ -146,10 +146,10 @@ const LayoutForm = ({ children }: Props) => {
               onNo={handleModalConfirm}
             />
           )}
-          <s.RememberButton onClick={handleRememberClick}>
         </s.PageContainer>
       </>
     );
   };
+};
 
 export default LayoutForm;
