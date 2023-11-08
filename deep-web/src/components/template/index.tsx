@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
-import customAxios, { templateAxios } from "src/lib/customAxios";
+import customAxios from "src/lib/customAxios";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
 
 const Template = () => {
@@ -55,7 +55,7 @@ const Template = () => {
       <Header />
       <S.TemplateInputWraper>
         <S.TemplateTitleWrapper>
-          <S.TemplateTitleBlack>최희건님의</S.TemplateTitleBlack>
+          <S.TemplateTitleBlack>조승완님의</S.TemplateTitleBlack>
           <S.TemplateRowContainer>
             <S.TemplateTitleBlue>DEE:P</S.TemplateTitleBlue>
             <S.TemplateTitleBlack>명함 제작하기</S.TemplateTitleBlack>

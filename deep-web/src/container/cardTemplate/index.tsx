@@ -2,20 +2,20 @@ import React from "react";
 import * as S from "../../components/template/style";
 
 interface CardProps {
-  id: Number;
-  uid: String;
-  template: String;
-  name: String;
-  position: String;
-  department: String;
-  phone: String;
-  email: String;
-  github: String;
-  createdDateTime: String;
-  modifiedDateTime: String;
+  data: {
+    department: String;
+    name: String;
+    position: String;
+    phone: String;
+    email: String;
+    github: String;
+  };
 }
 
-const CardTemplate = ({ data }: any) => {
+
+
+const CardTemplate = ({ data }: CardProps) => {
+  console.log(data);
   return (
     <>
       <S.TemplatePreviewWraper>
