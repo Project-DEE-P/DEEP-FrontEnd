@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // react-router-dom의 useHistory를 가져옴
+import { useNavigate } from "react-router-dom"
 import * as S from "./style";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
 
 function OAuth() {
-  const serverUrl = "https://api.ddeep.store";
+  const serverUrl = "https://api2.ddeep.store:444";
   const navigation = useNavigate();
 
   const handleLoginClick = () => {
@@ -15,10 +15,18 @@ function OAuth() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-
+  
     if (token) {
       localStorage.setItem("token", token);
-
+      navigation("/");
+    }
+  }, [navigation]);
+  
+  useEffect(() => {
+    console.log(localStorage);
+    const isLoggedIn = localStorage.getItem("token");
+  
+    if (isLoggedIn) {
       navigation("/");
     }
   }, [navigation]);

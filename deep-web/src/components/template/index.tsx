@@ -55,7 +55,7 @@ const Template = () => {
       <Header />
       <S.TemplateInputWraper>
         <S.TemplateTitleWrapper>
-          <S.TemplateTitleBlack>최희건님의</S.TemplateTitleBlack>
+          <S.TemplateTitleBlack>조승완님의</S.TemplateTitleBlack>
           <S.TemplateRowContainer>
             <S.TemplateTitleBlue>DEE:P</S.TemplateTitleBlue>
             <S.TemplateTitleBlack>명함 제작하기</S.TemplateTitleBlack>
