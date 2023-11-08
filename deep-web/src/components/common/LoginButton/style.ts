@@ -21,8 +21,6 @@ export const LoginButton = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
-    max-width: 328px;
     font-size: 16px;
   }
 `;

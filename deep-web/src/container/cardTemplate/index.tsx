@@ -12,9 +12,7 @@ interface CardProps {
   };
 }
 
-
-
-const CardTemplate = ({ data }: CardProps) => {
+const CardTemplate = ({ data }: any) => {
   console.log(data);
   return (
     <>
