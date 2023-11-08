@@ -18,7 +18,7 @@ export const loginAxios = async (userId: string, password: string) => {
       console.log(`Refresh Token: ${refreshToken}`);
       return { token, refreshToken };
     } else {
-      throw new Error(data.message);
+      throw new Error('로그인에 실패했습니다.');
     }
   } catch (error) {
     throw error;

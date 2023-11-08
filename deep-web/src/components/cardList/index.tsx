@@ -51,7 +51,7 @@ const CardList = () => {
     <>
       <Header />
       <S.CardListTitleWrapper>
-        <S.CardListTitleBlack>최희건님의</S.CardListTitleBlack>
+        <S.CardListTitleBlack>조승완님의</S.CardListTitleBlack>
         <S.CardListRowContainer>
           <S.CardListTitleBlue>DEE:P</S.CardListTitleBlue>
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>
@@ -81,15 +81,16 @@ const CardList = () => {
         ]}
       />
       <S.CardListContainer>
-      <S.CardWrapper>
-        {tabNum === 0
-          ? templateCardData.map((card) => (
-              <TestCard key={card.id} cardData={card} />
-            ))
-          : imageCardData.map((card) => (
-              <TestCard key={card.id} cardData={card} />
-            ))}
-      </S.CardWrapper>
+        <S.CardWrapper style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+          {tabNum === 0
+            ? templateCardData.map((card) => (
+                <TestCard key={card.id} cardData={card} />
+              ))
+            : imageCardData.map((card) => (
+                <TestCard key={card.id} cardData={card} />
+              ))
+          }
+        </S.CardWrapper>
       </S.CardListContainer>
     </>
   );
