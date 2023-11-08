@@ -51,7 +51,7 @@ const CardList = () => {
     <>
       <Header />
       <S.CardListTitleWrapper>
-        <S.CardListTitleBlack>최희건님의</S.CardListTitleBlack>
+        <S.CardListTitleBlack>조승완님의</S.CardListTitleBlack>
         <S.CardListRowContainer>
           <S.CardListTitleBlue>DEE:P</S.CardListTitleBlue>
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>
