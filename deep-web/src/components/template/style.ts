@@ -5,8 +5,7 @@ export const TemplateListContainer = styled.div`
   padding: 30px;
   overflow-y: hidden;
   @media screen and (max-width: 1024px) {
-    height: 70vh;
-    min-width: 130%;
+    height: 40vh;
     padding-left: 10vw;
     padding-right: 10vw;
     font-family: Pretendard;
@@ -177,12 +176,13 @@ export const TemplateInputWraper = styled.div`
 `;
 
 export const TemplatePreviewWraper = styled.div`
-  height: 70vh;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
+  height: 50vh;
   @media screen and (max-width: 1024px) {
+    height: 40vh;
     align-items: flex-start;
     padding: 10vw;
   }
@@ -317,14 +317,13 @@ export const CreateTemplate = styled.button`
   border-radius: 0.375rem;
   border-style: solid;
   border-width: 1px;
-  background: #1775F9;
+  background: #1775f9;
   color: #fff;
   font-family: Pretendard;
   font-size: 20px;
-  margin-top: 5%;
   &:focus {
     border-color: #1775f9;
     border-width: 1px;
     outline: none;
-}
+  }
 `;

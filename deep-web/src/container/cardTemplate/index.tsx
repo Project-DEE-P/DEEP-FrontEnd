@@ -15,7 +15,12 @@ interface CardProps {
   modifiedDateTime: String;
 }
 
+<<<<<<< Updated upstream
 const CardTemplate = ({ data }: any) => {
+=======
+const CardTemplate = ({ data }: CardProps) => {
+  console.log(data);
+>>>>>>> Stashed changes
   return (
     <>
       <S.TemplatePreviewWraper>

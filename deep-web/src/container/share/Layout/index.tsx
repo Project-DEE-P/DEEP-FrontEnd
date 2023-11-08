@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import React, { useEffect, useLayoutEffect, useState } from "react";
+=======
+import React, { useEffect, useRef, useState } from "react";
+>>>>>>> Stashed changes
 import * as s from "./style";
 import * as S from "../../../components/template/style";
 import { DefaultBox } from "../../../styles/default";
@@ -11,8 +15,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/common/modal";
 import { customAxios } from "../../../lib/customAxios";
 import SampleCard from "../../../assets/img/SampleCard.svg";
+<<<<<<< Updated upstream
 import CardTemplate from "src/container/cardTemplate";
 import axios from "axios";
+=======
+import CardTemplate from "src/container/cardTemplate"; // 이 부분의 경로 확인
+import domtoimage from "dom-to-image";
+import html2canvas from "html2canvas";
+import { saveAs } from "file-saver";
+>>>>>>> Stashed changes
 interface Props {
   children: React.ReactNode;
 }
@@ -42,15 +53,41 @@ const LayoutForm = ({ children }: Props) => {
 
   const navigation = useNavigate();
 
+<<<<<<< Updated upstream
   // 1) url로 Param 값을 type, id로 저장
+=======
+  const domRef = useRef<HTMLDivElement>(null);
+
+>>>>>>> Stashed changes
   const { istemplate, id } = useParams();
   setCardId(Number(id));
   setCardType(String(istemplate).toUpperCase());
   console.log(cardType);
 
+<<<<<<< Updated upstream
   // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
     const response = customAxios
+=======
+  // const convertAndSave = async () => {
+  //   if (domRef.current) {
+  //     const canvas = await html2canvas(domRef.current);
+  //     const callback = (blob: Blob | null) => {
+  //       if (blob) {
+  //         console.log(blob);
+  //       }
+  //     };
+  //     const blob = canvas.toBlob(callback);
+  //     saveAs(blob, "dom-image.png");
+  //   }
+  // };
+
+  const handleRememberClick = () => {
+    domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
+      saveAs(blob, "card.png");
+    });
+    customAxios
+>>>>>>> Stashed changes
       .post(`${serverUrl}/v2/api/remember`, {
         cardType: cardType,
         cardId: cardId,
@@ -129,6 +166,7 @@ const LayoutForm = ({ children }: Props) => {
       <s.PageContainer>
         <s.NFCContainer>
           <s.NFCTitle>
+<<<<<<< Updated upstream
             최희건 님의 <span style={{ color: "#1775F9" }}>DEE:P</span> 명함
           </s.NFCTitle>
         </s.NFCContainer>
@@ -138,6 +176,42 @@ const LayoutForm = ({ children }: Props) => {
           ) : (
             <img src={""}></img>
           )}
+=======
+            {cardData
+              ? `${cardData.name} 님의 DEE:P 명함`
+              : "명함 정보를 불러오는 중..."}
+          </s.NFCTitle>
+        </s.NFCContainer>
+        <s.CardContainer ref={domRef} className="card">
+          {cardData ? (
+            cardType === "TEMPLATE" ? (
+              // <div ref={domRef} className="card">
+              <s.TemplatePreviewWraper>
+                <s.TemplatePreviewCard>
+                  <s.CardInfoWraper>
+                    <s.CardDepartment>{cardData.department}</s.CardDepartment>
+                    <s.CardName>{cardData.name}</s.CardName>
+                    <s.CardPosition>{cardData.position}</s.CardPosition>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>Tel.</s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.phone}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>E-mail. </s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.email}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>Portfolio. </s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.github}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                  </s.CardInfoWraper>
+                </s.TemplatePreviewCard>
+              </s.TemplatePreviewWraper>
+            ) : (
+              <img src={SampleCard} alt="Sample Image" />
+            )
+          ) : null}
+>>>>>>> Stashed changes
         </s.CardContainer>
         <s.ButtonContainer>
           <s.RememberButton onClick={handleRememberClick}>
