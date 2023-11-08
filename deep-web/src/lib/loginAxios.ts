@@ -10,8 +10,8 @@ export const loginAxios = async (userId: string, password: string) => {
     });
 
     const { data } = response;
-
-    if (data && data.code === 200) {
+    console.log(response);
+    if (data && data.code === 201) {
       const { token, refreshToken } = data.data;
       console.log('로그인 성공!');
       console.log(`Token: ${token}`);
