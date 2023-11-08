@@ -81,15 +81,16 @@ const CardList = () => {
         ]}
       />
       <S.CardListContainer>
-      <S.CardWrapper>
-        {tabNum === 0
-          ? templateCardData.map((card) => (
-              <TestCard key={card.id} cardData={card} />
-            ))
-          : imageCardData.map((card) => (
-              <TestCard key={card.id} cardData={card} />
-            ))}
-      </S.CardWrapper>
+        <S.CardWrapper style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+          {tabNum === 0
+            ? templateCardData.map((card) => (
+                <TestCard key={card.id} cardData={card} />
+              ))
+            : imageCardData.map((card) => (
+                <TestCard key={card.id} cardData={card} />
+              ))
+          }
+        </S.CardWrapper>
       </S.CardListContainer>
     </>
   );
