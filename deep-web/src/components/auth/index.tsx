@@ -6,7 +6,7 @@ import OAuthBtn from "../../assets/img/OAuthBtn.svg";
 import Header from "../layout/Header";
 
 function OAuth() {
-  const serverUrl = "https://api.ddeep.store";
+  const serverUrl = "https://api2.ddeep.store:444";
   const navigation = useNavigate();
 
   const handleLoginClick = () => {

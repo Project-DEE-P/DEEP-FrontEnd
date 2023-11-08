@@ -1,42 +1,48 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import * as l from "./style";
 import { useNavigate } from "react-router-dom";
-import { loginAxios } from "../../lib/loginAxios";
+import axios from "axios";
 
 const Login = () => {
   const navagation = useNavigate();
-
+  const apiServer = "https://api.ddeep.store";
   const [formValue, setFormValue] = useState({
-    id: "",
-    pw: "",
+    userId: "",
+    password: "",
   });
 
-  const onChangeFormValue = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeFormValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setFormValue({
       ...formValue,
       [name]: value,
     });
-  }, [formValue]);
+  };
 
-  const onSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const { id, pw } = formValue;
+      const response = await axios.post(`${apiServer}/v1/api/auth/login`, {
+        userId: formValue.userId,
+        password: formValue.password,
+      });
 
-      const { token, refreshToken } = await loginAxios(id, pw);
+      if (response.status === 201) {
+        console.log("로그인 성공!");
+        window.alert("로그인에 성공했습니다!");
 
-      console.log("로그인 성공!");
-      console.log(`Token: ${token}`);
-      console.log(`Refresh Token: ${refreshToken}`);
-
+        navagation("/"); 
+      } else {
+        console.log("로그인 실패", response.data.message);
+        window.alert("로그인에 실패했습니다: " + response.data.message);
+      }
     } catch (error) {
       console.log("로그인 실패", error);
-      window.alert("로그인 실패: 서버와 통신 중 오류가 발생했습니다.");
+      window.alert("로그인에 실패했습니다: 아이디 혹은 비밀번호가 올바르지 않습니다.");
     }
-  }, [formValue]);
+  };
 
   return (
     <>
@@ -47,16 +53,16 @@ const Login = () => {
           <l.UserName
             type="text"
             placeholder="아이디를 입력해주세요"
-            name="id"
+            name="userId"
             onChange={onChangeFormValue}
-            value={formValue.id}
+            value={formValue.userId}
           />
           <l.PassWord
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            name="pw"
+            name="password"
             onChange={onChangeFormValue}
-            value={formValue.pw}
+            value={formValue.password}
           />
 
           <l.CheckContainer>
@@ -65,12 +71,11 @@ const Login = () => {
               <l.Text>보안접속</l.Text>
             </l.Wrap>
           </l.CheckContainer>
-
           <l.LoginBtn type="submit">로그인</l.LoginBtn>
 
           <l.SignBtn
             onClick={() => {
-              navagation("/signup");
+              navagation("/register");
             }}
           >
             회원가입
