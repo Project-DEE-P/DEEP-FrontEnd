@@ -33,47 +33,26 @@ const Template = () => {
     domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
       saveAs(blob, "card.png");
       setImage(blob);
-
+  
       const formData = new FormData();
       formData.append("image", image);
-
+  
       customAxios
         .post(`https://api.ddeep.store/v1/api/images/image`, formData, {
-          headers: {},
+          headers: {
+            'ACCESS-KEY': 'd15ee2fe18d2ebe2ef7afda51ffd3114e5cd1f29dc8fd70e3ffee96b698ceed027a0',
+            'Content-Type': 'multipart/form-data',
+          },
         })
         .then((postResponse) => {
-          console.log("User data sent to server:", postResponse.data);
+          console.log("User data sent to the server:", postResponse.data);
         })
         .catch((e) => {
           console.log(e);
         });
     });
-    // try {
-    //   const requestBody = {
-    //     template: "",
-    //     name: cardData.name,
-    //     position: cardData.position,
-    //     department: cardData.department,
-    //     phone: cardData.number,
-    //     email: cardData.email,
-    //     github: cardData.homepage,
-    //   };
-
-    //   const response = await customAxios.post(
-    //     `${serverUrl}/v2/api/card/template`,
-    //     requestBody
-    //   );
-
-    //   if (response.status === 201) {
-    //     console.log("[SUCCESS] Created");
-    //     alert("명함이 생성되었습니다.");
-    //   } else {
-    //     console.log("[ERROR] Request failed");
-    //   }
-    // } catch (error) {
-    //   console.error("error", error);
-    // }
   };
+  
 
   return (
     <>

@@ -70,7 +70,7 @@ const CardList = () => {
             ),
           },
           {
-            title: "imageCard",
+            title: "DEE:P",
             url: "/imageCard",
             component: (
               <>
@@ -79,7 +79,7 @@ const CardList = () => {
             ),
           },
           {
-            title: "remeberCard",
+            title: "DEE:P",
             url: "remeberTemplat",
             component: (
               <>

@@ -31,26 +31,7 @@ const LayoutForm = ({ children }: Props) => {
   setCardId(Number(id));
   setCardType(String(istemplate).toUpperCase());
 
-  // const handleRememberClick = async () => {
-  //   console.log(setCardType);
-
-  //   try {
-  //     const response = await customAxios.post(`${serverUrl}/v2/api/remember`, {
-  //       cardType: cardType,
-  //       cardId: cardId,
-  //     });
-
-  //     if (response.status === 201) {
-  //       console.log("[SUCCESS] Created");
-  //       navigation("/cardList");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error occurred while sending user data to server:", error);
-  //   }
-  // };
   const handleRememberClick = async () => {
-    console.log(setCardType);
-
     // 데이터 유효성 검사
     if (cardType !== "TEMPLATE" && cardType !== "IMAGE") {
       console.error("Invalid cardType:", cardType);
@@ -92,16 +73,20 @@ const LayoutForm = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`)
-      .then((postResponse) => {
+    const fetchData = async () => {
+      try {
+        const postResponse = await axios.get(
+          `${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`
+        );
         setCardData(postResponse.data.data);
-      });
+      } catch (error) {
+        console.error("데이터를 불러오는 동안 오류 발생", error);
+      }
+    };
+  
+    fetchData();
   }, [cardType, cardId]);
-
-  const showCardInfo = () => {
-    navigation(`/showcard/${cardType}/${cardId}`);
-  };
+  
 
   const handleImageLoad = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
@@ -115,8 +100,6 @@ const LayoutForm = ({ children }: Props) => {
   } else {
     navigation("/showCard");
   }
-
-  console.log(`https://api.ddeep.store/v1/api/images/${cardData.image}`);
 
   return (
     <>
@@ -135,7 +118,7 @@ const LayoutForm = ({ children }: Props) => {
               <CardTemplate data={cardData} />
             ) : (
               <s.ResponsiveImage
-                src={SampleCard}
+                src={cardData.image ? `https://api.ddeep.store/v1/api/images/${cardData.image}` : SampleCard}
                 alt="Sample Image"
                 onLoad={handleImageLoad}
                 width={imageWidth}
