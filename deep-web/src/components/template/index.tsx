@@ -33,15 +33,16 @@ const Template = () => {
     domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
       saveAs(blob, "card.png");
       setImage(blob);
-  
+
       const formData = new FormData();
       formData.append("image", image);
-  
+
       customAxios
         .post(`https://api.ddeep.store/v1/api/images/image`, formData, {
           headers: {
-            'ACCESS-KEY': 'd15ee2fe18d2ebe2ef7afda51ffd3114e5cd1f29dc8fd70e3ffee96b698ceed027a0',
-            'Content-Type': 'multipart/form-data',
+            "ACCESS-KEY":
+              "d15ee2fe18d2ebe2ef7afda51ffd3114e5cd1f29dc8fd70e3ffee96b698ceed027a0",
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((postResponse) => {
@@ -52,7 +53,6 @@ const Template = () => {
         });
     });
   };
-  
 
   return (
     <>
@@ -157,7 +157,7 @@ const Template = () => {
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
 
-          <S.TemplatePreviewWraper>
+          {/* <S.TemplatePreviewWraper>
             <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
             <S.TemplatePreviewCard ref={domRef} className="card">
               <S.CardInfoWraper>
@@ -178,7 +178,7 @@ const Template = () => {
                 </S.TemplateRowContainer>
               </S.CardInfoWraper>
             </S.TemplatePreviewCard>
-          </S.TemplatePreviewWraper>
+          </S.TemplatePreviewWraper> */}
         </S.TemplateComponentWraper>
       </S.TemplateInputWraper>
     </>

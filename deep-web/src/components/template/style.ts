@@ -182,6 +182,7 @@ export const TemplatePreviewWraper = styled.div`
   justify-content: center;
   height: 50vh;
   @media screen and (max-width: 1024px) {
+    margin-top: 10vh;
     height: 40vh;
     align-items: flex-start;
     padding: 10vw;
