@@ -22,11 +22,11 @@ const Header: React.FC = () => {
               <img src={Deep} alt="error" />
             </a>
             <_.HeaderButtonBox>
-              {/* <button onClick={() => handleNavigate("/template")}>
+              <button onClick={() => handleNavigate("/template")}>
                 <_.HeaderButton>
                   <div>명함 제작</div>
                 </_.HeaderButton>
-              </button> */}
+              </button>
               <button onClick={() => handleNavigate("/cardlist")}>
                 <_.HeaderButton>
                   <div>명함 관리</div>
