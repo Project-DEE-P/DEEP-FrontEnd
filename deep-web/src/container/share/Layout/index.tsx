@@ -32,7 +32,6 @@ const LayoutForm = ({ children }: Props) => {
       .get(`${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`)
       .then((postResponse) => {
         setCardData(postResponse.data.data);
-        console.log("User data sent to server:", postResponse.data);
       });
   }, [cardType, cardId]);
   const navigation = useNavigate();
@@ -73,6 +72,8 @@ const LayoutForm = ({ children }: Props) => {
     navigation("/showCard");
   }
 
+  console.log(`https://api.ddeep.store/v1/api/images/${cardData.image}`);
+
   return (
     <>
       <Header />
@@ -111,6 +112,10 @@ const LayoutForm = ({ children }: Props) => {
               </s.TemplatePreviewWraper>
             ) : (
               <img src={SampleCard} alt="Sample Image" />
+              // // <s.ResponsiveImage
+              // //   src={`https://api.ddeep.store/v1/api/images/${cardData.image}`}
+              // //   alt=""
+              // // ></s.ResponsiveImage>
             )
           ) : null}
         </s.CardContainer>
