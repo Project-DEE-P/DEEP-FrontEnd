@@ -24,7 +24,7 @@ const LayoutForm = ({ children }: Props) => {
   const [showModal, setShowModal] = useState<any>(false);
   const [cardData, setCardData] = useState<any>(null);
   const [imageWidth, setImageWidth] = useState<number>(0);
-
+  const [imageurl, setImageUrl] = useState<any>(null);
   const navigation = useNavigate();
 
   const { istemplate, id } = useParams();
@@ -79,14 +79,14 @@ const LayoutForm = ({ children }: Props) => {
           `${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`
         );
         setCardData(postResponse.data.data);
+        setImageUrl(postResponse.data.data.image);
+        // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
       } catch (error) {
         console.error("데이터를 불러오는 동안 오류 발생", error);
       }
     };
-  
     fetchData();
   }, [cardType, cardId]);
-  
 
   const handleImageLoad = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
@@ -100,6 +100,7 @@ const LayoutForm = ({ children }: Props) => {
   } else {
     navigation("/showCard");
   }
+  console.log(`https://api.ddeep.store/v1/api/images/${imageurl}`);
 
   return (
     <>
@@ -117,12 +118,14 @@ const LayoutForm = ({ children }: Props) => {
             cardType === "TEMPLATE" ? (
               <CardTemplate data={cardData} />
             ) : (
-              <s.ResponsiveImage
-                src={`https://api.ddeep.store/v1/api/images/"${cardData.image}`}
-                alt="Sample Image"
-                onLoad={handleImageLoad}
-                width={imageWidth}
-              />
+              imageurl && (
+                <s.ResponsiveImage
+                  src={`https://api.ddeep.store/v1/api/images/${imageurl}`}
+                  alt="Sample Image"
+                  onLoad={handleImageLoad}
+                  width={imageWidth}
+                />
+              )
             )
           ) : null}
         </s.CardContainer>
