@@ -4,7 +4,7 @@ export const TemplateListContainer = styled.div`
   height: 100vh;
   padding: 30px;
   overflow-y: hidden;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     height: 40vh;
     padding-left: 10vw;
     padding-right: 10vw;
@@ -74,8 +74,8 @@ export const TemplateTitleWrapper = styled.div`
     height: 20vh;
     display: flex;
     flex-direction: column;
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
     box-sizing: border-box;
   }
 `;
@@ -86,10 +86,10 @@ export const TemplateComponentWraper = styled.div`
   column-gap: 5px;
   padding-left: 15vw;
   padding-right: 15vw;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     flex-direction: column;
-    padding-left: 0vw;
-    padding-right: 0vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
   }
 `;
 
@@ -132,7 +132,7 @@ export const TemplateOptionInput = styled.input`
   box-shadow: 0px 0px 0px 1px #cdd1dc;
   display: flex;
   justify-content: flex-start;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     ${(props) =>
       props.width === "small" &&
       css`
@@ -167,12 +167,13 @@ export const TemplateOptionHelper = styled.p`
 
 export const TemplateOptionWraper = styled.div`
   margin-right: 50px;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     margin-right: 10px;
   }
 `;
 export const TemplateInputWraper = styled.div`
   margin-top: 5vh;
+  height: 100vh;
 `;
 
 export const TemplatePreviewWraper = styled.div`
@@ -181,7 +182,7 @@ export const TemplatePreviewWraper = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 50vh;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     margin-top: 10vh;
     height: 40vh;
     align-items: flex-start;
@@ -195,7 +196,7 @@ export const TemplatePreviewCard = styled.div`
   background-color: #f8f8f8;
   padding: 40px;
   box-sizing: border-box;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     padding: 10px;
     padding-left: 20px;
     width: 300px;
@@ -210,7 +211,7 @@ export const CardName = styled.p`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     font-size: 1.5rem;
   }
 `;
@@ -221,7 +222,7 @@ export const CardPosition = styled.p`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     font-size: 1.2rem;
     margin: 5px;
   }
@@ -233,7 +234,7 @@ export const CardNumber = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     font-size: 1.2rem;
     margin: 5px;
   }
@@ -263,7 +264,7 @@ export const CardDepartment = styled.p`
   font-weight: 500;
   line-height: 2.5rem;
   margin-top: 100px;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     margin-top: 0px;
     font-size: 1rem;
   }
@@ -277,7 +278,7 @@ export const CardInfoBlue = styled.div`
   font-weight: 400;
   line-height: normal;
   height: 1.8rem;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     font-size: 0.8rem;
     height: 1.2rem;
   }
@@ -290,7 +291,7 @@ export const CardInfoBlack = styled.div`
   font-weight: 400;
   line-height: normal;
   height: 1.8rem;
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     font-size: 0.8rem;
     height: 1.2rem;
   }
