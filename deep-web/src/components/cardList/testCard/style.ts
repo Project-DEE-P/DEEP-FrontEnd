@@ -50,3 +50,22 @@ export const SampleCardImg = styled.img<{ src: string }>`
     width: 300px;
   }
 `;
+
+export const CustomButton = styled.button`
+width: 328px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: var(--blue-400, #4591FA);
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    cursor: pointer;
+`
