@@ -78,6 +78,15 @@ const CardList = () => {
               </>
             ),
           },
+          {
+            title: "remeberCard",
+            url: "remeberTemplat",
+            component: (
+              <>
+                <S.TabText>기억중인 명함</S.TabText>
+              </>
+            ),
+          },
         ]}
       />
       <S.CardListContainer>
