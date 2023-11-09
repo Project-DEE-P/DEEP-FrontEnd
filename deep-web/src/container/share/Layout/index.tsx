@@ -33,7 +33,7 @@ const LayoutForm = ({ children }: Props) => {
 
   // const handleRememberClick = async () => {
   //   console.log(setCardType);
-    
+
   //   try {
   //     const response = await customAxios.post(`${serverUrl}/v2/api/remember`, {
   //       cardType: cardType,
@@ -50,24 +50,24 @@ const LayoutForm = ({ children }: Props) => {
   // };
   const handleRememberClick = async () => {
     console.log(setCardType);
-    
+
     // 데이터 유효성 검사
     if (cardType !== "TEMPLATE" && cardType !== "IMAGE") {
       console.error("Invalid cardType:", cardType);
       return;
     }
-    
+
     if (typeof cardId !== "number" || !Number.isInteger(cardId)) {
       console.error("Invalid cardId:", cardId);
       return;
     }
-    
+
     try {
       const requestData = {
         cardType: cardType,
         cardId: cardId,
       };
-      
+
       const response = await customAxios.post(
         `${serverUrl}/v2/api/remember`,
         requestData,
@@ -77,7 +77,7 @@ const LayoutForm = ({ children }: Props) => {
           },
         }
       );
-    
+
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
         navigation("/cardList");
@@ -86,7 +86,6 @@ const LayoutForm = ({ children }: Props) => {
       console.error("Error occurred while sending user data to server:", error);
     }
   };
-  
 
   const handleModalConfirm = () => {
     setShowModal(false);
@@ -97,7 +96,6 @@ const LayoutForm = ({ children }: Props) => {
       .get(`${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`)
       .then((postResponse) => {
         setCardData(postResponse.data.data);
-        console.log("User data sent to server:", postResponse.data);
       });
   }, [cardType, cardId]);
 
@@ -118,17 +116,17 @@ const LayoutForm = ({ children }: Props) => {
     navigation("/showCard");
   }
 
+  console.log(`https://api.ddeep.store/v1/api/images/${cardData.image}`);
+
   return (
     <>
       <Header />
       <s.PageContainer>
         <s.NFCContainer>
           <s.NFCTitle>
-            {cardData ? (
-              `${cardData.name} 님의 DEE:P 명함`
-            ) : (
-              "명함 정보를 불러오는 중..."
-            )}
+            {cardData
+              ? `${cardData.name} 님의 DEE:P 명함`
+              : "명함 정보를 불러오는 중..."}
           </s.NFCTitle>
         </s.NFCContainer>
         <s.CardContainer>
