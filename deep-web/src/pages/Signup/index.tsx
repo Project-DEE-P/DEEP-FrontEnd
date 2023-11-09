@@ -1,28 +1,24 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userInfoAtom from "src/atoms/userInfo";
 import * as s from "./style";
 import axios from "axios";
+import { useRecoilState } from "recoil";
 
 const SignUp = () => {
-  const [formRegister, setFormRegister] = useState({
-    userId: "",
-    password: "",
-    pwCheck: "",
-    name: "",
-    email: "",
-  });
+  const [userinfo, setUserInfo] = useRecoilState(userInfoAtom);
   const serverUrl = "https://api.ddeep.store";
-  const { userId, password, pwCheck, name, email } = formRegister;
+  const { userId, password, pwCheck, name, email } = userinfo;
   const navigation = useNavigate();
   const [isIdChecked, setIsIdChecked] = useState(false);
 
   const onChangeFormRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setFormRegister({
-      ...formRegister,
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
       [name]: value,
-    });
+    }));
 
     setIsIdChecked(false);
   };

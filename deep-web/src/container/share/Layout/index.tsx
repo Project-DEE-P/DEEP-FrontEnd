@@ -31,17 +31,62 @@ const LayoutForm = ({ children }: Props) => {
   setCardId(Number(id));
   setCardType(String(istemplate).toUpperCase());
 
-  const handleRememberClick = () => {
-    customAxios
-      .post(`${serverUrl}/v2/api/remember`, {
+  // const handleRememberClick = async () => {
+  //   console.log(setCardType);
+    
+  //   try {
+  //     const response = await customAxios.post(`${serverUrl}/v2/api/remember`, {
+  //       cardType: cardType,
+  //       cardId: cardId,
+  //     });
+
+  //     if (response.status === 201) {
+  //       console.log("[SUCCESS] Created");
+  //       navigation("/cardList");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error occurred while sending user data to server:", error);
+  //   }
+  // };
+  const handleRememberClick = async () => {
+    console.log(setCardType);
+    
+    // 데이터 유효성 검사
+    if (cardType !== "TEMPLATE" && cardType !== "IMAGE") {
+      console.error("Invalid cardType:", cardType);
+      return;
+    }
+    
+    if (typeof cardId !== "number" || !Number.isInteger(cardId)) {
+      console.error("Invalid cardId:", cardId);
+      return;
+    }
+    
+    try {
+      const requestData = {
         cardType: cardType,
         cardId: cardId,
-      })
-      .then((postResponse) => {
-        console.log("User data sent to server:", postResponse.data);
-        navigation("/cardlist");
-      });
+      };
+      
+      const response = await customAxios.post(
+        `${serverUrl}/v2/api/remember`,
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    
+      if (response.status === 201) {
+        console.log("[SUCCESS] Created");
+        navigation("/cardList");
+      }
+    } catch (error) {
+      console.error("Error occurred while sending user data to server:", error);
+    }
   };
+  
 
   const handleModalConfirm = () => {
     setShowModal(false);
@@ -60,7 +105,9 @@ const LayoutForm = ({ children }: Props) => {
     navigation(`/showcard/${cardType}/${cardId}`);
   };
 
-  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageLoad = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
     const imageElement = event.target as HTMLImageElement;
     setImageWidth(imageElement.clientWidth);
   };
