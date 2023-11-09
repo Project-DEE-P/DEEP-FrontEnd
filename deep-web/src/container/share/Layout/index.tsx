@@ -1,8 +1,6 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as s from "./style";
 import Header from "../../../components/layout/Header";
-import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import oAuthInfoAtom from "../../../atoms/loginInfo";
 import cardIdAtom from "../../../atoms/cardid";
@@ -29,6 +27,14 @@ const LayoutForm = ({ children }: Props) => {
   const [showModal, setShowModal] = useState<any>(false);
   const [cardData, setCardData] = useState<any>(null); // 추가: API 응답 데이터를 저장할 상태
 
+  useEffect(() => {
+    axios
+      .get(`${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`)
+      .then((postResponse) => {
+        setCardData(postResponse.data.data);
+        console.log("User data sent to server:", postResponse.data);
+      });
+  }, [cardType, cardId]);
   const navigation = useNavigate();
 
   const domRef = useRef<HTMLDivElement>(null);
@@ -37,26 +43,10 @@ const LayoutForm = ({ children }: Props) => {
   setCardId(Number(id));
   setCardType(String(istemplate).toUpperCase());
 
-  // 2) 클릭했을 때 명함 기억하기 기능을 구현하기 위해 post 보냄 (type, id)
   const handleRememberClick = () => {
-    const response = customAxios;
-    // const convertAndSave = async () => {
-    //   if (domRef.current) {
-    //     const canvas = await html2canvas(domRef.current);
-    //     const callback = (blob: Blob | null) => {
-    //       if (blob) {
-    //         console.log(blob);
-    //       }
-    //     };
-    //     const blob = canvas.toBlob(callback);
-    //     saveAs(blob, "dom-image.png");
-    //   }
-    // };
-
-    const handleRememberClick = () => {
-      domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
-        saveAs(blob, "card.png");
-      });
+    if (loginInfo == null) {
+      navigation("/oauth");
+    } else {
       customAxios
         .post(`${serverUrl}/v2/api/remember`, {
           cardType: cardType,
@@ -66,90 +56,81 @@ const LayoutForm = ({ children }: Props) => {
           console.log("User data sent to server:", postResponse.data);
           navigation("/cardlist");
         });
-    };
-
-    const handleModalConfirm = () => {
-      setShowModal(false);
-    };
-
-    useEffect(() => {
-      axios
-        .get(`${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`)
-        .then((postResponse) => {
-          setCardData(postResponse.data.data);
-          console.log("User data sent to server:", postResponse.data);
-        });
-    }, [cardType, cardId]);
-
-    const showCardInfo = () => {
-      navigation(`/showcard/${cardType}/${cardId}`);
-    };
-
-    if (!isNaN(Number(id))) {
-      setCardId(Number(id));
-    } else {
-      navigation("/showCard");
     }
-
-    return (
-      <>
-        <Header />
-        <s.PageContainer>
-          <s.NFCContainer>
-            <s.NFCTitle>
-              {cardData
-                ? `${cardData.name} 님의 DEE:P 명함`
-                : "명함 정보를 불러오는 중..."}
-            </s.NFCTitle>
-          </s.NFCContainer>
-          <s.CardContainer ref={domRef} className="card">
-            {cardData ? (
-              cardType === "TEMPLATE" ? (
-                // <div ref={domRef} className="card">
-                <s.TemplatePreviewWraper>
-                  <s.TemplatePreviewCard>
-                    <s.CardInfoWraper>
-                      <s.CardDepartment>{cardData.department}</s.CardDepartment>
-                      <s.CardName>{cardData.name}</s.CardName>
-                      <s.CardPosition>{cardData.position}</s.CardPosition>
-                      <s.TemplateRowContainer>
-                        <s.CardInfoBlue>Tel.</s.CardInfoBlue>
-                        <s.CardInfoBlack>{cardData.phone}</s.CardInfoBlack>
-                      </s.TemplateRowContainer>
-                      <s.TemplateRowContainer>
-                        <s.CardInfoBlue>E-mail. </s.CardInfoBlue>
-                        <s.CardInfoBlack>{cardData.email}</s.CardInfoBlack>
-                      </s.TemplateRowContainer>
-                      <s.TemplateRowContainer>
-                        <s.CardInfoBlue>Portfolio. </s.CardInfoBlue>
-                        <s.CardInfoBlack>{cardData.github}</s.CardInfoBlack>
-                      </s.TemplateRowContainer>
-                    </s.CardInfoWraper>
-                  </s.TemplatePreviewCard>
-                </s.TemplatePreviewWraper>
-              ) : (
-                <img src={SampleCard} alt="Sample Image" />
-              )
-            ) : null}
-          </s.CardContainer>
-          <s.ButtonContainer>
-            {cardData && (
-              <s.RememberButton onClick={handleRememberClick}>
-                기억하기
-              </s.RememberButton>
-            )}
-          </s.ButtonContainer>
-          {showModal && (
-            <Modal
-              isOpen={showModal}
-              onYes={handleModalConfirm}
-              onNo={handleModalConfirm}
-            />
-          )}
-        </s.PageContainer>
-      </>
-    );
   };
+
+  const handleModalConfirm = () => {
+    setShowModal(false);
+  };
+
+  const showCardInfo = () => {
+    navigation(`/showcard/${cardType}/${cardId}`);
+  };
+
+  if (!isNaN(Number(id))) {
+    setCardId(Number(id));
+  } else {
+    navigation("/showCard");
+  }
+
+  return (
+    <>
+      <Header />
+      <s.PageContainer>
+        <s.NFCContainer>
+          <s.NFCTitle>
+            {cardData
+              ? `${cardData.name} 님의 DEE:P 명함`
+              : "명함 정보를 불러오는 중..."}
+          </s.NFCTitle>
+        </s.NFCContainer>
+        <s.CardContainer ref={domRef} className="card">
+          {cardData ? (
+            cardType === "TEMPLATE" ? (
+              // <div ref={domRef} className="card">
+              <s.TemplatePreviewWraper>
+                <s.TemplatePreviewCard>
+                  <s.CardInfoWraper>
+                    <s.CardDepartment>{cardData.department}</s.CardDepartment>
+                    <s.CardName>{cardData.name}</s.CardName>
+                    <s.CardPosition>{cardData.position}</s.CardPosition>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>Tel.</s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.phone}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>E-mail. </s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.email}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                    <s.TemplateRowContainer>
+                      <s.CardInfoBlue>Portfolio. </s.CardInfoBlue>
+                      <s.CardInfoBlack>{cardData.github}</s.CardInfoBlack>
+                    </s.TemplateRowContainer>
+                  </s.CardInfoWraper>
+                </s.TemplatePreviewCard>
+              </s.TemplatePreviewWraper>
+            ) : (
+              <img src={SampleCard} alt="Sample Image" />
+            )
+          ) : null}
+        </s.CardContainer>
+        <s.ButtonContainer>
+          {cardData && (
+            <s.RememberButton onClick={handleRememberClick}>
+              기억하기
+            </s.RememberButton>
+          )}
+        </s.ButtonContainer>
+        {showModal && (
+          <Modal
+            isOpen={showModal}
+            onYes={handleModalConfirm}
+            onNo={handleModalConfirm}
+          />
+        )}
+      </s.PageContainer>
+    </>
+  );
 };
 
 export default LayoutForm;
