@@ -118,7 +118,7 @@ const LayoutForm = ({ children }: Props) => {
               <CardTemplate data={cardData} />
             ) : (
               <s.ResponsiveImage
-                src={cardData.image ? `https://api.ddeep.store/v1/api/images/${cardData.image}` : SampleCard}
+                src={`https://api.ddeep.store/v1/api/images/"${cardData.image}`}
                 alt="Sample Image"
                 onLoad={handleImageLoad}
                 width={imageWidth}
