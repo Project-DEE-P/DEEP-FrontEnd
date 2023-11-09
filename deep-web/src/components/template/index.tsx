@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
 import customAxios from "src/lib/customAxios";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
+import domtoimage from "dom-to-image";
+import html2canvas from "html2canvas";
+import { saveAs } from "file-saver";
 
 const Template = () => {
   const [cardData, setCardData] = useState({
@@ -15,7 +18,8 @@ const Template = () => {
     homepage: "",
   });
   const serverUrl = "https://api.ddeep.store";
-
+  const domRef = useRef<HTMLDivElement>(null);
+  const [image, setImage] = useState<any>(null);
   const onChangeHandler = (e: any) => {
     setCardData((data) => {
       return {
@@ -26,6 +30,20 @@ const Template = () => {
   };
 
   const handleSubmit = async () => {
+    domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
+      saveAs(blob, "card.png");
+      setImage(blob);
+
+      const formData = new FormData();
+      formData.append("image", image);
+
+      customAxios.post(
+        `
+        ${serverUrl}/v1/api/images/image
+      `,
+        formData
+      );
+    });
     try {
       const requestBody = {
         template: "",
@@ -37,18 +55,21 @@ const Template = () => {
         github: cardData.homepage,
       };
 
-      const response = await customAxios.post(`${serverUrl}/v2/api/card/template`, requestBody);
+      const response = await customAxios.post(
+        `${serverUrl}/v2/api/card/template`,
+        requestBody
+      );
 
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
-        alert("명함이 생성되었습니다.")
+        alert("명함이 생성되었습니다.");
       } else {
         console.log("[ERROR] Request failed");
       }
     } catch (error) {
       console.error("error", error);
     }
-  }
+  };
 
   return (
     <>
@@ -147,13 +168,15 @@ const Template = () => {
               <S.TemplateOptionHelper>
                 깃허브 또는 홈페이지를 입력해주세요
               </S.TemplateOptionHelper>
-              <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
+              <S.CreateTemplate onClick={handleSubmit}>
+                생성하기
+              </S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
 
           <S.TemplatePreviewWraper>
             <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
-            <S.TemplatePreviewCard>
+            <S.TemplatePreviewCard ref={domRef} className="card">
               <S.CardInfoWraper>
                 <S.CardDepartment>{cardData.department}</S.CardDepartment>
                 <S.CardName>{cardData.name}</S.CardName>

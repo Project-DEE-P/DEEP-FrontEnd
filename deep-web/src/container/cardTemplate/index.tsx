@@ -12,9 +12,7 @@ interface CardProps {
   };
 }
 
-
-
-const CardTemplate = ({ data }: CardProps) => {
+const CardTemplate = ({ data }: any) => {
   console.log(data);
   return (
     <>
@@ -24,7 +22,7 @@ const CardTemplate = ({ data }: CardProps) => {
             <S.CardDepartment>{data.department}</S.CardDepartment>
             <S.CardName>{data.name}</S.CardName>
             <S.CardPosition>{data.position}</S.CardPosition>
-            <S.TemplateRowContainer>
+            <S.TemplateRowContainer>``
               <S.CardInfoBlue>Tel.</S.CardInfoBlue>
               <S.CardInfoBlack>{data.phone}</S.CardInfoBlack>
             </S.TemplateRowContainer>
