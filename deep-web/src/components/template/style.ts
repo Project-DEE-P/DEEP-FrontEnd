@@ -195,31 +195,25 @@ export const TemplatePreviewCard = styled.div`
   padding: 40px;
   box-sizing: border-box;
   @media screen and (max-width: 1024px) {
+    padding: 10px;
+    padding-left: 20px;
     width: 300px;
     height: 188px;
   }
 `;
-export const CardInfoWraper = styled.div`
-  position: absolute;
-`;
+export const CardInfoWraper = styled.div``;
 export const CardTitle = styled.p``;
 export const CardName = styled.p`
-  position: relative;
-  top: 70px;
   font-family: Pretendard;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   @media screen and (max-width: 1024px) {
-    top: -20px;
     font-size: 1.5rem;
   }
 `;
 export const CardPosition = styled.p`
-  position: relative;
-  top: 35px;
-  left: 80px;
   color: #000;
   font-family: Pretendard;
   font-size: 1.25rem;
@@ -227,8 +221,6 @@ export const CardPosition = styled.p`
   font-weight: 300;
   line-height: normal;
   @media screen and (max-width: 1024px) {
-    top: -55px;
-    left: 70px;
     font-size: 1.2rem;
     margin: 5px;
   }
@@ -241,7 +233,6 @@ export const CardNumber = styled.p`
   font-weight: 500;
   line-height: normal;
   @media screen and (max-width: 1024px) {
-    top: -100px;
     font-size: 1.2rem;
     margin: 5px;
   }
@@ -264,23 +255,20 @@ export const CardHomepage = styled.p`
 `;
 
 export const CardDepartment = styled.p`
-  position: relative;
-  top: 85px;
   color: #3f86f8;
   font-family: Pretendard;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
   line-height: 2.5rem;
+  margin-top: 100px;
   @media screen and (max-width: 1024px) {
-    top: 0px;
+    margin-top: 0px;
     font-size: 1rem;
   }
 `;
 
 export const CardInfoBlue = styled.div`
-  position: relative;
-  top: 70px;
   color: #3f86f8;
   font-family: Pretendard;
   font-size: 1.2rem;
@@ -289,14 +277,11 @@ export const CardInfoBlue = styled.div`
   line-height: normal;
   height: 1.8rem;
   @media screen and (max-width: 1024px) {
-    top: -50px;
     font-size: 0.8rem;
     height: 1.2rem;
   }
 `;
 export const CardInfoBlack = styled.div`
-  position: relative;
-  top: 70px;
   color: #000000;
   font-family: Pretendard;
   font-size: 1.2rem;
@@ -305,7 +290,6 @@ export const CardInfoBlack = styled.div`
   line-height: normal;
   height: 1.8rem;
   @media screen and (max-width: 1024px) {
-    top: -50px;
     font-size: 0.8rem;
     height: 1.2rem;
   }
