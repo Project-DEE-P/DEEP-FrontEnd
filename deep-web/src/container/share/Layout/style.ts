@@ -71,3 +71,8 @@ export const RememberButton = styled.button`
     cursor: pointer;
 `;
 
+export const ResponsiveImage = styled.img`
+    max-width: 100%;
+    height: auto;
+`
+

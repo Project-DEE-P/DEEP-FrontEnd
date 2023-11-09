@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/common/modal";
 import { customAxios } from "../../../lib/customAxios";
 import SampleCard from "../../../assets/img/SampleCard.svg";
-import CardTemplate from "src/container/cardTemplate"; // 이 부분의 경로 확인
+import CardTemplate from "src/container/cardTemplate";
 
 interface Props {
   children: React.ReactNode;
@@ -22,7 +22,8 @@ const LayoutForm = ({ children }: Props) => {
   const [cardId, setCardId] = useRecoilState(cardIdAtom);
   const [cardType, setCardType] = useRecoilState(CardTypeAtom);
   const [showModal, setShowModal] = useState<any>(false);
-  const [cardData, setCardData] = useState<any>(null); // 추가: API 응답 데이터를 저장할 상태
+  const [cardData, setCardData] = useState<any>(null);
+  const [imageWidth, setImageWidth] = useState<number>(0);
 
   const navigation = useNavigate();
 
@@ -59,6 +60,11 @@ const LayoutForm = ({ children }: Props) => {
     navigation(`/showcard/${cardType}/${cardId}`);
   };
 
+  const handleImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const imageElement = event.target as HTMLImageElement;
+    setImageWidth(imageElement.clientWidth);
+  };
+
   if (!isNaN(Number(id))) {
     setCardId(Number(id));
   } else {
@@ -83,7 +89,12 @@ const LayoutForm = ({ children }: Props) => {
             cardType === "TEMPLATE" ? (
               <CardTemplate data={cardData} />
             ) : (
-              <img src={SampleCard} alt="Sample Image" />
+              <s.ResponsiveImage
+                src={SampleCard}
+                alt="Sample Image"
+                onLoad={handleImageLoad}
+                width={imageWidth}
+              />
             )
           ) : null}
         </s.CardContainer>
