@@ -37,38 +37,42 @@ const Template = () => {
       const formData = new FormData();
       formData.append("image", image);
 
-      customAxios.post(
-        `
-        ${serverUrl}/v1/api/images/image
-      `,
-        formData
-      );
+      customAxios
+        .post(`https://api.ddeep.store/v1/api/images/image`, formData, {
+          headers: {},
+        })
+        .then((postResponse) => {
+          console.log("User data sent to server:", postResponse.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     });
-    try {
-      const requestBody = {
-        template: "",
-        name: cardData.name,
-        position: cardData.position,
-        department: cardData.department,
-        phone: cardData.number,
-        email: cardData.email,
-        github: cardData.homepage,
-      };
+    // try {
+    //   const requestBody = {
+    //     template: "",
+    //     name: cardData.name,
+    //     position: cardData.position,
+    //     department: cardData.department,
+    //     phone: cardData.number,
+    //     email: cardData.email,
+    //     github: cardData.homepage,
+    //   };
 
-      const response = await customAxios.post(
-        `${serverUrl}/v2/api/card/template`,
-        requestBody
-      );
+    //   const response = await customAxios.post(
+    //     `${serverUrl}/v2/api/card/template`,
+    //     requestBody
+    //   );
 
-      if (response.status === 201) {
-        console.log("[SUCCESS] Created");
-        alert("명함이 생성되었습니다.");
-      } else {
-        console.log("[ERROR] Request failed");
-      }
-    } catch (error) {
-      console.error("error", error);
-    }
+    //   if (response.status === 201) {
+    //     console.log("[SUCCESS] Created");
+    //     alert("명함이 생성되었습니다.");
+    //   } else {
+    //     console.log("[ERROR] Request failed");
+    //   }
+    // } catch (error) {
+    //   console.error("error", error);
+    // }
   };
 
   return (
