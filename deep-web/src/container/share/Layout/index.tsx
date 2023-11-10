@@ -9,7 +9,6 @@ import CardTypeAtom from "../../../atoms/cardType";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../../../components/common/modal";
 import { customAxios } from "../../../lib/customAxios";
-import SampleCard from "../../../assets/img/SampleCard.svg";
 import CardTemplate from "src/container/cardTemplate";
 
 interface Props {
@@ -28,8 +27,11 @@ const LayoutForm = ({ children }: Props) => {
   const navigation = useNavigate();
 
   const { istemplate, id } = useParams();
-  setCardId(Number(id));
-  setCardType(String(istemplate).toUpperCase());
+
+  useEffect(() => {
+    setCardId(Number(id));
+    setCardType(String(istemplate).toUpperCase());
+  }, [id, istemplate]);
 
   const handleRememberClick = async () => {
     // 데이터 유효성 검사
@@ -80,7 +82,6 @@ const LayoutForm = ({ children }: Props) => {
         );
         setCardData(postResponse.data.data);
         setImageUrl(postResponse.data.data.image);
-        // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
       } catch (error) {
         console.error("데이터를 불러오는 동안 오류 발생", error);
       }
@@ -95,12 +96,11 @@ const LayoutForm = ({ children }: Props) => {
     setImageWidth(imageElement.clientWidth);
   };
 
-  if (!isNaN(Number(id))) {
-    setCardId(Number(id));
-  } else {
-    navigation("/showCard");
-  }
-  console.log(`https://api.ddeep.store/v1/api/images/${imageurl}`);
+  useEffect(() => {
+    if (isNaN(Number(id))) {
+      navigation("/showCard");
+    }
+  }, [id, navigation]);
 
   return (
     <>
@@ -120,7 +120,7 @@ const LayoutForm = ({ children }: Props) => {
             ) : (
               imageurl && (
                 <s.ResponsiveImage
-                  src={`https://api.ddeep.store/v1/api/images/${imageurl}`}
+                  src={`${serverUrl}/v1/api/images/${imageurl}`}
                   alt="Sample Image"
                   onLoad={handleImageLoad}
                   width={imageWidth}

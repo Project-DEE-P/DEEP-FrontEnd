@@ -5,14 +5,12 @@ import TestCard from "./testCard";
 import customAxios from "src/lib/customAxios";
 import { useLocation } from "react-router-dom";
 import PageTab from "src/modules/PageTab";
-import axios from "axios";
 
 const CardList = () => {
-  // const [cardData, setCardData] = useState<any[]>([]);
   const location = useLocation();
   const [tabNum, setTabNum] = useState(location.pathname === "/recent" ? 1 : 0);
   const serverUrl = "https://api.ddeep.store";
-
+  const [imageurl, setImageUrl] = useState<any>(null);
   const [templateCardData, setTemplateCardData] = useState<any[]>([]);
   const [imageCardData, setImageCardData] = useState<any[]>([]);
 
@@ -39,7 +37,6 @@ const CardList = () => {
   };
 
   useEffect(() => {
-    // 초기 렌더링 시, 선택된 탭에 따라 데이터를 가져오도록 수정
     if (tabNum === 0) {
       fetchTemplateCardData();
     } else {
@@ -58,7 +55,8 @@ const CardList = () => {
         </S.CardListRowContainer>
       </S.CardListTitleWrapper>
       <PageTab
-        {...{ tabNum, setTabNum }}
+        tabNum={tabNum}
+        setTabNum={setTabNum}
         tabItems={[
           {
             title: "DEEP",
@@ -97,8 +95,7 @@ const CardList = () => {
               ))
             : imageCardData.map((card) => (
                 <TestCard key={card.id} cardData={card} />
-              ))
-          }
+              ))}
         </S.CardWrapper>
       </S.CardListContainer>
     </>
