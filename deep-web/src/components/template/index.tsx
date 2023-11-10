@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import axios, { AxiosResponse } from "axios";
 import Header from "../layout/Header";
 import customAxios from "src/lib/customAxios";
+import TestCard from "../cardList/testCard";
 import { Desktop, Mobile } from "src/hooks/useMediaQuery";
-import domtoimage from "dom-to-image";
-import html2canvas from "html2canvas";
-import { saveAs } from "file-saver";
 
 const Template = () => {
   const [cardData, setCardData] = useState({
@@ -18,8 +16,7 @@ const Template = () => {
     homepage: "",
   });
   const serverUrl = "https://api.ddeep.store";
-  const domRef = useRef<HTMLDivElement>(null);
-  const [image, setImage] = useState<any>(null);
+
   const onChangeHandler = (e: any) => {
     setCardData((data) => {
       return {
@@ -30,29 +27,30 @@ const Template = () => {
   };
 
   const handleSubmit = async () => {
-    domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
-      saveAs(blob, "card.png");
-      setImage(blob);
+    try {
+      const requestBody = {
+        template: "", 
+        name: cardData.name,
+        position: cardData.position,
+        department: cardData.department,
+        phone: cardData.number,
+        email: cardData.email,
+        github: cardData.homepage,
+      };
 
-      const formData = new FormData();
-      formData.append("image", image);
+      const response = await customAxios.post(`${serverUrl}/v2/api/card/template`, requestBody);
 
-      customAxios
-        .post(`https://api.ddeep.store/v1/api/images/image`, formData, {
-          headers: {
-            "ACCESS-KEY":
-              "d15ee2fe18d2ebe2ef7afda51ffd3114e5cd1f29dc8fd70e3ffee96b698ceed027a0",
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((postResponse) => {
-          console.log("User data sent to the server:", postResponse.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
+      if (response.status === 201) {
+        console.log("[SUCCESS] Created");
+        alert("명함이 생성되었습니다.");
+      } else {
+        console.log("[ERROR] Request failed");
+      }
+    } catch (error) {
+      console.error("error", error);
+    }
   };
+
 
   return (
     <>
@@ -151,15 +149,13 @@ const Template = () => {
               <S.TemplateOptionHelper>
                 깃허브 또는 홈페이지를 입력해주세요
               </S.TemplateOptionHelper>
-              <S.CreateTemplate onClick={handleSubmit}>
-                생성하기
-              </S.CreateTemplate>
+              <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
 
-          {/* <S.TemplatePreviewWraper>
+          <S.TemplatePreviewWraper>
             <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
-            <S.TemplatePreviewCard ref={domRef} className="card">
+            <S.TemplatePreviewCard>
               <S.CardInfoWraper>
                 <S.CardDepartment>{cardData.department}</S.CardDepartment>
                 <S.CardName>{cardData.name}</S.CardName>
@@ -178,7 +174,7 @@ const Template = () => {
                 </S.TemplateRowContainer>
               </S.CardInfoWraper>
             </S.TemplatePreviewCard>
-          </S.TemplatePreviewWraper> */}
+          </S.TemplatePreviewWraper>
         </S.TemplateComponentWraper>
       </S.TemplateInputWraper>
     </>

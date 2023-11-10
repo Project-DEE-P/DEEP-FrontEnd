@@ -61,7 +61,7 @@ const CardList = () => {
         {...{ tabNum, setTabNum }}
         tabItems={[
           {
-            title: "DEE:P",
+            title: "DEEP",
             url: "/cardList",
             component: (
               <>
@@ -70,7 +70,7 @@ const CardList = () => {
             ),
           },
           {
-            title: "DEE:P",
+            title: "DEEP",
             url: "/imageCard",
             component: (
               <>
@@ -79,7 +79,7 @@ const CardList = () => {
             ),
           },
           {
-            title: "DEE:P",
+            title: "DEEP",
             url: "remeberTemplat",
             component: (
               <>

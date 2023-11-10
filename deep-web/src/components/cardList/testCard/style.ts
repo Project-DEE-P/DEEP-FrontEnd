@@ -69,3 +69,20 @@ width: 328px;
     outline: none;
     cursor: pointer;
 `
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: centet;
+  margin-top: 10%;
+  a {
+    img {
+      height: 190px;
+    }
+  }
+`;
+
+export const ResponsiveImage = styled.img`
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+`;
