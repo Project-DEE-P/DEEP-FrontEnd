@@ -4,11 +4,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import customAxios from "src/lib/customAxios";
+
+interface User {
+  userId: string;
+  password: string;
+}
 
 const Login = () => {
   const navigation = useNavigate();
   const apiServer = "https://api.ddeep.store";
-  const [formValue, setFormValue] = useState({
+  const [formValue, setFormValue] = useState<User>({
     userId: "",
     password: "",
   });
@@ -26,14 +32,17 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${apiServer}/v1/api/auth/login`, {
-        userId: formValue.userId,
-        password: formValue.password,
+      const { userId, password } = formValue;
+
+      const response = await customAxios.post(`${apiServer}/v1/api/auth/login`, {
+        userId,
+        password,
       });
 
       if (response.status === 201) {
         console.log("로그인 성공!");
         toast.success("로그인에 성공했습니다!");
+        localStorage.setItem('accessToken', response.data.accessToken);
         navigation("/");
       } else {
         console.log("로그인 실패", response.data.message);
