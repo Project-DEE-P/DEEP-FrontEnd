@@ -18,17 +18,19 @@ const CardList = () => {
     try {
       const response = await customAxios.get(`${serverUrl}/v2/api/card/template`);
       if (response.data && response.data.data) {
+        console.log("Template card data:", response.data.data);
         setTemplateCardData(response.data.data);
       }
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   const fetchImageCardData = async () => {
     try {
       const response = await customAxios.get(`${serverUrl}/v2/api/card/image`);
       if (response.data && response.data.data) {
+        console.log("Image card data:", response.data.data);
         setImageCardData(response.data.data);
       }
     } catch (error) {
@@ -37,6 +39,8 @@ const CardList = () => {
   };
 
   useEffect(() => {
+    console.log("Mount");
+    
     if (tabNum === 0) {
       fetchTemplateCardData();
     } else {
