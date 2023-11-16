@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import * as l from "./style";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const navagation = useNavigate();
+  const navigation = useNavigate();
   const apiServer = "https://api.ddeep.store";
   const [formValue, setFormValue] = useState({
     userId: "",
@@ -31,9 +33,8 @@ const Login = () => {
 
       if (response.status === 201) {
         console.log("로그인 성공!");
-        window.alert("로그인에 성공했습니다!");
-
-        navagation("/"); 
+        toast.success("로그인에 성공했습니다!");
+        navigation("/");
       } else {
         console.log("로그인 실패", response.data.message);
         window.alert("로그인에 실패했습니다: " + response.data.message);
@@ -75,7 +76,7 @@ const Login = () => {
 
           <l.SignBtn
             onClick={() => {
-              navagation("/register");
+              navigation("/signup");
             }}
           >
             회원가입

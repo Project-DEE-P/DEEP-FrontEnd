@@ -19,7 +19,7 @@ interface Props {
     fax: string;
     homepage: string;
     department: string;
-    image: string;
+    image: string;  // 이미지 속성 추가
     createdDateTime: string;
     modifiedDateTime: string;
   };
@@ -37,11 +37,9 @@ const TestCard: React.FC<Props> = ({ cardData }) => {
   const fetchCardImage = async () => {
     try {
       const response = await axios.get(
-        `${serverUrl}/v2/api/card/image/${cardType.toLowerCase()}/${cardData.id}`
+        `${serverUrl}/v2/api/card/image/${cardType.toLowerCase()}/${cardData.image}`
       );
       setCardImage(response.data);
-      console.log(cardData);
-      console.log(cardData.image);
     } catch (error) {
       console.error("Failed to fetch card image:", error);
     }

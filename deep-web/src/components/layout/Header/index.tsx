@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as _ from "./style";
 import Deep from "../../../assets/img/DeepLogo.svg";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Mobile, Desktop } from "../../../hooks/useMediaQuery";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
   const handleNavigate = (path: string) => {
     navigate(path);
   };
@@ -32,11 +32,18 @@ const Header: React.FC = () => {
                   <div>명함 관리</div>
                 </_.HeaderButton>
               </button>
+              {token ? <button onClick={() => {localStorage.removeItem('accessToken'); setToken(null); navigate('/')}}>
+                <_.HeaderButton>
+                  <div>로그아웃</div>
+                </_.HeaderButton>
+              </button>
+              :
               <button onClick={() => handleNavigate("/oauth")}>
                 <_.HeaderButton>
                   <div>로그인</div>
                 </_.HeaderButton>
               </button>
+              }
             </_.HeaderButtonBox>
           </_.AppHeaderBox>
         </_.HeaderContainer>

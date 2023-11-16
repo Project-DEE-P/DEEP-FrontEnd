@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userInfoAtom from "src/atoms/userInfo";
+import { toast } from "react-toastify";
 import * as s from "./style";
 import axios from "axios";
 import { useRecoilState } from "recoil";
@@ -102,7 +103,7 @@ const SignUp = () => {
       );
   
       if (response.status === 201) {
-        alert("회원가입 성공");
+        toast.success("회원가입에 성공했습니다!");
         navigation("/login");
       } else if (response.status === 500) {
         alert("INTERNAL SERVER ERROR");
