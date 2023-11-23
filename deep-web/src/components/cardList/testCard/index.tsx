@@ -19,7 +19,7 @@ interface Props {
     fax: string;
     homepage: string;
     department: string;
-    image: string;  // 이미지 속성 추가
+    image: string;
     createdDateTime: string;
     modifiedDateTime: string;
   };

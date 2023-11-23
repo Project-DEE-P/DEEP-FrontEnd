@@ -51,7 +51,6 @@ const Template = () => {
     }
   };
 
-
   return (
     <>
       <Header />
@@ -152,7 +151,6 @@ const Template = () => {
               <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
-
           <S.TemplatePreviewWraper>
             <S.TemplateOptionTitle>명함 미리보기</S.TemplateOptionTitle>
             <S.TemplatePreviewCard>

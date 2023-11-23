@@ -4,6 +4,7 @@ import userInfoAtom from "src/atoms/userInfo";
 import { toast } from "react-toastify";
 import * as s from "./style";
 import axios from "axios";
+import useSignUp from "src/hooks/Signup/useSignup";
 import { useRecoilState } from "recoil";
 
 const SignUp = () => {
@@ -11,6 +12,7 @@ const SignUp = () => {
   const serverUrl = "https://api.ddeep.store";
   const { userId, password, pwCheck, name, email } = userinfo;
   const navigation = useNavigate();
+  const { signUp } = useSignUp();
   const [isIdChecked, setIsIdChecked] = useState(false);
 
   const onChangeFormRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,78 +60,13 @@ const SignUp = () => {
     }
   }, [userId]);
 
-  const onSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    if (!userId || !name || !password || !pwCheck || !email) {
-      alert("빈칸을 모두 채워주세요.");
-      return;
-    }
-    if (password !== pwCheck) {
-      alert("패스워드가 서로 일치하지 않습니다.");
-      return;
-    }
-    if (!isId(userId)) {
-      alert("아이디를 다시 입력해주세요.");
-      return;
-    }
-  
-    if (!isPassword(password)) {
-      alert("비밀번호를 다시 입력해주세요.");
-      return;
-    }
-  
-    if (!isEmail(email)) {
-      alert("이메일이 올바르지 않습니다.");
-      return;
-    }
-  
-    try {
-      const userData = {
-        userId: userId,
-        password: password,
-        name: name,
-        email: email,
-      };
-  
-      const response = await axios.post(
-        `${serverUrl}/v1/api/auth/signup`,
-        userData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-  
-      if (response.status === 201) {
-        toast.success("회원가입에 성공했습니다!");
-        navigation("/login");
-      } else if (response.status === 500) {
-        alert("INTERNAL SERVER ERROR");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [userId, name, password, pwCheck, email, navigation]);
-
-  function isId(userId: string) {
-    // let regExp = /[a-zA-Z0-9]/;
-    // return regExp.test(userId);
-    return true;
-  }
-
-  function isPassword(password: string) {
-    // let regExp =
-    //   /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
-    // return regExp.test(password);
-    return true;
-  }
-
-  function isEmail(email: string) {
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    return emailRegex.test(email);
-  }
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      signUp(userId, name, password, pwCheck, email);
+    },
+    [userId, name, password, pwCheck, email]
+  );
 
   return (
     <>

@@ -25,6 +25,7 @@ export const TemplateRowContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
 export const TemplateTitleBlack = styled.div`
   font-size: 1.2em;
   color: black;
@@ -100,6 +101,7 @@ export const TemplateOptionTitle = styled.p`
   font-style: normal;
   font-weight: 500;
 `;
+
 export const TemplateOptionRequire = styled.p`
   color: #fb2047;
   font-family: Pretendard;
@@ -107,6 +109,7 @@ export const TemplateOptionRequire = styled.p`
   font-style: normal;
   font-weight: 500;
 `;
+
 export const TemplateOptionTitleWraper = styled.div`
   display: flex;
   flex-direction: row;
@@ -171,6 +174,7 @@ export const TemplateOptionWraper = styled.div`
     margin-right: 10px;
   }
 `;
+
 export const TemplateInputWraper = styled.div`
   margin-top: 5vh;
 `;
@@ -199,10 +203,13 @@ export const TemplatePreviewCard = styled.div`
     height: 188px;
   }
 `;
+
 export const CardInfoWraper = styled.div`
   position: absolute;
 `;
+
 export const CardTitle = styled.p``;
+
 export const CardName = styled.p`
   position: relative;
   top: 70px;
@@ -216,6 +223,7 @@ export const CardName = styled.p`
     font-size: 1.5rem;
   }
 `;
+
 export const CardPosition = styled.p`
   position: relative;
   top: 35px;
@@ -294,6 +302,7 @@ export const CardInfoBlue = styled.div`
     height: 1.2rem;
   }
 `;
+
 export const CardInfoBlack = styled.div`
   position: relative;
   top: 70px;

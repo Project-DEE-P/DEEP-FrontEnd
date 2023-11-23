@@ -17,7 +17,7 @@ function OAuth() {
     const token = urlParams.get("token");
   
     if (token) {
-      localStorage.setItem("token", token);
+      localStorage.setItem("Token", token);
       navigation("/");
     }
   }, [navigation]);
@@ -34,7 +34,7 @@ function OAuth() {
   return (
     <>
       <S.OAuthContainer>
-        <S.DeepLogoImg src={DeepLogo}></S.DeepLogoImg>
+        <S.DeepLogoImg src={DeepLogo} />
         <S.OAuthButton src={OAuthBtn} onClick={handleLoginClick} />
       </S.OAuthContainer>
     </>

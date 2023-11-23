@@ -40,19 +40,19 @@ const CardList = () => {
 
   useEffect(() => {
     console.log("Mount");
-    
     if (tabNum === 0) {
       fetchTemplateCardData();
     } else {
       fetchImageCardData();
     }
   }, [tabNum]);
+  
 
   return (
     <>
       <Header />
       <S.CardListTitleWrapper>
-        <S.CardListTitleBlack>조승완님의</S.CardListTitleBlack>
+        <S.CardListTitleBlack>님의</S.CardListTitleBlack>
         <S.CardListRowContainer>
           <S.CardListTitleBlue>DEE:P</S.CardListTitleBlue>
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>

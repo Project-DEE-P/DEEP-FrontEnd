@@ -3,14 +3,26 @@ import * as _ from "./style";
 import Deep from "../../../assets/img/DeepLogo.svg";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../AppHeader";
+import { toast } from "react-toastify";
 import { Mobile, Desktop } from "../../../hooks/useMediaQuery";
 
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem('accessToken'));
+  
   const handleNavigate = (path: string) => {
-    navigate(path);
+    if (!token) {
+      toast.error("로그인이 필요합니다. 로그인을 해주세요.");
+    } else {
+      navigate(path);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setToken(null);
+    navigate('/');
   };
 
   return (
@@ -32,13 +44,13 @@ const Header: React.FC = () => {
                   <div>명함 관리</div>
                 </_.HeaderButton>
               </button>
-              {token ? <button onClick={() => {localStorage.removeItem('accessToken'); setToken(null); navigate('/')}}>
+              {token ? <button onClick={handleLogout}>
                 <_.HeaderButton>
                   <div>로그아웃</div>
                 </_.HeaderButton>
               </button>
               :
-              <button onClick={() => handleNavigate("/oauth")}>
+              <button onClick={() => navigate("/oauth")}>
                 <_.HeaderButton>
                   <div>로그인</div>
                 </_.HeaderButton>
