@@ -5,7 +5,7 @@ export const TemplateListContainer = styled.div`
   padding: 30px;
   overflow-y: hidden;
   @media screen and (max-width: 1024px) {
-    height: 40vh;
+    height: 100vh;
     padding-left: 10vw;
     padding-right: 10vw;
     font-family: Pretendard;
@@ -135,6 +135,7 @@ export const TemplateOptionInput = styled.input`
   box-shadow: 0px 0px 0px 1px #cdd1dc;
   display: flex;
   justify-content: flex-start;
+
   @media screen and (max-width: 1024px) {
     ${(props) =>
       props.width === "small" &&
@@ -153,12 +154,14 @@ export const TemplateOptionInput = styled.input`
     padding-right: 10px;
     box-sizing: border-box;
   }
+
   &:focus {
     border-color: #1775f9;
     border-width: 1px;
     outline: none;
   }
 `;
+
 
 export const TemplateOptionHelper = styled.p`
   color: #737992;
@@ -189,6 +192,7 @@ export const TemplatePreviewWraper = styled.div`
     height: 40vh;
     align-items: flex-start;
     padding: 10vw;
+    margin-top: 5vh;
   }
 `;
 

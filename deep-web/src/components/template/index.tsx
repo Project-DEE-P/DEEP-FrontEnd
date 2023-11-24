@@ -73,7 +73,7 @@ const Template = () => {
                 width={"small"}
                 name="name"
                 onChange={onChangeHandler}
-              ></S.TemplateOptionInput>
+              />
               <S.TemplateOptionHelper>
                 이름을 입력해주세요
               </S.TemplateOptionHelper>
@@ -88,7 +88,7 @@ const Template = () => {
                   width={"small"}
                   name="position"
                   onChange={onChangeHandler}
-                ></S.TemplateOptionInput>
+                />
                 <S.TemplateOptionHelper>
                   직책/학교명을 입력해주세요
                 </S.TemplateOptionHelper>
@@ -102,7 +102,7 @@ const Template = () => {
                   width={"small"}
                   name="department"
                   onChange={onChangeHandler}
-                ></S.TemplateOptionInput>
+                />
                 <S.TemplateOptionHelper>
                   부서/전공명을 입력해주세요
                 </S.TemplateOptionHelper>
@@ -117,7 +117,7 @@ const Template = () => {
                 width={"large"}
                 name="number"
                 onChange={onChangeHandler}
-              ></S.TemplateOptionInput>
+              />
               <S.TemplateOptionHelper>
                 전화번호를 입력해주세요
               </S.TemplateOptionHelper>
@@ -131,7 +131,7 @@ const Template = () => {
                 width={"large"}
                 name="email"
                 onChange={onChangeHandler}
-              ></S.TemplateOptionInput>
+              />
               <S.TemplateOptionHelper>
                 이메일을 입력해주세요
               </S.TemplateOptionHelper>
@@ -144,7 +144,7 @@ const Template = () => {
                 width={"large"}
                 name="homepage"
                 onChange={onChangeHandler}
-              ></S.TemplateOptionInput>
+              />
               <S.TemplateOptionHelper>
                 깃허브 또는 홈페이지를 입력해주세요
               </S.TemplateOptionHelper>
