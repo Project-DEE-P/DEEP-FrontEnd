@@ -29,7 +29,7 @@ const Template = () => {
   const handleSubmit = async () => {
     try {
       const requestBody = {
-        template: "", 
+        template: "",
         name: cardData.name,
         position: cardData.position,
         department: cardData.department,
@@ -38,7 +38,10 @@ const Template = () => {
         github: cardData.homepage,
       };
 
-      const response = await customAxios.post(`${serverUrl}/v2/api/card/template`, requestBody);
+      const response = await customAxios.post(
+        `${serverUrl}/v2/api/card/template`,
+        requestBody
+      );
 
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
@@ -148,7 +151,9 @@ const Template = () => {
               <S.TemplateOptionHelper>
                 깃허브 또는 홈페이지를 입력해주세요
               </S.TemplateOptionHelper>
-              <S.CreateTemplate onClick={handleSubmit}>생성하기</S.CreateTemplate>
+              <S.CreateTemplate onClick={handleSubmit}>
+                생성하기
+              </S.CreateTemplate>
             </S.TemplateOptionWraper>
           </S.TemplateListContainer>
           <S.TemplatePreviewWraper>
