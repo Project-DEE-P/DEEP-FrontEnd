@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "downlevelIteration": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,7 +19,5 @@
     "jsx": "react-jsx",
     "types": ["react-query"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
