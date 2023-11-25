@@ -1,12 +1,11 @@
 import styled, { css } from "styled-components";
 
 export const TemplateListContainer = styled.div`
-  width: 100vw;
   height: 100vh;
   padding: 30px;
-  overflow-y: scroll;
-
-  @media screen and (min-width: 1024px) {
+  overflow-y: hidden;
+  @media screen and (max-width: 1024px) {
+    height: 100vh;
     padding-left: 10vw;
     padding-right: 10vw;
     font-family: Pretendard;
@@ -18,6 +17,7 @@ export const TemplateListContainer = styled.div`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    padding-top: 0px;
   }
 `;
 
@@ -82,16 +82,15 @@ export const TemplateTitleWrapper = styled.div`
 `;
 
 export const TemplateComponentWraper = styled.div`
-  height: 80vh;
-  flex-direction: column;
-  padding-left: 1vw;
-  padding-right: 1vw;
-  @media screen and (min-width: 1024px) {
-    display: flex;
-    flex-direction: row;
-    column-gap: 5px;
-    padding-left: 5vw;
-    padding-right: 5vw;
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    padding-left: 0vw;
+    padding-right: 0vw;
   }
 `;
 
@@ -120,40 +119,40 @@ export const TemplateOptionInput = styled.input`
   ${(props) =>
     props.width === "small" &&
     css`
-      width: 150px;
+      width: 200px;
     `};
   ${(props) =>
     props.width === "large" &&
     css`
-      width: 250px;
+      width: 400px;
     `};
-  height: 35px;
-  display: flex;
-  flex-direction: column;
-  padding-left: 10px;
-  padding-right: 10px;
-  box-sizing: border-box;
 
-  @media screen and (min-width: 1024px) {
+  height: 40px;
+  border-color: #c1c7de;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0px 0px 0px 1px #cdd1dc;
+  display: flex;
+  justify-content: flex-start;
+
+  @media screen and (max-width: 1024px) {
     ${(props) =>
       props.width === "small" &&
       css`
-        width: 200px;
+        width: 150px;
       `};
     ${(props) =>
       props.width === "large" &&
       css`
-        width: 400px;
+        width: 250px;
       `};
-
-    height: 40px;
-    border-color: #c1c7de;
-    border-radius: 0.375rem;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0px 0px 0px 1px #cdd1dc;
+    height: 35px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
   }
 
   &:focus {
@@ -189,21 +188,23 @@ export const TemplatePreviewWraper = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 50vh;
-  @media screen and (min-width: 1024px) {
+  @media screen and (max-width: 1024px) {
+    height: 40vh;
     align-items: flex-start;
-    padding: 2vw;
+    padding: 10vw;
+    margin-top: 5vh;
   }
 `;
 
 export const TemplatePreviewCard = styled.div`
-  width: 300px;
-  height: 188px;
-  @media screen and (min-width: 1024px) {
-    width: 600px;
-    height: 376px;
-    background-color: #f8f8f8;
-    padding: 40px;
-    box-sizing: border-box;
+  width: 600px;
+  height: 376px;
+  background-color: #f8f8f8;
+  padding: 40px;
+  box-sizing: border-box;
+  @media screen and (max-width: 1024px) {
+    width: 300px;
+    height: 188px;
   }
 `;
 
@@ -214,13 +215,16 @@ export const CardInfoWraper = styled.div`
 export const CardTitle = styled.p``;
 
 export const CardName = styled.p`
-  font-size: 1.5rem;
-  @media screen and (min-width: 1024px) {
-    font-family: Pretendard;
-    font-size: 1.8rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  position: relative;
+  top: 70px;
+  font-family: Pretendard;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  @media screen and (max-width: 1024px) {
+    top: -20px;
+    font-size: 1.5rem;
   }
 `;
 
@@ -272,45 +276,51 @@ export const CardHomepage = styled.p`
 `;
 
 export const CardDepartment = styled.p`
-  margin-top: 0px;
-  font-size: 1rem;
-  @media screen and (min-width: 1024px) {
-    color: #3f86f8;
-    font-family: Pretendard;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2.5rem;
-    margin-top: 100px;
+  position: relative;
+  top: 85px;
+  color: #3f86f8;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.5rem;
+  @media screen and (max-width: 1024px) {
+    top: 0px;
+    font-size: 1rem;
   }
 `;
 
 export const CardInfoBlue = styled.div`
-  font-size: 0.8rem;
-  height: 1.2rem;
-  @media screen and (min-width: 1024px) {
-    color: #3f86f8;
-    font-family: Pretendard;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    height: 1.8rem;
+  position: relative;
+  top: 70px;
+  color: #3f86f8;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 1.8rem;
+  @media screen and (max-width: 1024px) {
+    top: -50px;
+    font-size: 0.8rem;
+    height: 1.2rem;
   }
 `;
 
 export const CardInfoBlack = styled.div`
-  font-size: 0.8rem;
-  height: 1.2rem;
-
-  @media screen and (min-width: 1024px) {
-    color: #000000;
-    font-family: Pretendard;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    height: 1.8rem;
+  position: relative;
+  top: 70px;
+  color: #000000;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 1.8rem;
+  @media screen and (max-width: 1024px) {
+    top: -50px;
+    font-size: 0.8rem;
+    height: 1.2rem;
   }
 `;
 
