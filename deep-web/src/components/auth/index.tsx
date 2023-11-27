@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
@@ -15,17 +15,17 @@ function OAuth() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
-  
+
     if (token) {
       localStorage.setItem("Token", token);
       navigation("/");
+      
     }
   }, [navigation]);
-  
+
   useEffect(() => {
-    console.log(localStorage);
-    const isLoggedIn = localStorage.getItem("token");
-  
+    const isLoggedIn = localStorage.getItem("Token");
+
     if (isLoggedIn) {
       navigation("/");
     }
