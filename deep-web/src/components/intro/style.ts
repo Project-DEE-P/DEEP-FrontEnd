@@ -90,12 +90,9 @@ export const SecondContainer = styled.div`
 
 export const ThirdContainer = styled.div`
   width: 100vw;
-  height: 185vh;
+  height: auto;
   background-color: #ffffff;
-  padding-left: 15vw;
-  padding-right: 15vw;
-  padding-top: 15vh;
-  padding-bottom: 5vh;
+  padding: 15vh 8vw;
   box-sizing: border-box;
 
   display: flex;
@@ -104,8 +101,7 @@ export const ThirdContainer = styled.div`
   justify-content: center;
 
   @media screen and (max-width: 1024px) {
-    display: flex;
-    flex-direction: column;
+    padding: 5vh 8vw;
   }
 `;
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import customAxios from "src/lib/customAxios";
 import { toast } from "react-toastify";
+import { rmSync } from "fs";
 
 interface User {
   userId: string;
@@ -38,7 +39,9 @@ const useLogin = () => {
       if (response.status === 201) {
         console.log("로그인 성공!");
         toast.success("로그인에 성공했습니다!");
-        localStorage.setItem('accessToken', response.data.accessToken);
+        console.log(response.data.token);
+        
+        localStorage.setItem('accessToken', response.data.token);
         navigation("/");
       } else {
         console.log("로그인 실패", response.data.message);
