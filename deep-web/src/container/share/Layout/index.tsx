@@ -18,6 +18,7 @@ interface Props {
 const LayoutForm = ({ children }: Props) => {
   const serverUrl = "https://api.ddeep.store";
   const loginInfo = useRecoilValue(oAuthInfoAtom);
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
   const [cardId, setCardId] = useRecoilState(cardIdAtom);
   const [cardType, setCardType] = useRecoilState(CardTypeAtom);
   const [showModal, setShowModal] = useState<any>(false);
@@ -77,7 +78,7 @@ const LayoutForm = ({ children }: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postResponse = await axios.get(
+        const postResponse = await customAxios.get(
           `${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`
         );
         setCardData(postResponse.data.data);
