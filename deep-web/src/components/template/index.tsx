@@ -10,18 +10,14 @@ import { saveAs } from "file-saver";
 
 const Template = () => {
   const [cardData, setCardData] = useState({
+    template: "1",
     name: "",
-    company: "",
-    address: "",
     position: "",
-    mobile: "",
-    tel: "",
-    email: "",
-    fax: "",
-    homepage: "",
     department: "",
-    number: 0,
-    image: "",
+    phone: "",
+    email: "",
+    github: "",
+    image: "test",
   });
   const serverUrl = "https://api.ddeep.store";
   const domRef = useRef<HTMLDivElement>(null);
@@ -44,10 +40,8 @@ const Template = () => {
       formData.append("image", blob, "card.png");
 
       customAxios
-        .post(`https://api.ddeep.store/v1/api/images/image`, formData, {
+        .post(`v1/api/images/image`, formData, {
           headers: {
-            "ACCESS-KEY":
-              "d15ee2fe18d2ebe2ef7afda51ffd3114e5cd1f29dc8fd70e3ffee96b698ceed027a0",
             "Content-Type": "multipart/form-data",
           },
         })
@@ -62,12 +56,12 @@ const Template = () => {
               image: postResponse.data.data.ident,
             };
           });
+          SubmitDataHandler();
         })
         .catch((e) => {
           console.log(e);
         });
     });
-    SubmitDataHandler();
   };
 
   useEffect(() => {
@@ -76,7 +70,7 @@ const Template = () => {
 
   const SubmitDataHandler = async () => {
     customAxios
-      .post("/api/card/image", cardData)
+      .post("/v2/api/card/template", cardData)
       .then((postResponse) => {
         console.log(postResponse);
       })
@@ -149,7 +143,7 @@ const Template = () => {
               </S.TemplateOptionTitleWraper>
               <S.TemplateOptionInput
                 width={"large"}
-                name="number"
+                name="phone"
                 onChange={onChangeHandler}
               ></S.TemplateOptionInput>
               <S.TemplateOptionHelper>
@@ -176,7 +170,7 @@ const Template = () => {
               </S.TemplateOptionTitleWraper>
               <S.TemplateOptionInput
                 width={"large"}
-                name="homepage"
+                name="github"
                 onChange={onChangeHandler}
               ></S.TemplateOptionInput>
               <S.TemplateOptionHelper>
@@ -195,7 +189,7 @@ const Template = () => {
               <S.CardPosition>{cardData.position}</S.CardPosition>
               <S.TemplateRowContainer>
                 <S.CardInfoBlue>Tel.</S.CardInfoBlue>
-                <S.CardInfoBlack>{cardData.number}</S.CardInfoBlack>
+                <S.CardInfoBlack>{cardData.phone}</S.CardInfoBlack>
               </S.TemplateRowContainer>
               <S.TemplateRowContainer>
                 <S.CardInfoBlue>E-mail. </S.CardInfoBlue>
@@ -203,7 +197,7 @@ const Template = () => {
               </S.TemplateRowContainer>
               <S.TemplateRowContainer>
                 <S.CardInfoBlue>Portfolio. </S.CardInfoBlue>
-                <S.CardInfoBlack>{cardData.homepage}</S.CardInfoBlack>
+                <S.CardInfoBlack>{cardData.github}</S.CardInfoBlack>
               </S.TemplateRowContainer>
             </S.TemplatePreviewCard>
           </S.TemplatePreviewWraper>
