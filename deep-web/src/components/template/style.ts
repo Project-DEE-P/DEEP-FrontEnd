@@ -162,7 +162,6 @@ export const TemplateOptionInput = styled.input`
   }
 `;
 
-
 export const TemplateOptionHelper = styled.p`
   color: #737992;
   font-family: Pretendard;
@@ -209,6 +208,7 @@ export const TemplatePreviewCard = styled.div`
 `;
 
 export const CardInfoWraper = styled.div`
+  background-color: black;
   position: absolute;
 `;
 
