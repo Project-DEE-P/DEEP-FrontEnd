@@ -18,7 +18,7 @@ interface Props {
 const LayoutForm = ({ children }: Props) => {
   const serverUrl = "https://api.ddeep.store";
   const loginInfo = useRecoilValue(oAuthInfoAtom);
-  const [token, setToken] = useState(localStorage.getItem('accessToken'));
+  const [token, setToken] = useState(localStorage.getItem('Token'));
   const [cardId, setCardId] = useRecoilState(cardIdAtom);
   const [cardType, setCardType] = useRecoilState(CardTypeAtom);
   const [showModal, setShowModal] = useState<any>(false);
@@ -28,28 +28,11 @@ const LayoutForm = ({ children }: Props) => {
   const navigation = useNavigate();
 
   const { istemplate, id } = useParams();
-
-  useEffect(() => {
-    setCardId(Number(id));
-    setCardType(String(istemplate).toUpperCase());
-  }, [id, istemplate]);
-
-  useEffect(() => {
-    setToken(localStorage.getItem('accessToken'));
-  }, []);
-
-  useEffect(() => {
-    if (!token) {
-      navigation("/login");
-    }
-  }, [token, navigation]);
+  setCardId(Number(id));
+  setCardType(String(istemplate).toUpperCase());
 
   const handleRememberClick = async () => {
-    if (!token) {
-      navigation("/login");
-      return;
-    }
-
+    // 데이터 유효성 검사
     if (cardType !== "TEMPLATE" && cardType !== "IMAGE") {
       console.error("Invalid cardType:", cardType);
       return;
@@ -65,6 +48,11 @@ const LayoutForm = ({ children }: Props) => {
         cardType: cardType,
         cardId: cardId,
       };
+
+      if (!token) {
+        navigation("/oauth");
+        return;
+      }
 
       const response = await customAxios.post(
         `${serverUrl}/v2/api/remember`,
@@ -93,7 +81,7 @@ const LayoutForm = ({ children }: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postResponse = await customAxios.get(
+        const postResponse = await axios.get(
           `${serverUrl}/v2/api/card/${cardType.toLowerCase()}/${cardId}`
         );
         setCardData(postResponse.data.data);
@@ -112,11 +100,11 @@ const LayoutForm = ({ children }: Props) => {
     setImageWidth(imageElement.clientWidth);
   };
 
-  useEffect(() => {
-    if (isNaN(Number(id))) {
-      navigation("/showCard");
-    }
-  }, [id, navigation]);
+  if (!isNaN(Number(id))) {
+    setCardId(Number(id));
+  } else {
+    navigation("/showCard");
+  }
 
   return (
     <>
@@ -136,7 +124,7 @@ const LayoutForm = ({ children }: Props) => {
             ) : (
               imageurl && (
                 <s.ResponsiveImage
-                  src={`${serverUrl}/v1/api/images/${imageurl}`}
+                  src={`https://api.ddeep.store/v1/api/images/${imageurl}`}
                   alt="Sample Image"
                   onLoad={handleImageLoad}
                   width={imageWidth}
