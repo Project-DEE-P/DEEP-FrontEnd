@@ -1,6 +1,4 @@
-const CallbackPage = () => {
+export default function CallbackPage() {
     return <div>callback...</div>
 
 }
-
-export default CallbackPage

@@ -103,7 +103,7 @@ export const LoginBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 150%;
+  width: 100%;
   max-width: 380px;
 `;
 
@@ -118,7 +118,7 @@ export const SignBtn = styled.button`
   height: 54px;
   border-radius: 3px;
   text-align: center;
-  width: 150%;
+  width: 100%;
   max-width: 380px;
   margin-top: 10px;
 `;

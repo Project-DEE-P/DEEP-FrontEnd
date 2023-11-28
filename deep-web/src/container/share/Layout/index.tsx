@@ -34,8 +34,22 @@ const LayoutForm = ({ children }: Props) => {
     setCardType(String(istemplate).toUpperCase());
   }, [id, istemplate]);
 
+  useEffect(() => {
+    setToken(localStorage.getItem('accessToken'));
+  }, []);
+
+  useEffect(() => {
+    if (!token) {
+      navigation("/login");
+    }
+  }, [token, navigation]);
+
   const handleRememberClick = async () => {
-    // 데이터 유효성 검사
+    if (!token) {
+      navigation("/login");
+      return;
+    }
+
     if (cardType !== "TEMPLATE" && cardType !== "IMAGE") {
       console.error("Invalid cardType:", cardType);
       return;
@@ -58,6 +72,7 @@ const LayoutForm = ({ children }: Props) => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
           },
         }
       );

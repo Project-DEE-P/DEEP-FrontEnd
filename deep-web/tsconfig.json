@@ -17,7 +17,7 @@
     "noEmit": true,
     "baseUrl": "./",
     "jsx": "react-jsx",
-    "types": ["react-query"]
+    "types": ["react-query", "jwt-decode"]
   },
   "include": ["src"]
 }

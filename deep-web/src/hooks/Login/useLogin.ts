@@ -39,9 +39,9 @@ const useLogin = () => {
       if (response.status === 201) {
         console.log("로그인 성공!");
         toast.success("로그인에 성공했습니다!");
-        console.log(response.data.token);
+        console.log(response.data.data.token);
         
-        localStorage.setItem('accessToken', response.data.token);
+        localStorage.setItem('Token', response.data.data.token);
         navigation("/");
       } else {
         console.log("로그인 실패", response.data.message);
