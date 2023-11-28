@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as _ from "./style";
+import { Link, useNavigate } from "react-router-dom";
 import Deep from "../../../assets/img/DeepLogo.svg";
-import { useNavigate } from "react-router-dom";
 import AppHeader from "../AppHeader";
 import { toast } from "react-toastify";
 import { Mobile, Desktop } from "../../../hooks/useMediaQuery";
@@ -11,7 +11,7 @@ const Header: React.FC = () => {
   const [token, setToken] = useState(localStorage.getItem("accessToken"));
 
   const handleNavigate = (path: string) => {
-    if (!token) {
+    if (!token && path !== "/oauth") {
       toast.error("로그인이 필요합니다. 로그인을 해주세요.");
     } else {
       navigate(path);
@@ -24,14 +24,18 @@ const Header: React.FC = () => {
     navigate("/");
   };
 
+  const getButtonText = () => {
+    return token ? "로그아웃" : "로그인";
+  };
+
   return (
     <>
       <Desktop>
         <_.HeaderContainer>
           <_.AppHeaderBox>
-            <a href="/">
+            <Link to="/">
               <img src={Deep} alt="error" />
-            </a>
+            </Link>
             <_.HeaderButtonBox>
               <button onClick={() => handleNavigate("/template")}>
                 <_.HeaderButton>
@@ -43,27 +47,19 @@ const Header: React.FC = () => {
                   <div>명함 관리</div>
                 </_.HeaderButton>
               </button>
-              {token ? (
-                <button onClick={handleLogout}>
-                  <_.HeaderButton>
-                    <div>로그아웃</div>
-                  </_.HeaderButton>
-                </button>
-              ) : (
-                <button onClick={() => navigate("/oauth")}>
-                  <_.HeaderButton>
-                    <div>로그인</div>
-                  </_.HeaderButton>
-                </button>
-              )}
+              <button onClick={token ? handleLogout : () => handleNavigate("/oauth")}>
+                <_.HeaderButton>
+                  <div>{getButtonText()}</div>
+                </_.HeaderButton>
+              </button>
             </_.HeaderButtonBox>
           </_.AppHeaderBox>
         </_.HeaderContainer>
       </Desktop>
       <Mobile>
-        <AppHeader></AppHeader>
+        <AppHeader />
       </Mobile>
-    </>
+    </>  
   );
 };
 

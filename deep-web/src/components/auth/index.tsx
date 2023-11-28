@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
-import { useSocialLogin } from "src/hooks/auth/useSocialLogin";
 
 function OAuth() {
   const serverUrl = "https://api2.ddeep.store:444";
@@ -14,10 +13,13 @@ function OAuth() {
   };
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("Token");
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
 
-    if (isLoggedIn) {
+    if (token) {
+      localStorage.setItem("Token", token);
       navigation("/");
+      
     }
   }, [navigation]);
 

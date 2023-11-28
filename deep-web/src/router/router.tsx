@@ -20,7 +20,7 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/callback" element={<AuthLoadingPage />} />
+          {/* <Route path="/callback" element={<AuthLoadingPage />} /> */}
           <Route path="/showCard/:istemplate/:id" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />
