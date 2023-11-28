@@ -8,7 +8,7 @@ import { Mobile, Desktop } from "../../../hooks/useMediaQuery";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [token, setToken] = useState(localStorage.getItem("accessToken"));
+  const [token, setToken] = useState(localStorage.getItem("Token"));
 
   const handleNavigate = (path: string) => {
     if (!token && path !== "/oauth") {
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem("Token");
     setToken(null);
     navigate("/");
   };
