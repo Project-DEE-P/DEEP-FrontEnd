@@ -4,6 +4,7 @@ import ShowCard from "../pages/ShowCard/index";
 import OAuthPage from "../pages/OAuth/OAuth";
 import NoMatchPage from "../pages/NoMatch";
 import CardListPage from "../pages/CardList";
+import AuthLoadingPage from "src/pages/AuthPage";
 import { ToastContainer } from "react-toastify"
 import Production from "../pages/Production";
 import SignUp from "../pages/Signup";
@@ -19,6 +20,7 @@ const Router = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/callback" element={<AuthLoadingPage />} />
           <Route path="/showCard/:istemplate/:id" element={<ShowCard />} />
           <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/cardlist" element={<CardListPage />} />

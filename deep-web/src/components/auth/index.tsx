@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import DeepLogo from "../../assets/img/DeepLogo.svg";
 import OAuthBtn from "../../assets/img/OAuthBtn.svg";
+import { useSocialLogin } from "src/hooks/auth/useSocialLogin";
 
 function OAuth() {
   const serverUrl = "https://api2.ddeep.store:444";
@@ -11,17 +12,6 @@ function OAuth() {
   const handleLoginClick = () => {
     window.location.href = `${serverUrl}/v1/api/auth/google`;
   };
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
-
-    if (token) {
-      localStorage.setItem("Token", token);
-      navigation("/");
-      
-    }
-  }, [navigation]);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("Token");
