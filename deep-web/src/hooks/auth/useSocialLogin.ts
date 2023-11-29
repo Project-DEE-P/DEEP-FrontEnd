@@ -19,7 +19,7 @@ export function useSocialLogin() {
             Token.setToken(REFRESH_TOKEN_KEY, refreshToken.toString());
 
             const jwtDecode = tokenDecode("access", "authority");
-            if (jwtDecode === "USER") {
+            if (jwtDecode === "MEMBER") {
                 navigate("/")
             }
         }

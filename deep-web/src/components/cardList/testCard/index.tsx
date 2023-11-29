@@ -27,21 +27,40 @@ interface Props {
 
 const TestCard: React.FC<Props> = ({ cardData }) => {
   const [cardType, setCardType] = useRecoilState(CardTypeAtom);
-  const serverUrl = "https://web.ddeep.store";
+  const serverUrl = "https://api.ddeep.store";
   const [cardImage, setCardImage] = useState<string>("");
+  const isValidUUID = (uuid: string) => {
+    const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    return uuidRegex.test(uuid);
+  };
 
   useEffect(() => {
     fetchCardImage();
-  }, []);
+  }, [cardData]);
 
   const fetchCardImage = async () => {
+    if (!isValidUUID(cardData.image)) {
+      console.error("유효하지 않은 UUID입니다:", cardData.image);
+      return;
+    }
+  
     try {
       const response = await axios.get(
-        `${serverUrl}/v2/api/card/image/${cardType.toLowerCase()}/${cardData.image}`
+        `${serverUrl}/v1/api/images/${cardData.image}`
       );
-      setCardImage(response.data);
+      console.log(response);
+      
+  
+      const responseData = response.data;
+      if (!responseData || !responseData.image) {
+        // console.log("올바르지 않은 서버 응답 형식입니다:", responseData);
+        return;
+      }
+  
+      const imageData = responseData.image;
+      setCardImage(imageData);
     } catch (error) {
-      console.error("Failed to fetch card image:", error);
+      console.error("카드 이미지 가져오기 오류:", error);
     }
   };
 
@@ -55,11 +74,11 @@ const TestCard: React.FC<Props> = ({ cardData }) => {
             {new Date(cardData.createdDateTime).toLocaleDateString()}
           </S.CardDateText>
         </S.CardNameWrapper>
-        {cardImage ? (
+        {/* {cardImage && (
           <S.SampleCardImg src={cardImage} alt="Sample Card" />
-        ) : (
-          <S.SampleCardImg src={cardData.image} alt="Sample Card" />
-        )}
+        )
+        } */}
+        <S.SampleCardImg src={`${serverUrl}/v1/api/images/${cardData.image}`} alt="BC"/>
       </S.CardContainer>
     </>
   );

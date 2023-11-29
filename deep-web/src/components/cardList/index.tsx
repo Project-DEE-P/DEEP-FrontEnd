@@ -52,7 +52,7 @@ const CardList = () => {
     <>
       <Header />
       <S.CardListTitleWrapper>
-        <S.CardListTitleBlack>님의</S.CardListTitleBlack>
+        <S.CardListTitleBlack>유지민님의</S.CardListTitleBlack>
         <S.CardListRowContainer>
           <S.CardListTitleBlue>DEE:P</S.CardListTitleBlue>
           <S.CardListTitleBlack>명함 리스트</S.CardListTitleBlack>

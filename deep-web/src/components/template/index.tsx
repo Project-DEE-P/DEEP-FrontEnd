@@ -84,7 +84,7 @@ const Template = () => {
       <Header />
       <S.TemplateInputWraper>
         <S.TemplateTitleWrapper>
-          <S.TemplateTitleBlack>{cardData.name}님의</S.TemplateTitleBlack>
+          <S.TemplateTitleBlack>유지민님의</S.TemplateTitleBlack>
           <S.TemplateRowContainer>
             <S.TemplateTitleBlue>DEE:P</S.TemplateTitleBlue>
             <S.TemplateTitleBlack>명함 제작하기</S.TemplateTitleBlack>

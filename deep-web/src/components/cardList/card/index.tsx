@@ -6,7 +6,7 @@ const Card = () => {
     <>
       <S.CardContainer>
         <S.CardNameWrapper>
-          <S.CardNameText>최희건</S.CardNameText>
+          <S.CardNameText>유지민</S.CardNameText>
           <S.CardNameText>님의 명함</S.CardNameText>
           <S.CardDateText>2023년 10월 06일</S.CardDateText>
         </S.CardNameWrapper>
