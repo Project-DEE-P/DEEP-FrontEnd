@@ -44,7 +44,7 @@ export const CardDateText = styled.p`
   }
 `;
 
-export const SampleCardImg = styled.img<{ src: string }>`
+export const SampleCardImg = styled.img`
   width: calc(100vw - 30px);
   @media screen and (min-width: 1024px) {
     width: 300px;

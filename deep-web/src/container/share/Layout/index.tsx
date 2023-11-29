@@ -65,9 +65,15 @@ const LayoutForm = ({ children }: Props) => {
         }
       );
 
+      console.log("Remember Response:", response); // 서버 응답 확인
+
       if (response.status === 201) {
         console.log("[SUCCESS] Created");
         navigation("/cardList");
+      }
+      if (response.status === 204) {
+        console.log("[SUCCESS] Already Remembered");
+        setShowModal(true);
       }
     } catch (error) {
       console.error("Error occurred while sending user data to server:", error);
