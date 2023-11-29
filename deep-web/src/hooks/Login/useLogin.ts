@@ -41,6 +41,8 @@ const useLogin = () => {
         toast.success("로그인에 성공했습니다!");
         
         localStorage.setItem('Token', response.data.data.token);
+        console.log(response.data.data.token);
+        
         navigation("/");
       } else {
         console.log("로그인 실패", response.data.message);

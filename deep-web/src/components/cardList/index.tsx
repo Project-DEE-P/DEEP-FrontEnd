@@ -10,31 +10,58 @@ const CardList = () => {
   const location = useLocation();
   const [tabNum, setTabNum] = useState(location.pathname === "/recent" ? 1 : 0);
   const serverUrl = "https://api.ddeep.store";
-  const [imageurl, setImageUrl] = useState<any>(null);
   const [templateCardData, setTemplateCardData] = useState<any[]>([]);
   const [imageCardData, setImageCardData] = useState<any[]>([]);
 
   const fetchTemplateCardData = async () => {
     try {
-      const response = await customAxios.get(`${serverUrl}/v2/api/card/template`);
+      const token = localStorage.getItem("Token");
+
+      if (!token) {
+        console.error("User not authenticated");
+        return;
+      }
+
+      const response = await customAxios.get(`${serverUrl}/v2/api/card/template`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       if (response.data && response.data.data) {
         console.log("Template card data:", response.data.data);
         setTemplateCardData(response.data.data);
+      } else {
+        console.error("No template card data in the response.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching template card data:", error);
     }
   };
-  
+
   const fetchImageCardData = async () => {
     try {
-      const response = await customAxios.get(`${serverUrl}/v2/api/card/image`);
+      const token = localStorage.getItem("Token");
+
+      if (!token) {
+        console.error("User not authenticated");
+        return;
+      }
+
+      const response = await customAxios.get(`${serverUrl}/v2/api/card/image`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       if (response.data && response.data.data) {
         console.log("Image card data:", response.data.data);
         setImageCardData(response.data.data);
+      } else {
+        console.error("No image card data in the response.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching image card data:", error);
     }
   };
 
@@ -46,7 +73,7 @@ const CardList = () => {
       fetchImageCardData();
     }
   }, [tabNum]);
-  
+
 
   return (
     <>
