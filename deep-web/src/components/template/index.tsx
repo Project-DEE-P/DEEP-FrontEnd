@@ -7,21 +7,131 @@ import { Desktop, Mobile } from "src/hooks/useMediaQuery";
 import domtoimage from "dom-to-image";
 import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
+import { useRecoilState } from "recoil";
+import { cardDataState } from "src/atoms/cardData";
+import { log } from "console";
 
 const Template = () => {
-  const [cardData, setCardData] = useState({
-    template: "1",
-    name: "",
-    position: "",
-    department: "",
-    phone: "",
-    email: "",
-    github: "",
-    image: "test",
-  });
+  const [cardData, setCardData] = useRecoilState(cardDataState);
   const serverUrl = "https://api.ddeep.store";
   const domRef = useRef<HTMLDivElement>(null);
   const [image, setImage] = useState<any>(null);
+  
+  useEffect(() => {
+    console.log(cardData);
+  }, [cardData]);
+
+  const getToken = () => {
+    return localStorage.getItem("Token");
+  };
+
+  const saveToken = (token: string) => {
+    localStorage.setItem("Token", token);
+  };
+
+  const removeToken = () => {
+    localStorage.removeItem("Token");
+  };
+
+  const login = async () => {
+    try {
+      const response = await axios.post(`${serverUrl}/v1/api/auth/login`, {
+      });
+
+      saveToken(response.data.token);
+
+      return response.data.token;
+    } catch (error) {
+      console.error("Error fetching token:", error);
+      throw error;
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      let token = getToken();
+  
+      if (!token) {
+        token = await login();
+      }
+  
+      // 이미지 생성
+      domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
+        if (blob) {
+          saveAs(blob, "card.png");
+          setImage(blob);
+  
+          // 이미지를 서버에 업로드
+          const formData = new FormData();
+          formData.append("image", blob, "card.png");
+  
+          // 이미지를 서버에 업로드
+        customAxios
+        .post(`${serverUrl}/v1/api/images/image`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((postResponse) => {
+          console.log(
+            "Image data sent to the server:",
+            postResponse.data.data.ident
+          );
+
+          // setCardData((data) => {
+          //   return {
+          //     ...data,
+          //     image: postResponse.data.data.ident,
+          //   };
+          // });
+          cardData.image = postResponse.data.data.ident
+          console.log(cardData);
+          
+          
+
+          // 이미지 업로드 후에 명함 데이터 서버에 전송
+          customAxios
+            .post(
+              `${serverUrl}/v2/api/card/template`,
+              cardData,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+            .then((response) => {
+              if (response.data && response.data.code === 404) {
+                console.error(
+                  "Error creating card template:",
+                  response.data.message
+                );
+
+              } else if (response.data && response.data.code === 200) {
+                console.log("Card template created successfully!");
+              } else {
+                console.error("Unexpected response:", response);
+              }
+            })
+            .catch((error) => {
+              console.error("Error creating card template:", error);
+            });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+        } else {
+          console.error("Image is empty or invalid");
+        }
+      });
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+    }
+  };
+  
+
   const onChangeHandler = (e: any) => {
     setCardData((data) => {
       return {
@@ -29,54 +139,6 @@ const Template = () => {
         [e.target.name]: e.target.value,
       };
     });
-  };
-
-  const handleSubmit = async () => {
-    domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
-      saveAs(blob, "card.png");
-      setImage(blob);
-
-      const formData = new FormData();
-      formData.append("image", blob, "card.png");
-
-      customAxios
-        .post(`v1/api/images/image`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((postResponse) => {
-          console.log(
-            "User data sent to the server:",
-            postResponse.data.data.ident
-          );
-          setCardData((data) => {
-            return {
-              ...data,
-              image: postResponse.data.data.ident,
-            };
-          });
-          SubmitDataHandler();
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  };
-
-  useEffect(() => {
-    console.log(cardData);
-  }, [cardData]);
-
-  const SubmitDataHandler = async () => {
-    customAxios
-      .post("/v2/api/card/template", cardData)
-      .then((postResponse) => {
-        console.log(postResponse);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   };
 
   return (

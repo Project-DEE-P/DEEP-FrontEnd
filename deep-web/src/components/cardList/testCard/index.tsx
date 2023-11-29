@@ -48,12 +48,11 @@ const TestCard: React.FC<Props> = ({ cardData }) => {
       const response = await axios.get(
         `${serverUrl}/v1/api/images/${cardData.image}`
       );
-      console.log(response);
+      console.log(response.data.data.cardData.image);
       
   
       const responseData = response.data;
       if (!responseData || !responseData.image) {
-        // console.log("올바르지 않은 서버 응답 형식입니다:", responseData);
         return;
       }
   
