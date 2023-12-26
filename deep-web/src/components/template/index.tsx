@@ -9,7 +9,6 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { useRecoilState } from "recoil";
 import { cardDataState } from "src/atoms/cardData";
-import { log } from "console";
 
 const Template = () => {
   const [cardData, setCardData] = useRecoilState(cardDataState);
