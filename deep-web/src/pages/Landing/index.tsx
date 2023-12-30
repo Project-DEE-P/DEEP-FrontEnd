@@ -6,7 +6,7 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <Intro></Intro>
+      <Intro />
     </>
   );
 };
