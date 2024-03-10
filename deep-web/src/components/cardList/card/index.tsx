@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./style";
 import Sample from "../../../assets/img/SampleCard.svg";
+
 const Card = () => {
   return (
     <>

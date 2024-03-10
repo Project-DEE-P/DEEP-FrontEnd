@@ -19,5 +19,5 @@
     "jsx": "react-jsx",
     "types": ["react-query", "jwt-decode"]
   },
-  "include": ["src"]
+  "include": ["src", "webpack.config.ts"]
 }

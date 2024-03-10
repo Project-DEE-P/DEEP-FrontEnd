@@ -35,6 +35,7 @@ const TestCard: React.FC<Props> = ({ cardData }) => {
   };
 
   useEffect(() => {
+    // console.log("cardData", cardData.image);
     fetchCardImage();
   }, [cardData]);
 

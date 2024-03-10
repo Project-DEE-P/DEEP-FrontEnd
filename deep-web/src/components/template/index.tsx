@@ -9,7 +9,6 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import { useRecoilState } from "recoil";
 import { cardDataState } from "src/atoms/cardData";
-import { log } from "console";
 
 const Template = () => {
   const [cardData, setCardData] = useRecoilState(cardDataState);
@@ -55,17 +54,14 @@ const Template = () => {
         token = await login();
       }
   
-      // 이미지 생성
       domtoimage.toBlob(document.querySelector(".card")!).then((blob) => {
         if (blob) {
           saveAs(blob, "card.png");
           setImage(blob);
   
-          // 이미지를 서버에 업로드
           const formData = new FormData();
           formData.append("image", blob, "card.png");
   
-          // 이미지를 서버에 업로드
         customAxios
         .post(`${serverUrl}/v1/api/images/image`, formData, {
           headers: {
@@ -79,18 +75,11 @@ const Template = () => {
             postResponse.data.data.ident
           );
 
-          // setCardData((data) => {
-          //   return {
-          //     ...data,
-          //     image: postResponse.data.data.ident,
-          //   };
-          // });
           cardData.image = postResponse.data.data.ident
           console.log(cardData);
           
           
 
-          // 이미지 업로드 후에 명함 데이터 서버에 전송
           customAxios
             .post(
               `${serverUrl}/v2/api/card/template`,
